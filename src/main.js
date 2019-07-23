@@ -18,6 +18,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // font-awesome
 import 'font-awesome/css/font-awesome.min.css'
 
+// Vue-Particles粒子特效
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
+
+// Vee-validate
+import Veevalidate from 'vee-validate'
+Vue.use(Veevalidate)
+
 // axios
 import qs from 'qs'
 import axios from 'axios'

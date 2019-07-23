@@ -1,13 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
+// 主页
+import Home from '@/views/Home.vue'
+
+// 用户相关
+import User from '@/views/User/User.vue'
+// 登录
+import Login from '@/views/User/Login.vue'
+// 注册
+import Register from '@/views/User/Register.vue'
+
+// 404 Not Found
+import NotFound from '@/views/NotFound.vue'
 
 Vue.use(Router)
 
 const router =  new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [{
+  routes: [
+    // 主页
+    {
       path: '/',
       name: 'home',
       meta: {
@@ -15,6 +29,7 @@ const router =  new Router({
       },
       component: Home
     },
+    // 关于
     {
       path: '/about',
       name: 'about',
@@ -25,6 +40,30 @@ const router =  new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+    },
+    // 用户相关
+    {
+      path: "/user",
+      name: "user",
+      component: User,
+      children: [
+        {
+          path: "login",
+          name: "login",
+          component: Login
+        },
+        {
+          path: "register",
+          name: "register",
+          component: Register
+        }
+      ]
+    },
+    // 404 not found
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     }
   ]
 })
