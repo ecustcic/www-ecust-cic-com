@@ -1,6 +1,7 @@
 <template>
-  <div class="container" id="login">
-    <h1 class="mb-5">Login</h1>
+  <div class="container px-5 pt-3 pb-5" id="login">
+    <!-- <h1 class="mb-5">Login</h1> -->
+    <AnimWords text="Login" :animation="false" />
     <div class="row mb-3">
       <label
         class="form-control col-md-2 offset-md-2 mb-0"
@@ -78,15 +79,18 @@
 <style scoped>
 #login {
   background: #dedede;
-  padding: 3rem 3rem;
 }
 </style>
 
 
 <script>
 import $ from "jquery";
+import AnimWords from '@/components/AnimWords.vue';
 export default {
   name: "Login",
+  components: {
+    AnimWords
+  },
   data() {
     return {
       username: "",

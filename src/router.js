@@ -11,6 +11,9 @@ import Login from '@/views/User/Login.vue'
 // 注册
 import Register from '@/views/User/Register.vue'
 
+// test
+import AnimWords from '@/components/AnimWords.vue'
+
 // 404 Not Found
 import NotFound from '@/views/NotFound.vue'
 
@@ -58,6 +61,12 @@ const router =  new Router({
           component: Register
         }
       ]
+    },
+    // test
+    {
+      path: '/test',
+      name: 'test',
+      component: AnimWords
     },
     // 404 not found
     {

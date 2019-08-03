@@ -1,6 +1,7 @@
 <template>
-  <div class="container" id="register">
-    <h1 class="mb-5">Register</h1>
+  <div class="container px-5 pt-3 pb-5" id="register">
+    <!-- <h1 class="mb-5">Register</h1> -->
+    <AnimWords text="Register" :animation="false" />
     <div class="row mb-3">
       <label
         class="form-control col-md-2 offset-md-2 mb-0"
@@ -73,7 +74,7 @@
       <label
         class="form-control col-md-2 offset-md-2 mb-0"
         onselectstart="return false;"
-        for="password"
+        for="passwordAgain"
       >确认密码</label>
       <input
         type="password"
@@ -101,14 +102,17 @@
 <style>
 #register {
   background: #dedede;
-  padding: 3rem 3rem;
 }
 </style>
 
 <script>
 import $ from "jquery";
+import AnimWords from '@/components/AnimWords.vue';
 export default {
   name: "Register",
+  components: {
+    AnimWords
+  },
   data() {
     return {
       username: "",
