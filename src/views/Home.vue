@@ -12,7 +12,9 @@
       <hr />
       <div class="row">
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/Home/tech.png" class="card-img-top mt-2" alt="技术" />
+          <div class="card-img-top mt-4">
+            <img src="@/assets/img/Home/tech.png" alt="技术" width="100" height="100" />
+          </div>
           <div class="card-body">
             <h2 class="card-title">技术部</h2>
           </div>
@@ -26,7 +28,9 @@
           </div>
         </div>
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/Home/serve.png" class="card-img-top mt-2" alt="服务" />
+          <div class="card-img-top mt-4">
+            <img src="@/assets/img/Home/serve.png" alt="服务" width="100" height="100" />
+          </div>
           <div class="card-body">
             <h2 class="card-title">服务部</h2>
           </div>
@@ -40,7 +44,9 @@
           </div>
         </div>
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/Home/media.png" class="card-img-top mt-2" alt="组宣" />
+          <div class="card-img-top mt-4">
+            <img src="@/assets/img/Home/media.png" alt="组宣" width="100" height="100" />
+          </div>
           <div class="card-body">
             <h2 class="card-title">组宣部</h2>
           </div>
@@ -54,7 +60,9 @@
           </div>
         </div>
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/Home/game.png" class="card-img-top mt-2" alt="电竞" />
+          <div class="card-img-top mt-4">
+            <img src="@/assets/img/Home/game.png" alt="电竞" width="100" height="100" />
+          </div>
           <div class="card-body">
             <h2 class="card-title">电竞部</h2>
           </div>
@@ -86,7 +94,7 @@ export default {
         {
           img: require("@/assets/img/Home/bg-th1.jpg"),
           title: "技术",
-          subTitle: "first"
+          subTitle: "CIC Tech, More Than You Think"
         },
         {
           img: require("@/assets/img/Home/bg-th2.jpg"),
@@ -96,7 +104,7 @@ export default {
         {
           img: require("@/assets/img/Home/bg-th3.jpg"),
           title: "电竞",
-          subTitle: "third"
+          subTitle: "ECUST E-Sports, Go Beyond the Game"
         }
       ]
     };

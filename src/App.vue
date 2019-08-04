@@ -127,12 +127,12 @@
                 <i class="fa fa-github fa-fw"></i>
               </a>
             </li>
-            <li class="list-inline-item">
+            <li class="list-inline-item" id="wechat">
               <a
                 href="javascript:void(0);"
                 data-toggle="popover"
                 data-animation="true"
-                data-container="body"
+                data-container="#wechat"
                 data-placement="top"
                 data-trigger="hover"
                 data-html="true"
@@ -204,6 +204,7 @@ body {
 
 <script>
 import $ from "jquery";
+import { setTimeout } from "timers";
 export default {
   data() {
     return {
@@ -267,6 +268,25 @@ export default {
   },
   mounted: function() {
     $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]')
+      .on("shown.bs.popover", function() {
+        $('[data-toggle="popover"]').popover("update");
+      })
+      .on("mouseenter", function() {
+        var that = this;
+        $(this).popover("show");
+        $(".popover").on("mouseleave", function() {
+          $(that).popover("hide");
+        });
+      })
+      .on("mouseleave", function() {
+        var that = this;
+        setTimeout(function() {
+          if (!$(".popover:hover").length) {
+            $(that).popover("hide");
+          }
+        }, 300);
+      });
     this.windowsResize();
     var that = this;
     window.onresize = function() {
