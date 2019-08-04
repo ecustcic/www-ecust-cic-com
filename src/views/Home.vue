@@ -12,7 +12,7 @@
       <hr />
       <div class="row">
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/tech.png" class="card-img-top mt-2" alt="技术" />
+          <img src="@/assets/img/Home/tech.png" class="card-img-top mt-2" alt="技术" />
           <div class="card-body">
             <h2 class="card-title">技术部</h2>
           </div>
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/serve.png" class="card-img-top mt-2" alt="服务" />
+          <img src="@/assets/img/Home/serve.png" class="card-img-top mt-2" alt="服务" />
           <div class="card-body">
             <h2 class="card-title">服务部</h2>
           </div>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/media.png" class="card-img-top mt-2" alt="组宣" />
+          <img src="@/assets/img/Home/media.png" class="card-img-top mt-2" alt="组宣" />
           <div class="card-body">
             <h2 class="card-title">组宣部</h2>
           </div>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="card shadow-sm col-md-3">
-          <img src="@/assets/img/game.png" class="card-img-top mt-2" alt="电竞" />
+          <img src="@/assets/img/Home/game.png" class="card-img-top mt-2" alt="电竞" />
           <div class="card-body">
             <h2 class="card-title">电竞部</h2>
           </div>
@@ -84,17 +84,17 @@ export default {
     return {
       slides: [
         {
-          img: require("@/assets/img/bg-th1.jpg"),
+          img: require("@/assets/img/Home/bg-th1.jpg"),
           title: "技术",
           subTitle: "first"
         },
         {
-          img: require("@/assets/img/bg-th2.jpg"),
+          img: require("@/assets/img/Home/bg-th2.jpg"),
           title: "服务",
           subTitle: "second"
         },
         {
-          img: require("@/assets/img/bg-th3.jpg"),
+          img: require("@/assets/img/Home/bg-th3.jpg"),
           title: "电竞",
           subTitle: "third"
         }
