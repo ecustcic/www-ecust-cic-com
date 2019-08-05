@@ -4,6 +4,9 @@ import Router from 'vue-router'
 // 主页
 import Home from '@/views/Home.vue'
 
+// 技术
+import Tech from '@/views/Tech.vue'
+
 // 用户相关
 import User from '@/views/User/User.vue'
 // 登录
@@ -12,7 +15,7 @@ import Login from '@/views/User/Login.vue'
 import Register from '@/views/User/Register.vue'
 
 // test
-import AnimWords from '@/components/AnimWords.vue'
+// import AnimWords from '@/components/AnimWords.vue'
 
 // 404 Not Found
 import NotFound from '@/views/NotFound.vue'
@@ -31,6 +34,15 @@ const router =  new Router({
         title: '华理计算机信息交流协会'
       },
       component: Home
+    },
+    // 技术
+    {
+      path: '/tech',
+      name: 'tech',
+      meta: {
+        title: '技术'
+      },
+      component: Tech
     },
     // 关于
     {
@@ -53,26 +65,35 @@ const router =  new Router({
         {
           path: "login",
           name: "login",
-          component: Login
+          component: Login,
+          meta: {
+            title: '登录'
+          }
         },
         {
           path: "register",
           name: "register",
-          component: Register
+          component: Register,
+          meta: {
+            title: '注册'
+          }
         }
       ]
     },
     // test
-    {
-      path: '/test',
-      name: 'test',
-      component: AnimWords
-    },
+    // {
+    //   path: '/test',
+    //   name: 'test',
+    //   component: AnimWords
+    // },
     // 404 not found
     {
       path: '*',
       name: 'NotFound',
-      component: NotFound
+      component: NotFound,
+      meta: {
+        title: '404 Not Found'
+      }
     }
   ]
 })

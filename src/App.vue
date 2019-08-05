@@ -134,7 +134,7 @@
                 data-animation="true"
                 data-container="#wechat"
                 data-placement="top"
-                data-trigger="hover"
+                data-trigger="manual"
                 data-html="true"
                 data-content="<img src='/img/logo.png' width='86'>"
               >
@@ -285,7 +285,7 @@ export default {
           if (!$(".popover:hover").length) {
             $(that).popover("hide");
           }
-        }, 300);
+        }, 500);
       });
     this.windowsResize();
     var that = this;

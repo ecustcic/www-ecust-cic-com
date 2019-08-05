@@ -37,13 +37,19 @@ axios.interceptors.request.use(
     if (token) {
       config.headers.common['Authorization'] = token;
     }
-    config.data = qs.stringify(config.data, { indices: false });
+    config.data = qs.stringify(config.data, {
+      indices: false
+    });
     return config;
   },
   error => {
     return Promise.reject(error);
   }
 )
+
+// Global Values
+import globals from "@/Global.vue"
+Vue.prototype.globals = globals
 
 // devtools
 Vue.config.devtools = process.env.NODE_ENV === 'development'

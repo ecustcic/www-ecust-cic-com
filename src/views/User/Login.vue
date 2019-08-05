@@ -85,7 +85,7 @@
 
 <script>
 import $ from "jquery";
-import AnimWords from '@/components/AnimWords.vue';
+import AnimWords from "@/components/AnimWords.vue";
 export default {
   name: "Login",
   components: {
@@ -121,7 +121,10 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          var captcha = new TencentCaptcha("2018946756", this.cbfn);
+          var captcha = new TencentCaptcha(
+            this.globals.TencentAPPID,
+            this.cbfn
+          );
           captcha.show();
         }
       });
@@ -160,7 +163,7 @@ export default {
         //     }
         //   });
       }
-    },
+    }
   },
   mounted() {
     this.disablePopover();
