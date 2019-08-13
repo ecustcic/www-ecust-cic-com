@@ -54,6 +54,7 @@ import $ from "jquery";
 export default {
   name: "NotFound",
   mounted() {
+    $(".footer").css({"display": "none"})
     var notFound = $(".notFound");
     var S = {
       init: function() {
@@ -109,10 +110,7 @@ export default {
         adjustCanvas: function() {
           canvas.width = $(window).innerWidth();
           canvas.height =
-            $(window).innerHeight() -
-            $(".navbar").outerHeight(true) -
-            $(".footer").outerHeight(true) -
-            21;
+            $(window).innerHeight() - 10;
         },
 
         clearFrame: function() {
@@ -707,6 +705,10 @@ export default {
     })();
 
     S.init();
+  },
+  destroyed() {
+    $(".footer").attr("style", "");
+    $(".footer").removeAttr("style");
   }
 };
 </script>

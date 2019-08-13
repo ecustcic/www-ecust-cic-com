@@ -19,6 +19,7 @@
         clickMode="push"
       ></vue-particles>
     </div>
+    <div id="navbarHolder"></div>
     <div id="user">
       <router-view />
     </div>
@@ -28,7 +29,7 @@
 <style scoped>
 #user {
   padding: 1rem;
-  margin: 0;
+  margin: 0 0 0 0;
 }
 .particles {
   position: fixed;
@@ -40,9 +41,12 @@
 </style>
 
 <script>
+import $ from "jquery";
 export default {
   name: "User",
   methods: {},
-  mounted: function() {}
+  mounted: function() {
+    $("#navbarHolder").height($(".navbar").outerHeight(true));
+  }
 };
 </script>

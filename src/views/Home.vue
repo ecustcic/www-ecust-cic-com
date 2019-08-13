@@ -92,18 +92,18 @@ export default {
     return {
       slides: [
         {
-          img: require("@/assets/img/Home/bg-th1.jpg"),
-          title: "技术",
+          img: require("@/assets/img/Home/bg-th1.png"),
+          title: "",
           subTitle: "CIC Tech, More Than You Think"
         },
         {
-          img: require("@/assets/img/Home/bg-th2.jpg"),
-          title: "服务",
-          subTitle: "second"
+          img: require("@/assets/img/Home/bg-th2.png"),
+          title: "",
+          subTitle: "CIC Service, Waiting For Serving Everyone"
         },
         {
-          img: require("@/assets/img/Home/bg-th3.jpg"),
-          title: "电竞",
+          img: require("@/assets/img/Home/bg-th3.png"),
+          title: "",
           subTitle: "ECUST E-Sports, Go Beyond the Game"
         }
       ]
