@@ -3,12 +3,18 @@
     <Carousel :slides="this.slides"></Carousel>
     <div class="container">
       <hr />
-      <h3 class="text-left">华理计算机信息交流协会 创立于1998年3月</h3>
-      <h3 class="text-right">宗旨：服务华理，振兴IT！</h3>
-      <h5 class="text-right">
+      <div class="tlt h3">
+        <ul class="texts">
+          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">华东理工大学计算机信息交流协会</li>
+          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">成立于1998年3月</li>
+          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">ECUST-CIC</li>
+        </ul>
+      </div>
+      <div class="text-muted lead">宗旨：服务华理，振兴IT！</div>
+      <div class="text-muted">
         更多请看：
         <router-link to="/about">社团介绍</router-link>
-      </h5>
+      </div>
       <hr />
       <div class="row">
         <div class="card shadow-sm col-md-3">
@@ -81,6 +87,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 import Carousel from "@/components/Carousel.vue";
 
 export default {
@@ -108,6 +115,12 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    $(".tlt").textillate({
+      loop: true,
+      delay: 50
+    });
   }
 };
 </script>

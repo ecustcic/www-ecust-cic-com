@@ -6,15 +6,16 @@
     >
       <div class="container">
         <a class="navbar-brand" href="/">
-          <img id="img" src="./assets/logo.png" width="30" />
-          <i id="title">ECUST-CIC</i>
+          <img src="./assets/logo-cic.png" alt height="35" />
+          <!-- <img src="./assets/logo-cn.png" alt class="logo-scroll" height="35" /> -->
+          <!-- <img src="./assets/logo-cic.png" alt class="logo-trans" height="35" /> -->
         </a>
         <button
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
@@ -177,7 +178,8 @@
 
 <style>
 html,
-body {
+body,
+.fullscreen {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -215,6 +217,10 @@ body {
   position: relative;
 }
 
+.navbar .navbar-nav {
+  margin-left: 150px;
+}
+
 .navbar .navbar-nav .nav-link {
   text-transform: capitalize;
   font-weight: 400;
@@ -247,7 +253,7 @@ body {
   }
   .navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-brand > img {
     position: absolute;
-    top: 30px;
+    top: 25px;
   }
 
   /* logo */
@@ -366,7 +372,7 @@ export default {
     windowsResize: function() {
       const height =
         $(window).innerHeight() -
-        $(".navbar").outerHeight(true) -
+        // $(".navbar").outerHeight(true) -
         $(".footer").outerHeight(true) -
         21;
       $(".view").css("min-height", height + "px");

@@ -1,16 +1,27 @@
 <template>
   <div id="carousel">
-    <div id="carouselCaptions" class="carousel slide carousel-fade" data-ride="carousel">
+    <div
+      id="carouselCaptions"
+      class="carousel slide"
+      data-ride="carousel"
+      data-interval="4500"
+      data-pause="false"
+    >
       <!-- 底部导航 -->
       <ol class="carousel-indicators">
         <template v-for="(item, index) in this.slideObjects">
-          <li :class="{active: index == 1}" data-target="#carouselCaptions" :data-slide-to="index" :key="index"></li>
+          <li
+            :class="{active: index == 0}"
+            data-target="#carouselCaptions"
+            :data-slide-to="index"
+            :key="index"
+          ></li>
         </template>
       </ol>
       <!-- 滚动图片 -->
       <div class="carousel-inner">
         <template v-for="(item, index) in this.slideObjects">
-          <div class="carousel-item" :class="{active: index == 1}" :key="index">
+          <div class="carousel-item" :class="{active: index == 0}" :key="index">
             <img :src="item.img" class="d-block w-100" :alt="item.title" />
             <div class="carousel-caption d-none d-md-block">
               <h3>{{ item.title }}</h3>

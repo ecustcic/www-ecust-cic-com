@@ -18,9 +18,19 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // font-awesome
 import 'font-awesome/css/font-awesome.min.css'
 
+// animation文字特效
+import 'animate.css/animate.min.css'
+// textillate
+import 'textillate'
+// lettering.js
+import './assets/js/jquery.lettering.js'
+
 // Vue-Particles粒子特效
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
+
+// ParticleGround粒子特效
+import './assets/js/jquery.particleground.min.js'
 
 // Vee-validate
 import Veevalidate from 'vee-validate'
