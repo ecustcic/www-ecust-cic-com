@@ -29,7 +29,9 @@
     "eslint-plugin-vue": "^5.0.0",
     "textillate": "^0.4.1",
     "vee-validate": "^2.2.15",
+    "vue-fullpage.js": "^0.1.4",
     "vue-particles": "^1.0.9",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "wowjs": "^1.1.3"
   }
 }

@@ -25,6 +25,8 @@ Vue.use(Router)
 const router =  new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'exact-active',
   routes: [
     // 主页
     {

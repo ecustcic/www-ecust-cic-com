@@ -24,13 +24,23 @@ import 'animate.css/animate.min.css'
 import 'textillate'
 // lettering.js
 import './assets/js/jquery.lettering.js'
+// wow.js
+import "wowjs";
 
 // Vue-Particles粒子特效
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
 // ParticleGround粒子特效
-import './assets/js/jquery.particleground.min.js'
+// import './assets/js/jquery.particleground.min.js'
+
+// Slide Revolution Add-On particle
+// import './assets/css/revolution.addon.particles.css'
+// import './assets/js/jquery.particleground.min.js'
+
+// vue-fullpage.js
+import VueFullPage from 'vue-fullpage.js'
+Vue.use(VueFullPage)
 
 // Vee-validate
 import Veevalidate from 'vee-validate'

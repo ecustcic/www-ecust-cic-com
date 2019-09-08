@@ -23,36 +23,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item" :class="{active: navbar.index}" id="nav-index">
-              <router-link class="nav-link" to="/">
+            <li class="nav-item" id="nav-index">
+              <router-link class="nav-link" to="/" exact>
                 <i class="fa fa-home fa-fw"></i>首页
               </router-link>
             </li>
-            <li class="nav-item" :class="{active: navbar.tech}" id="nav-print">
+            <li class="nav-item" id="nav-print">
               <router-link class="nav-link" to="/tech">
                 <i class="fa fa-code fa-fw" aria-hidden="true"></i>
                 技术
               </router-link>
             </li>
-            <li class="nav-item" :class="{active: navbar.service}" id="nav-course">
+            <li class="nav-item" id="nav-course">
               <router-link class="nav-link" to="/service">
                 <i class="fa fa-group fa-fw" aria-hidden="true"></i>
                 服务
               </router-link>
             </li>
-            <li class="nav-item" :class="{active: navbar['e-sports']}" id="nav-file">
+            <li class="nav-item" id="nav-file">
               <router-link class="nav-link" to="/e-sports">
                 <i class="fa fa-gamepad fa-fw" aria-hidden="true"></i>
                 电竞
               </router-link>
             </li>
-            <li class="nav-item" :class="{active: navbar.others}" id="nav-info">
+            <li class="nav-item" id="nav-info">
               <router-link class="nav-link" to="/others">
                 <i class="fa fa-wrench fa-fw" aria-hidden="true"></i>
                 其他
               </router-link>
             </li>
-            <li class="nav-item" :class="{active: navbar.about}" id="nav-about">
+            <li class="nav-item" id="nav-about">
               <router-link class="nav-link" to="/about">
                 <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
                 关于
@@ -237,7 +237,7 @@ body,
 .navbar-light.navbar .navbar-nav .nav-link:hover,
 .navbar-light.navbar .navbar-nav .nav-link:focus,
 .navbar-light.navbar .navbar-nav .nav-link:active,
-.navbar-light.navbar .navbar-nav .nav-link.router-link-exact-active {
+.navbar-light.navbar .navbar-nav .nav-link.active {
   color: #1ecfca;
   border-top-color: #1ecfca;
 }
@@ -269,11 +269,16 @@ body,
     color: rgba(0, 0, 0, 0.73);
   }
   .navbar.navbar-sticky.navbar-transparent-light.bg-white
+    .navbar-nav.navbar-text-white
+    .nav-link {
+    color: rgba(255, 255, 255, 0.83);
+  }
+  .navbar.navbar-sticky.navbar-transparent-light.bg-white
     .navbar-nav
     .nav-link:hover,
   .navbar.navbar-sticky.navbar-transparent-light.bg-white
     .navbar-nav
-    .nav-link.router-link-exact-active,
+    .nav-link.active,
   .navbar.navbar-sticky.navbar-transparent-light.bg-white
     .navbar-nav
     .nav-link:active,
@@ -342,7 +347,7 @@ body,
     .nav-link:hover,
   .navbar.navbar-transparent-light.bg-white.navbar-sticky.fixed-top
     .navbar-nav
-    .nav-link.router-link-exact-active,
+    .nav-link.active,
   .navbar.navbar-transparent-light.bg-white.navbar-sticky.fixed-top
     .navbar-nav
     .nav-link:active,
@@ -352,11 +357,14 @@ body,
     color: #1ecfca;
   }
 }
+
+.wow {
+  opacity: 0;
+}
 </style>
 
 <script>
 import $ from "jquery";
-import { setTimeout } from "timers";
 export default {
   data() {
     return {
@@ -365,10 +373,6 @@ export default {
     };
   },
   methods: {
-    logout: function() {
-      this.$store.commit("handleLogout");
-      this.$router.push({ path: "/" });
-    },
     windowsResize: function() {
       const height =
         $(window).innerHeight() -
@@ -379,38 +383,6 @@ export default {
     }
   },
   computed: {
-    navbar: function() {
-      var path = this.$route.path.split("/");
-      var active = {
-        index: false,
-        tech: false,
-        service: false,
-        "e-sports": false,
-        others: false,
-        about: false
-      };
-      switch (path[1]) {
-        case "":
-          active.index = true;
-          break;
-        case "tech":
-          active.tech = true;
-          break;
-        case "service":
-          active.service = true;
-          break;
-        case "e-sports":
-          active["e-sports"] = true;
-          break;
-        case "others":
-          active.others = true;
-          break;
-        case "about":
-          active.about = true;
-          break;
-      }
-      return active;
-    },
     user: function() {
       return this.$store.state.user;
     },
@@ -439,6 +411,8 @@ export default {
           }
         }, 500);
       });
+
+    // navbar
     $(document).on("scroll", function() {
       if ($(document).scrollTop() > 150) {
         $(".navbar-sticky").addClass("fixed-top");
@@ -446,6 +420,8 @@ export default {
         $(".navbar-sticky").removeClass("fixed-top");
       }
     });
+
+    // resize
     this.windowsResize();
     var that = this;
     window.onresize = function() {
