@@ -100,12 +100,12 @@
               </template>
               <template v-else>
                 <li class="nav-item">
-                  <router-link to="/user/login">
+                  <router-link class="user-link" to="/user/login">
                     <i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>登录
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/user/register">
+                  <router-link class="user-link" to="/user/register">
                     <i class="fa fa-edit fa-fw" aria-hidden="true"></i>注册
                   </router-link>
                 </li>
@@ -240,6 +240,10 @@ body,
 .navbar-light.navbar .navbar-nav .nav-link.active {
   color: #1ecfca;
   border-top-color: #1ecfca;
+}
+
+.navbar .navbar-nav .user-link {
+  color: #1ecfca;
 }
 
 @media (min-width: 992px) {
