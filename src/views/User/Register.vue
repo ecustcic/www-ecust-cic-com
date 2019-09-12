@@ -68,7 +68,7 @@
         class="form-control alert-danger col-md-3"
         role="alert"
         v-show="errors.has('password')"
-      >请填写正确的密码</div>
+      >请填写至少6位密码</div>
     </div>
     <div class="row mb-5">
       <label
@@ -144,11 +144,11 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          var captcha = new TencentCaptcha(
-            this.globals.TencentAPPID,
-            this.cbfn
-          );
-          captcha.show();
+          // var captcha = new TencentCaptcha(
+          //   this.globals.TencentAPPID,
+          //   this.cbfn
+          // );
+          // captcha.show();
         }
       });
     },

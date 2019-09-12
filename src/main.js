@@ -18,6 +18,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // font-awesome
 import 'font-awesome/css/font-awesome.min.css'
 
+// jquery.magnific-popup.js
+import './assets/css/magnific-popup.css'
+import './assets/js/jquery.magnific-popup.min.js'
+
 // animation文字特效
 import 'animate.css/animate.min.css'
 // textillate
@@ -30,13 +34,6 @@ import "wowjs";
 // Vue-Particles粒子特效
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
-
-// ParticleGround粒子特效
-// import './assets/js/jquery.particleground.min.js'
-
-// Slide Revolution Add-On particle
-// import './assets/css/revolution.addon.particles.css'
-// import './assets/js/jquery.particleground.min.js'
 
 // vue-fullpage.js
 import VueFullPage from 'vue-fullpage.js'

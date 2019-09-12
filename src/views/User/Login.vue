@@ -121,11 +121,11 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          var captcha = new TencentCaptcha(
-            this.globals.TencentAPPID,
-            this.cbfn
-          );
-          captcha.show();
+          // var captcha = new TencentCaptcha(
+          //   this.globals.TencentAPPID,
+          //   this.cbfn
+          // );
+          // captcha.show();
         }
       });
     },

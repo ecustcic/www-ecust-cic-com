@@ -242,9 +242,9 @@ body,
   border-top-color: #1ecfca;
 }
 
-.navbar .navbar-nav .user-link {
+/* .navbar .navbar-nav .user-link {
   color: #1ecfca;
-}
+} */
 
 @media (min-width: 992px) {
   .navbar.navbar-sticky.navbar-transparent-light.bg-white {

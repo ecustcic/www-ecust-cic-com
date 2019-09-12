@@ -54,7 +54,12 @@
                   class="btn content-btn btn-md wow fadeIn"
                   @click="$refs.fullpage.api.moveSectionDown()"
                 >Next</button>
-                <img class="content-photo wow fadeInUp" src="../assets/logo.png" width="62%" alt />
+                <img
+                  class="content-photo wow fadeInUp"
+                  src="../assets/img/About/tech.png"
+                  width="62%"
+                  alt
+                />
               </div>
               <div class="col-md-5">
                 <div class="accordion wow fadeInRight" id="history-card" role="tablist">
@@ -147,25 +152,35 @@
             <h3 class="font-weight-bold">Services We Do</h3>
             <div class="line-center"></div>
           </div>
-          <div class="row wow fadeInUp">
+          <div class="row m-0 p-0 wow fadeInUp">
             <div class="col-md-6 p-0">
               <div class="overflow-hidden bg-primary-green">
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 p-0">
                     <div class="content-table content-card">
                       <div class="content-middle">
-                        <h3 class="content-card-text">
-                          CIC Tech, More Than You Think. Highly Flexible, always growing
-                        </h3>
+                        <h3 class="content-card-title">技术部</h3>
+                        <p class="content-card-text">技术讲座、项目开发、技术比赛</p>
                         <router-link class="btn btn-sm content-card-btn" to="/tech">More</router-link>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="content-table content-arrow-left content-arrow-green">
+                  <div class="col-sm-6 p-0">
+                    <div class="content-table content-arrow-left content-arrow-green overlay">
+                      <div class="overlay-wrapper">
+                        <div class="overlay-content">
+                          <router-link to="/tech">
+                            <i class="fa fa-link fa-fw"></i>
+                          </router-link>
+                          <a class="image-popup" :href="tech">
+                            <i class="fa fa-search"></i>
+                          </a>
+                        </div>
+                      </div>
                       <div
                         class="content-background-img"
-                        :style="{'background-image': 'url('+bg1+')'}"
+                        data-height="height"
+                        :style="{'background-image': 'url('+tech+')'}"
                       ></div>
                     </div>
                   </div>
@@ -175,24 +190,31 @@
             <div class="col-md-6 p-0">
               <div class="overflow-hidden bg-primary-brown">
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 p-0">
                     <div class="overflow-hidden content-table content-card">
                       <div class="content-middle">
-                        <h3
-                          class="content-card-text"
-                        >Nothing is impossible for JANGO. Highly Flexible, always growing</h3>
-                        <a href="#" class="btn btn-sm content-card-btn">More</a>
+                        <h3 class="content-card-title">服务部</h3>
+                        <p class="content-card-text">电脑软硬件问题处理、疑难解答</p>
+                        <router-link to="/service" class="btn btn-sm content-card-btn">More</router-link>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="overflow-hidden content-table content-card">
-                      <div class="content-middle">
-                        <h3
-                          class="content-card-text"
-                        >Nothing is impossible for JANGO. Highly Flexible, always growing</h3>
-                        <a href="#" class="btn btn-sm content-card-btn">More</a>
+                  <div class="col-sm-6 p-0">
+                    <div class="content-table content-arrow-left content-arrow-brown overlay">
+                      <div class="overlay-wrapper">
+                        <div class="overlay-content">
+                          <a href="#">
+                            <i class="fa fa-link fa-fw"></i>
+                          </a>
+                          <a class="image-popup" :href="tech">
+                            <i class="fa fa-search"></i>
+                          </a>
+                        </div>
                       </div>
+                      <div
+                        class="content-background-img"
+                        :style="{'background-image': 'url('+tech+')'}"
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -201,22 +223,29 @@
             <div class="col-md-6 p-0">
               <div class="overflow-hidden bg-primary-red">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="overflow-hidden content-table content-card">
-                      <div class="content-middle">
-                        <h3
-                          class="content-card-text"
-                        >Nothing is impossible for JANGO. Highly Flexible, always growing</h3>
-                        <a href="#" class="btn btn-sm content-card-btn">More</a>
+                  <div class="col-sm-6 p-0">
+                    <div class="content-table content-arrow-right content-arrow-red overlay">
+                      <div class="overlay-wrapper">
+                        <div class="overlay-content">
+                          <a href="#">
+                            <i class="fa fa-link fa-fw"></i>
+                          </a>
+                          <a class="image-popup" :href="tech">
+                            <i class="fa fa-search"></i>
+                          </a>
+                        </div>
                       </div>
+                      <div
+                        class="content-background-img"
+                        :style="{'background-image': 'url('+tech+')'}"
+                      ></div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 p-0">
                     <div class="overflow-hidden content-table content-card">
                       <div class="content-middle">
-                        <h3
-                          class="content-card-text"
-                        >Nothing is impossible for JANGO. Highly Flexible, always growing</h3>
+                        <h3 class="content-card-title">组宣部</h3>
+                        <p class="content-card-text">微信公众号、QQ等平台的运营</p>
                         <a href="#" class="btn btn-sm content-card-btn">More</a>
                       </div>
                     </div>
@@ -227,22 +256,29 @@
             <div class="col-md-6 p-0">
               <div class="overflow-hidden bg-primary-blue">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="overflow-hidden content-table content-card">
-                      <div class="content-middle">
-                        <h3
-                          class="content-card-text"
-                        >Nothing is impossible for JANGO. Highly Flexible, always growing</h3>
-                        <a href="#" class="btn btn-sm content-card-btn">More</a>
+                  <div class="col-sm-6 p-0">
+                    <div class="content-table content-arrow-right content-arrow-blue overlay">
+                      <div class="overlay-wrapper">
+                        <div class="overlay-content">
+                          <router-link to="/e-sports">
+                            <i class="fa fa-link fa-fw"></i>
+                          </router-link>
+                          <a class="image-popup" :href="eSports">
+                            <i class="fa fa-search"></i>
+                          </a>
+                        </div>
                       </div>
+                      <div
+                        class="content-background-img"
+                        :style="{'background-image': 'url('+eSports+')'}"
+                      ></div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 p-0">
                     <div class="overflow-hidden content-table content-card">
                       <div class="content-middle">
-                        <h3
-                          class="content-card-text"
-                        >Nothing is impossible for JANGO. Highly Flexible, always growing</h3>
+                        <h3 class="content-card-title">电竞部</h3>
+                        <p class="content-card-text">校内外电竞比赛、游戏交流</p>
                         <a href="#" class="btn btn-sm content-card-btn">More</a>
                       </div>
                     </div>
@@ -316,7 +352,7 @@
 }
 .content-text {
   position: relative;
-  background-color: rgba(181, 181, 181, 0.5);
+  background-color: rgba(181, 181, 181, 0.8);
   width: 40%;
   padding: 25px;
   z-index: 1;
@@ -341,12 +377,16 @@
   padding: 10%;
   overflow: hidden;
 }
-.content-card-text {
+.content-card-title {
   margin-top: 0;
   font-size: 20px;
   color: #fff;
   line-height: 34px;
   font-weight: 600 !important;
+}
+.content-card-text {
+  font-size: 17px;
+  color: #fff;
 }
 .content-card-btn {
   margin: 10px 0;
@@ -408,6 +448,8 @@
 }
 .content-background-img {
   height: 100%;
+  position: relative;
+  z-index: 1;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -424,6 +466,57 @@
   .content-photo {
     position: static;
     margin: 20px 0;
+  }
+}
+@media (max-width: 767px) {
+  /* 767px */
+  .content-arrow-left:after,
+  .content-arrow-right:after {
+    left: calc(50% - 13px);
+  }
+  .content-arrow-left:after {
+    bottom: 0;
+    border-bottom-color: #ffffff;
+    right: auto;
+    top: auto;
+    border-right-color: transparent;
+  }
+  .content-arrow-right:after {
+    top: 0;
+    border-top-color: #ffffff;
+    border-left-color: transparent;
+  }
+  .content-arrow-green.content-arrow-left:after {
+    border-right-color: transparent;
+    border-bottom-color: #32c5d2;
+  }
+  .content-arrow-green.content-arrow-right:after {
+    border-left-color: transparent;
+    border-top-color: #32c5d2;
+  }
+  .content-arrow-red-2.content-arrow-left:after {
+    border-right-color: transparent;
+    border-bottom-color: #e7505a;
+  }
+  .content-arrow-red-2.content-arrow-right:after {
+    border-left-color: transparent;
+    border-top-color: #e7505a;
+  }
+  .content-arrow-brown-2.content-arrow-left:after {
+    border-right-color: transparent;
+    border-bottom-color: #7a6a61;
+  }
+  .content-arrow-brown-2.content-arrow-right:after {
+    border-left-color: transparent;
+    border-top-color: #7a6a61;
+  }
+  .content-arrow-blue-3.content-arrow-left:after {
+    border-right-color: transparent;
+    border-bottom-color: #57bfe1;
+  }
+  .content-arrow-blue-3.content-arrow-right:after {
+    border-left-color: transparent;
+    border-top-color: #57bfe1;
   }
 }
 
@@ -550,13 +643,97 @@
   color: #ffffff;
   background-color: #32c5d2;
 }
+
+.overlay {
+  overflow: hidden;
+  position: relative;
+}
+.overlay .overlay-object {
+  position: relative;
+  z-index: 1;
+}
+.overlay .overlay-wrapper {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  transition: all 0.2s;
+  background: rgba(0, 0, 0, 0.4);
+}
+.overlay .overlay-wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.overlay .overlay-wrapper:before {
+  display: inline-block;
+  content: "";
+  vertical-align: middle;
+  height: 100%;
+}
+.overlay .overlay-wrapper .overlay-content {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0;
+  height: auto;
+  width: 95%;
+}
+.overlay .overlay-wrapper .overlay-content i {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  border-radius: 40px;
+  text-align: center;
+  padding: 14px 6px 8px 6px;
+  color: #fff;
+  font-size: 16px;
+  background: #000000;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  margin: 0 5px;
+}
+.overlay .overlay-wrapper .overlay-content i:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.overlay .overlay-wrapper.overlay-padding {
+  left: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+}
+.overlay:hover {
+  cursor: pointer;
+}
+.overlay:hover .overlay-wrapper {
+  top: 0;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.overlay:hover .overlay-wrapper.overlay-padding {
+  top: 10px;
+}
+.overlay .overlay-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  position: absolute;
+  z-index: 1;
+}
 </style>
 
 <script>
 import $ from "jquery";
 import { WOW } from "wowjs";
 
-import bg1 from "../assets/img/Tech/unity.png";
+import tech from "../assets/img/About/tech.png";
+import eSports from "../assets/img/About/e-sports.png";
 
 export default {
   name: "About",
@@ -567,9 +744,16 @@ export default {
         scrollBar: true,
         fitToSection: false
       },
-      bg1: bg1
+      tech: tech,
+      eSports: eSports
     };
   },
+  // methods: {
+  //   imagePreview() {
+  //     const viewer = this.$el.querySelector("#service").$viewer;
+  //     viewer.show();
+  //   }
+  // },
   mounted() {
     // $(
     //   ".navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-nav"
@@ -584,6 +768,11 @@ export default {
     //   // dotColor: "#8000ff",
     //   // lineColor: "#8000ff"
     // });
+
+    // magnific-popup
+    $(".image-popup").magnificPopup({
+      type: "image"
+    });
 
     // 滚动进入特效
     new WOW({
