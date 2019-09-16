@@ -56,7 +56,7 @@
                 >Next</button>
                 <img
                   class="content-photo wow fadeInUp"
-                  src="../assets/img/About/tech.png"
+                  src="../assets/img/About/history.png"
                   width="62%"
                   alt
                 />
@@ -203,17 +203,17 @@
                     <div class="content-table content-arrow-left content-arrow-brown overlay">
                       <div class="overlay-wrapper">
                         <div class="overlay-content">
-                          <a href="#">
+                          <router-link to="/service">
                             <i class="fa fa-link fa-fw"></i>
-                          </a>
-                          <a class="image-popup" :href="tech">
+                          </router-link>
+                          <a class="image-popup" :href="service">
                             <i class="fa fa-search"></i>
                           </a>
                         </div>
                       </div>
                       <div
                         class="content-background-img"
-                        :style="{'background-image': 'url('+tech+')'}"
+                        :style="{'background-image': 'url('+service+')'}"
                       ></div>
                     </div>
                   </div>
@@ -227,17 +227,17 @@
                     <div class="content-table content-arrow-right content-arrow-red overlay">
                       <div class="overlay-wrapper">
                         <div class="overlay-content">
-                          <a href="#">
+                          <a href="javascript:void;">
                             <i class="fa fa-link fa-fw"></i>
                           </a>
-                          <a class="image-popup" :href="tech">
+                          <a class="image-popup" :href="publicity">
                             <i class="fa fa-search"></i>
                           </a>
                         </div>
                       </div>
                       <div
                         class="content-background-img"
-                        :style="{'background-image': 'url('+tech+')'}"
+                        :style="{'background-image': 'url('+publicity+')'}"
                       ></div>
                     </div>
                   </div>
@@ -246,7 +246,7 @@
                       <div class="content-middle">
                         <h3 class="content-card-title">组宣部</h3>
                         <p class="content-card-text">微信公众号、QQ等平台的运营</p>
-                        <a href="#" class="btn btn-sm content-card-btn">More</a>
+                        <a href="javascript:void;" class="btn btn-sm content-card-btn">More</a>
                       </div>
                     </div>
                   </div>
@@ -279,7 +279,7 @@
                       <div class="content-middle">
                         <h3 class="content-card-title">电竞部</h3>
                         <p class="content-card-text">校内外电竞比赛、游戏交流</p>
-                        <a href="#" class="btn btn-sm content-card-btn">More</a>
+                        <router-link to="/e-sports" class="btn btn-sm content-card-btn">More</router-link>
                       </div>
                     </div>
                   </div>
@@ -732,8 +732,11 @@
 import $ from "jquery";
 import { WOW } from "wowjs";
 
+import history from "../assets/img/About/history.png";
 import tech from "../assets/img/About/tech.png";
+import service from "../assets/img/About/service.png";
 import eSports from "../assets/img/About/e-sports.png";
+import publicity from "../assets/img/About/publicity.png";
 
 export default {
   name: "About",
@@ -744,8 +747,11 @@ export default {
         scrollBar: true,
         fitToSection: false
       },
+      history: history,
       tech: tech,
-      eSports: eSports
+      service: service,
+      eSports: eSports,
+      publicity: publicity
     };
   },
   // methods: {

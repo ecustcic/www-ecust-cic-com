@@ -30,7 +30,7 @@
           <img src="@/assets/img/Home/serve.png" class="mr-3" alt="服务" width="100" height="100" />
           <div class="media-body">
             <h5 class="mt-0 font-weight-bold">服务部</h5>
-            这里是一群无私奉献、为他人服务的人们。
+            这里有一群无私奉献、为他人服务的人。
             <br />
             <router-link to="/service">点击进入</router-link>
           </div>
@@ -41,12 +41,17 @@
           <img src="@/assets/img/Home/media.png" class="mr-3" alt="组宣" width="100" height="100" />
           <div class="media-body">
             <h5 class="mt-0 font-weight-bold">组宣部</h5>
+            这里是社团运营以及宣传的大脑。
+            <br />
+            <a href="javascript:void;">点击进入</a>
           </div>
         </div>
         <div class="media shadow-sm col-md-6 wow fadeInRight">
           <img src="@/assets/img/Home/game.png" class="mr-3" alt="电竞" width="100" height="100" />
           <div class="media-body">
             <h5 class="mt-0 font-weight-bold">电竞部</h5>
+            这里是游戏爱好者的圣地。
+            <br />
             <router-link to="/e-sports">点击进入</router-link>
           </div>
         </div>

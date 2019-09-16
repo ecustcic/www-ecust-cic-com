@@ -25,7 +25,8 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item" id="nav-index">
               <router-link class="nav-link" to="/" exact>
-                <i class="fa fa-home fa-fw"></i>首页
+                <i class="fa fa-home fa-fw"></i>
+                首页
               </router-link>
             </li>
             <li class="nav-item" id="nav-print">
@@ -38,6 +39,12 @@
               <router-link class="nav-link" to="/service">
                 <i class="fa fa-group fa-fw" aria-hidden="true"></i>
                 服务
+              </router-link>
+            </li>
+            <li class="nav-item" id="nav-file">
+              <router-link class="nav-link" to="/publicity">
+                <i class="fa fa-share-alt fa-fw" aria-hidden="true"></i>
+                组宣
               </router-link>
             </li>
             <li class="nav-item" id="nav-file">
@@ -141,7 +148,7 @@
                 data-placement="top"
                 data-trigger="manual"
                 data-html="true"
-                data-content="<img src='/img/logo.png' width='86'>"
+                data-content="<img src='/img/cic_qrcode.jpg' width='86'>"
               >
                 <i class="fa fa-weixin fa-fw"></i>
               </a>
@@ -217,8 +224,18 @@ body,
   position: relative;
 }
 
+.navbar .navbar-brand {
+  margin-left: -30px;
+}
+
 .navbar .navbar-nav {
-  margin-left: 150px;
+  margin-left: 135px;
+}
+
+@media (max-width: 992px) {
+  .navbar .navbar-nav {
+    margin: 0px;
+  }
 }
 
 .navbar .navbar-nav .nav-link {

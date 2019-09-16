@@ -5,7 +5,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home.vue'
 
 // 技术
-import Tech from '@/views/Tech.vue'
+// import Tech from '@/views/Tech.vue'
 
 // 用户相关
 import User from '@/views/User/User.vue'
@@ -38,14 +38,14 @@ const router =  new Router({
       component: Home
     },
     // 技术
-    {
-      path: '/tech',
-      name: 'tech',
-      meta: {
-        title: '技术'
-      },
-      component: Tech
-    },
+    // {
+    //   path: '/tech',
+    //   name: 'tech',
+    //   meta: {
+    //     title: '技术'
+    //   },
+    //   component: Tech
+    // },
     // 关于
     {
       path: '/about',
