@@ -13,6 +13,8 @@ import User from '@/views/User/User.vue'
 import Login from '@/views/User/Login.vue'
 // 注册
 import Register from '@/views/User/Register.vue'
+// 用户信息
+import Info from '@/views/User/Info.vue'
 
 // test
 // import AnimWords from '@/components/AnimWords.vue'
@@ -78,6 +80,15 @@ const router =  new Router({
           component: Register,
           meta: {
             title: '注册'
+          }
+        },
+        {
+          path: "info",
+          name: "info",
+          component: Info,
+          meta: {
+            title: '个人信息',
+            requireAuth: true
           }
         }
       ]

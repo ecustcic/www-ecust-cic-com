@@ -1,6 +1,5 @@
 <template>
   <div class="container px-5 pt-3 pb-5" id="login">
-    <!-- <h1 class="mb-5">Login</h1> -->
     <AnimWords text="Login" :animation="false" />
     <div class="row mb-3">
       <label
@@ -47,7 +46,7 @@
           @click="disablePopover"
           @blur="check('password')"
           v-model="password"
-          v-validate="'required|min:6'"
+          v-validate="'required|min:6|max:20'"
           title="登录失败"
           data-toggle="popover"
           datas-placement="right"
@@ -72,6 +71,27 @@
     </div>
     <div class="col-md-6 offset-md-3">
       <button class="btn btn-primary btn-lg btn-block" @click="formValidate">登录</button>
+    </div>
+    <!-- FailModal -->
+    <div
+      class="modal fade"
+      id="failModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="failModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="failModalLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">服务似乎暂时不可用呢！</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -121,11 +141,11 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          // var captcha = new TencentCaptcha(
-          //   this.globals.TencentAPPID,
-          //   this.cbfn
-          // );
-          // captcha.show();
+          var captcha = new TencentCaptcha(
+            this.globals.TencentAPPID,
+            this.cbfn
+          );
+          captcha.show();
         }
       });
     },
@@ -143,25 +163,32 @@ export default {
     cbfn: function(res) {
       if (res.ret === 0) {
         console.log(res);
-        // var that = this;
-        // this.$ajax
-        //   .post(
-        //     "/api/user/login",
-        //     $.extend(this.user, {
-        //       ticket: res.ticket,
-        //       randstr: res.randstr
-        //     })
-        //   )
-        //   .then(res => {
-        //     if (res.status != 200) return;
-        //     if (res.data.ret === 0) {
-        //       that.$store.commit("handleLogin", res.data.data);
-        //       const redirect = that.$route.query.redirect || "/";
-        //       that.$router.push({ path: redirect });
-        //     } else {
-        //       console.log(res);
-        //     }
-        //   });
+        var that = this;
+        this.$ajax
+          .post("/api/user/login", {
+            username: that.username,
+            password: that.password,
+            ticket: res.ticket,
+            randstr: res.randstr
+          })
+          .then(res => {
+            if (res.data.ret === 0) {
+              this.$store.commit(
+                "login",
+                res.data.data.token
+              );
+              const redirect = that.$route.query.redirect || "/";
+              that.$router.push({ path: redirect });
+            } else {
+              console.log(res);
+            }
+          })
+          // eslint-disable-next-line
+          .catch(error => {
+            console.log(error);
+            $("#failModal").modal("show");
+            return;
+          });
       }
     }
   },

@@ -6,7 +6,7 @@
     >
       <div class="container">
         <a class="navbar-brand" href="/">
-          <img src="./assets/logo-cic.png" alt height="35" />
+          <img src="./assets/logo-cic.svg" alt height="35" />
           <!-- <img src="./assets/logo-cn.png" alt class="logo-scroll" height="35" /> -->
           <!-- <img src="./assets/logo-cic.png" alt class="logo-trans" height="35" /> -->
         </a>
@@ -70,13 +70,7 @@
           <div class="my-2 my-lg-0">
             <ul class="navbar-nav mr-auto userinfo">
               <template v-if="token">
-                <li class="nav-item" id="shopping-cart">
-                  <a class="nav-link" href="/shopping-cart">
-                    <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-                  </a>
-                </li>
-
-                <li class="nav-item dropdown active userinfo" id="dropmenu" display="block">
+                <li class="nav-item dropdown userinfo" id="dropmenu" display="block">
                   <a
                     role="button"
                     id="navbarDropdown"
@@ -85,15 +79,15 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                  >{{ user.username }}</a>
-                  <div class="dropdown-menu userinfoframe" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/user">
+                  >{{ name }}</a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right userinfoframe"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <a class="dropdown-item" href="/user/info">
                       <i class="fa fa-info-circle fa-fw"></i>&nbsp;个人信息
                     </a>
-                    <a class="dropdown-item" href="/order">
-                      <i class="fa fa-print fa-fw"></i>&nbsp;订单管理
-                    </a>
-                    <template v-if="user.level == 'admin'">
+                    <template v-if="admin">
                       <a class="dropdown-item" href="/admin" target="_blank">
                         <i class="fa fa-gear fa-fw"></i>&nbsp;后台管理
                       </a>
@@ -206,17 +200,11 @@ body,
 }
 
 .userinfo {
-  padding-right: 1.5em;
+  padding: 0;
 }
 
 .userinfoframe {
-  min-width: 5em;
-  left: -2em;
-  margin: 0;
-}
-
-.userinfo:hover > .userinfoframe {
-  display: block;
+  padding: 0;
 }
 
 .navbar .container,
@@ -377,6 +365,11 @@ body,
     .nav-link:focus {
     color: #1ecfca;
   }
+
+  .userinfo:hover > .userinfoframe {
+    display: block;
+    margin-top: 0;
+  }
 }
 
 .wow {
@@ -401,14 +394,27 @@ export default {
         $(".footer").outerHeight(true) -
         21;
       $(".view").css("min-height", height + "px");
+    },
+    logout: function() {
+      this.$cookies.remove("ECUST-CIC");
+      this.$store.commit("logout");
     }
   },
   computed: {
-    user: function() {
-      return this.$store.state.user;
+    name: function() {
+      return this.$store.state.name;
+    },
+    admin: function() {
+      return this.$store.state.admin;
     },
     token: function() {
       return this.$store.state.token;
+    }
+  },
+  beforeMount: function() {
+    if (this.$cookies.isKey("ECUST-CIC")) {
+      const token = this.$cookies.get("ECUST-CIC");
+      this.$store.commit("login", token);
     }
   },
   mounted: function() {

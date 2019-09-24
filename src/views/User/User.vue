@@ -23,7 +23,7 @@
     <div id="user">
       <router-view />
     </div>
-    <div
+    <!-- <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -17,13 +17,14 @@
         hoverMode="grab"
         :clickEffect="false"
         clickMode="push"
+        style="height: 100%"
       ></vue-particles>
       <div class="content-table absolute">
         <div class="content-middle">
           <div class="container">
             <div class="row align-items-center">
               <div class="text-center mr-auto ml-auto">
-                <img src="@/assets/logo-cn.png" class="py-4 wow fadeIn" alt width="90%" />
+                <img src="@/assets/logo-cn.svg" class="py-4 wow fadeIn" alt width="90%" />
                 <div>
                   <button
                     class="btn btn-outline-primary"
@@ -745,7 +746,10 @@ export default {
       options: {
         licenseKey: null,
         scrollBar: true,
-        fitToSection: false
+        fitToSection: false,
+        loopBottom: true,
+        responsiveWidth: 768
+        // scrollOverflow: true
       },
       history: history,
       tech: tech,
@@ -754,18 +758,12 @@ export default {
       publicity: publicity
     };
   },
-  // methods: {
-  //   imagePreview() {
-  //     const viewer = this.$el.querySelector("#service").$viewer;
-  //     viewer.show();
-  //   }
-  // },
   mounted() {
     // $(
     //   ".navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-nav"
     // ).addClass("navbar-text-white");
-    $("#app").css("height", "100%");
-    $(".view").css("height", "100%");
+    // $("#app").css("height", "100%");
+    // $(".view").css("height", "100%");
     $(".footer").css("display", "none");
 
     // $("#hero").particleground({
@@ -795,9 +793,9 @@ export default {
     // $(
     //   ".navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-nav"
     // ).removeClass("navbar-text-white");
-    $("#app").attr("style", "");
-    $("#app").removeAttr("style");
-    $(".view").css("height", "");
+    // $("#app").attr("style", "");
+    // $("#app").removeAttr("style");
+    // $(".view").css("height", "");
     $(".footer").attr("style", "");
     $(".footer").removeAttr("style");
   }

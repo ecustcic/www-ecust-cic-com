@@ -7,6 +7,10 @@ import router from './router'
 // vuex
 import store from './store'
 
+// vue-cookies
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
 // jquery
 import 'jquery'
 
@@ -36,6 +40,7 @@ import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
 // vue-fullpage.js
+// import 'fullpage.js/vendors/scrolloverflow.min.js'
 import VueFullPage from 'vue-fullpage.js'
 Vue.use(VueFullPage)
 

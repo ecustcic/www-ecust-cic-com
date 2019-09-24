@@ -96,6 +96,48 @@
     <div class="col-md-6 offset-md-3">
       <button class="btn btn-primary btn-lg btn-block" @click="formValidate">登录</button>
     </div>
+    <!-- SuccessModal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">注册成功！</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">浏览器将在3s后跳转登录...</div>
+        </div>
+      </div>
+    </div>
+    <!-- FailModal -->
+    <div
+      class="modal fade"
+      id="failModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="failModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="failModalLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">服务似乎暂时不可用呢！</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -144,11 +186,11 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          // var captcha = new TencentCaptcha(
-          //   this.globals.TencentAPPID,
-          //   this.cbfn
-          // );
-          // captcha.show();
+          var captcha = new TencentCaptcha(
+            this.globals.TencentAPPID,
+            this.cbfn
+          );
+          captcha.show();
         }
       });
     },
@@ -166,18 +208,33 @@ export default {
     cbfn: function(res) {
       if (res.ret === 0) {
         console.log(res);
-        // var that = this;
-        // this.$ajax
-        //   .post(
-        //     "/api/user/register",
-        //     $.extend(this.user, {
-        //       ticket: res.ticket,
-        //       randstr: res.randstr
-        //     })
-        //   )
-        //   .then(res => {
-        //
-        //   });
+        var that = this;
+        this.$ajax
+          .post("/api/user/register", {
+            username: that.username,
+            password: that.password,
+            ticket: res.ticket,
+            randstr: res.randstr
+          })
+          .then(res => {
+            if (res.data.ret === 0) {
+              $("#successModal").modal("show");
+              setTimeout(function() {
+                $("#successModal").modal("hide");
+                that.$router.push({
+                  name: "login",
+                  query: { redirect: "/user/info" }
+                });
+              }, 3000);
+            } else {
+              console.log(res);
+            }
+          })
+          // eslint-disable-next-line
+          .catch(error => {
+            $("#failModal").modal("show");
+            return;
+          });
       }
     }
   },
