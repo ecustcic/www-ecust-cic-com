@@ -688,12 +688,13 @@
 </style>
 
 <script>
+import $ from "jquery";
 export default {
   name: "AnimWords",
   data() {
     return {
       word: []
-    }
+    };
   },
   props: {
     text: {
@@ -704,11 +705,17 @@ export default {
     animation: {
       type: Boolean,
       default: true
+    },
+    fontSize: {
+      type: String
     }
   },
   mounted() {
     for (let i = 0; i < this.text.length; i++) {
       this.word.push({ char: this.text[i], alive: true });
+    }
+    if (this.fontSize) {
+      $(".text").css("font-size", this.fontSize);
     }
   },
   methods: {

@@ -23,41 +23,48 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item" id="nav-index">
+            <li class="nav-item">
               <router-link class="nav-link" to="/" exact>
                 <i class="fa fa-home fa-fw"></i>
                 首页
               </router-link>
             </li>
-            <li class="nav-item" id="nav-print">
+            <li class="nav-item">
               <router-link class="nav-link" to="/tech">
                 <i class="fa fa-code fa-fw" aria-hidden="true"></i>
                 技术
               </router-link>
             </li>
-            <li class="nav-item" id="nav-course">
+            <li class="nav-item">
               <router-link class="nav-link" to="/service">
                 <i class="fa fa-group fa-fw" aria-hidden="true"></i>
                 服务
               </router-link>
             </li>
-            <li class="nav-item" id="nav-file">
+            <li class="nav-item">
               <router-link class="nav-link" to="/publicity">
                 <i class="fa fa-share-alt fa-fw" aria-hidden="true"></i>
                 组宣
               </router-link>
             </li>
-            <li class="nav-item" id="nav-file">
+            <li class="nav-item">
               <router-link class="nav-link" to="/e-sports">
                 <i class="fa fa-gamepad fa-fw" aria-hidden="true"></i>
                 电竞
               </router-link>
             </li>
-            <li class="nav-item" id="nav-info">
-              <router-link class="nav-link" to="/others">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                id="dropdown-other"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="fa fa-wrench fa-fw" aria-hidden="true"></i>
                 其他
-              </router-link>
+              </a>
             </li>
             <li class="nav-item" id="nav-about">
               <router-link class="nav-link" to="/about">
@@ -68,9 +75,9 @@
           </ul>
 
           <div class="my-2 my-lg-0">
-            <ul class="navbar-nav mr-auto userinfo">
+            <ul class="navbar-nav mr-auto">
               <template v-if="token">
-                <li class="nav-item dropdown userinfo" id="dropmenu" display="block">
+                <li class="nav-item dropdown" id="dropmenu">
                   <a
                     role="button"
                     id="navbarDropdown"
@@ -80,10 +87,10 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >{{ name }}</a>
-                  <div
-                    class="dropdown-menu dropdown-menu-right userinfoframe"
-                    aria-labelledby="navbarDropdown"
-                  >
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/user/password">
+                      <i class="fa fa-info-circle fa-fw"></i>&nbsp;修改密码
+                    </a>
                     <a class="dropdown-item" href="/user/info">
                       <i class="fa fa-info-circle fa-fw"></i>&nbsp;个人信息
                     </a>
@@ -197,14 +204,6 @@ body,
 
 #title {
   padding: 10px;
-}
-
-.userinfo {
-  padding: 0;
-}
-
-.userinfoframe {
-  padding: 0;
 }
 
 .navbar .container,
@@ -366,9 +365,13 @@ body,
     color: #1ecfca;
   }
 
-  .userinfo:hover > .userinfoframe {
+  /* .dropdown:hover + .dropdown-menu {
     display: block;
-    margin-top: 0;
+  } */
+  .dropdown > #navbarDropdown {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -447,6 +450,7 @@ export default {
         $(".navbar-sticky").removeClass("fixed-top");
       }
     });
+    $('[data-toggle="dropdown"]').bootstrapDropdownHover();
 
     // resize
     this.windowsResize();

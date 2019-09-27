@@ -24,7 +24,7 @@ import NotFound from '@/views/NotFound.vue'
 
 Vue.use(Router)
 
-const router =  new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   linkActiveClass: 'active',
@@ -65,8 +65,7 @@ const router =  new Router({
       path: "/user",
       name: "user",
       component: User,
-      children: [
-        {
+      children: [{
           path: "login",
           name: "login",
           component: Login,
@@ -111,18 +110,39 @@ const router =  new Router({
   ]
 })
 
+
+// Global Values
+import globals from "@/Global.vue"
+Vue.prototype.globals = globals
+
+// router登录控制
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
   if (to.matched.some(record => record.meta.requireAuth)) {
     // 判断当前的token是否存在
-    if (localStorage.token) {
+    if (router.app.$cookies.isKey("ECUST-CIC")) {
+      // 判断是否是管理员
+      if (to.matched.some(record => record.meta.requireAdmin)) {
+        const token = router.app.$cookies.get("ECUST-CIC");
+        const admin = JSON.parse(window.atob(token.split(".")[1])).admin;
+        if (admin === false) {
+          next({
+            name: 'login',
+            query: {
+              redirect: to.fullPath
+            }
+          })
+        }
+      }
       next();
     } else {
       next({
         name: 'login',
-        query: { redirect: to.fullPath }
+        query: {
+          redirect: to.fullPath
+        }
       })
     }
   } else {

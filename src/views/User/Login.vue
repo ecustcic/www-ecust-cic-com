@@ -12,13 +12,11 @@
         id="username"
         name="username"
         class="form-control col-md-4 offset-md-1"
-        placeholder="手机号/学号"
+        placeholder="邮箱"
         @click="disablePopover"
         @blur="check('username')"
         v-model="username"
-        v-validate
-        required
-        pattern="^1([0-9]{7}|[0-9]{10})$"
+        v-validate="'required|email'"
         title="登录失败"
         data-toggle="popover"
         datas-placement="right"
@@ -173,11 +171,11 @@ export default {
           })
           .then(res => {
             if (res.data.ret === 0) {
-              this.$store.commit(
-                "login",
-                res.data.data.token
-              );
-              const redirect = that.$route.query.redirect || "/";
+              this.$store.commit("login", res.data.data.token);
+              var redirect = that.$route.query.redirect || "/";
+              if (redirect === "/user/login") {
+                redirect = "/";
+              }
               that.$router.push({ path: redirect });
             } else {
               console.log(res);

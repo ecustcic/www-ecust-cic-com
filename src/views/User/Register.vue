@@ -7,29 +7,27 @@
         class="form-control col-md-2 offset-md-2 mb-0"
         onselectstart="return false;"
         for="username"
-      >手机号</label>
+      >邮箱</label>
       <input
         type="text"
         id="username"
         name="username"
         class="form-control col-md-4 offset-md-1"
-        placeholder="手机号/学号"
+        placeholder="邮箱"
         @click="disablePopover"
         @blur="check('username')"
         v-model="username"
-        v-validate
-        required
-        pattern="^1[0-9]{10}$"
-        title="登录失败"
+        v-validate="'required|email'"
+        title="注册失败"
         data-toggle="popover"
         datas-placement="right"
-        data-content="该用户不存在"
+        data-content="该用户已存在"
       />
       <div
         class="form-control alert-danger col-md-3"
         role="alert"
         v-show="errors.has('username')"
-      >请填写正确的手机号</div>
+      >请填写正确的邮箱</div>
     </div>
     <div class="row mb-3">
       <label
@@ -48,10 +46,6 @@
           @blur="check('password')"
           v-model="password"
           v-validate="'required|min:6'"
-          title="登录失败"
-          data-toggle="popover"
-          datas-placement="right"
-          data-content="密码错误"
         />
         <div class="input-group-append">
           <button
@@ -94,7 +88,28 @@
       >输入不一致</div>
     </div>
     <div class="col-md-6 offset-md-3">
-      <button class="btn btn-primary btn-lg btn-block" @click="formValidate">登录</button>
+      <button class="btn btn-primary btn-lg btn-block" @click="formValidate">注册</button>
+    </div>
+    <!-- RegisterModal -->
+    <div
+      class="modal fade"
+      id="RegisterModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="RegisterModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="RegisterModalLabel">离成功一步之遥！</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">验证邮件已经发送到你的邮箱，请前往邮箱确认...</div>
+        </div>
+      </div>
     </div>
     <!-- SuccessModal -->
     <div
@@ -108,7 +123,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">注册成功！</h5>
+            <h5 class="modal-title" id="successModalLabel">注册成功！</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -176,7 +191,7 @@ export default {
       );
     },
     checkAll: function() {
-      var targets = ["username", "password"];
+      var targets = ["username", "password", "passwordAgain"];
       for (var index in targets) {
         this.check(targets[index]);
       }
@@ -207,7 +222,6 @@ export default {
     },
     cbfn: function(res) {
       if (res.ret === 0) {
-        console.log(res);
         var that = this;
         this.$ajax
           .post("/api/user/register", {
@@ -218,24 +232,51 @@ export default {
           })
           .then(res => {
             if (res.data.ret === 0) {
-              $("#successModal").modal("show");
-              setTimeout(function() {
-                $("#successModal").modal("hide");
-                that.$router.push({
-                  name: "login",
-                  query: { redirect: "/user/info" }
-                });
-              }, 3000);
-            } else {
-              console.log(res);
+              $("#registerModal").modal("show");
+              return;
+            } else if (res.data.ret === 11) {
+              $("#username").popover("enable");
+              $("#username").popover("show");
+              const top = document
+                .querySelector("#username")
+                .getBoundingClientRect().top;
+              const position = window.pageYOffset + top - 200;
+              window.scrollTo({ top: position, behavior: "smooth" });
+              return;
             }
+            $("#failModal").modal("show");
           })
           // eslint-disable-next-line
           .catch(error => {
             $("#failModal").modal("show");
-            return;
           });
       }
+    },
+    verifyEmail: function(ticket) {
+      var that = this;
+      this.$ajax
+        .post("/user/verify", {
+          ticket: ticket
+        })
+        .then(res => {
+          if (res.data.ret === 0) {
+            $("#successModal").modal("show");
+            setTimeout(function() {
+              $("#successModal").modal("hide");
+              that.$router.push({
+                name: "login",
+                query: { redirect: "/user/info?guide=true" }
+              });
+            }, 3000);
+            return;
+          }
+          console.log(res);
+          $("#failModal").modal("show");
+        })
+        // eslint-disable-next-line
+        .catch(error => {
+          $("#failModal").modal("show");
+        });
     }
   },
   mounted() {

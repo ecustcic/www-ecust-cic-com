@@ -18,6 +18,8 @@ import 'jquery'
 import 'popper.js'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+// bootstrap-dropdown-hover
+import 'bootstrap-dropdown-hover/dist/jquery.bootstrap-dropdown-hover.min.js'
 
 // font-awesome
 import 'font-awesome/css/font-awesome.min.css'
@@ -68,10 +70,6 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 )
-
-// Global Values
-import globals from "@/Global.vue"
-Vue.prototype.globals = globals
 
 // devtools
 Vue.config.devtools = process.env.NODE_ENV === 'development'

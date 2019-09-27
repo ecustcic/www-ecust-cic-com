@@ -26,6 +26,7 @@
     "@vue/cli-service": "^3.11.0",
     "animate.css": "^3.7.2",
     "babel-eslint": "^10.0.3",
+    "bootstrap-dropdown-hover": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "textillate": "^0.4.1",
