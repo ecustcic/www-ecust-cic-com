@@ -93,21 +93,24 @@
     <!-- RegisterModal -->
     <div
       class="modal fade"
-      id="RegisterModal"
+      id="registerModal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="RegisterModalLabel"
+      aria-labelledby="registerModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="RegisterModalLabel">离成功一步之遥！</h5>
+            <h5 class="modal-title" id="registerModalLabel">离成功一步之遥！</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">验证邮件已经发送到你的邮箱，请前往邮箱确认...</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">未收到邮件？</button>
+          </div>
         </div>
       </div>
     </div>
@@ -244,6 +247,7 @@ export default {
               window.scrollTo({ top: position, behavior: "smooth" });
               return;
             }
+            console.log(res);
             $("#failModal").modal("show");
           })
           // eslint-disable-next-line
@@ -255,7 +259,7 @@ export default {
     verifyEmail: function(ticket) {
       var that = this;
       this.$ajax
-        .post("/user/verify", {
+        .post("/api/user/verify", {
           ticket: ticket
         })
         .then(res => {
@@ -281,6 +285,9 @@ export default {
   },
   mounted() {
     this.disablePopover();
+    if (this.$route.query.ticket) {
+      this.verifyEmail(this.$route.query.ticket);
+    }
   }
 };
 </script>

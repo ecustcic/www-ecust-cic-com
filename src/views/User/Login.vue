@@ -68,7 +68,59 @@
       >请填写正确的密码</div>
     </div>
     <div class="col-md-6 offset-md-3">
-      <button class="btn btn-primary btn-lg btn-block" @click="formValidate">登录</button>
+      <button class="btn btn-primary btn-lg btn-block" @click="formValidate(cbfn)">登录</button>
+    </div>
+    <!-- ActiveModal -->
+    <div
+      class="modal fade"
+      id="activeModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="avtiveModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="activeModalLabel">Denied</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">请先激活你的邮箱!</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="formValidate(resendVerifyEmail)"
+            >未收到邮件？</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SuccessModal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Success</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">激活邮件发送成功！</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- FailModal -->
     <div
@@ -134,15 +186,12 @@ export default {
         this.check(targets[index]);
       }
     },
-    formValidate: function() {
+    formValidate: function(callback) {
       this.checkAll();
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          var captcha = new TencentCaptcha(
-            this.globals.TencentAPPID,
-            this.cbfn
-          );
+          var captcha = new TencentCaptcha(this.globals.TencentAPPID, callback);
           captcha.show();
         }
       });
@@ -160,7 +209,6 @@ export default {
     },
     cbfn: function(res) {
       if (res.ret === 0) {
-        console.log(res);
         var that = this;
         this.$ajax
           .post("/api/user/login", {
@@ -176,10 +224,58 @@ export default {
               if (redirect === "/user/login") {
                 redirect = "/";
               }
-              that.$router.push({ path: redirect });
-            } else {
-              console.log(res);
+              setTimeout(that.$router.push({ path: redirect }), 100);
+            } else if (res.data.ret === 10) {
+              $("#username").popover("enable");
+              $("#username").popover("show");
+              const top = document
+                .querySelector("#username")
+                .getBoundingClientRect().top;
+              const position = window.pageYOffset + top - 200;
+              window.scrollTo({ top: position, behavior: "smooth" });
+              return;
+            } else if (res.data.ret === 12) {
+              $("#password").popover("enable");
+              $("#password").popover("show");
+              const top = document
+                .querySelector("#password")
+                .getBoundingClientRect().top;
+              const position = window.pageYOffset + top - 200;
+              window.scrollTo({ top: position, behavior: "smooth" });
+              return;
+            } else if (res.data.ret === 13) {
+              $("#activeModal").modal("show");
+              return;
             }
+            console.log(res);
+            $("#failModal").modal("show");
+          })
+          // eslint-disable-next-line
+          .catch(error => {
+            console.log(error);
+            $("#failModal").modal("show");
+            return;
+          });
+      }
+    },
+    resendVerifyEmail: function(res) {
+      $("#activeModal").modal("hide");
+      if (res.ret === 0) {
+        var that = this;
+        this.$ajax
+          .post("/api/user/resend-verify-email", {
+            username: that.username,
+            password: that.password,
+            ticket: res.ticket,
+            randstr: res.randstr
+          })
+          .then(res => {
+            if (res.data.ret === 0) {
+              $("#successModal").modal("show");
+              return;
+            }
+            console.log(res);
+            $("#failModal").modal("show");
           })
           // eslint-disable-next-line
           .catch(error => {

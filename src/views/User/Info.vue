@@ -61,7 +61,6 @@
         @blur="check('mobilephone')"
         v-model="mobilephone"
         v-validate
-        required
         pattern="^1[0-9]{10}$"
         title="修改失败"
         data-toggle="popover"
@@ -93,7 +92,6 @@
         @blur="check('studentNumber')"
         v-model="studentNumber"
         v-validate
-        required
         pattern="^1[0-9]{7}$"
         title="修改失败"
         data-toggle="popover"
@@ -124,7 +122,8 @@
         @click="disablePopover"
         @blur="check('qqNumber')"
         v-model="qqNumber"
-        v-validate="'required|min:5|max:12'"
+        v-validate
+        pattern="^[1-9][0-9]{4,11}$"
       />
       <div
         class="form-control alert-danger col-md-3"
@@ -134,6 +133,48 @@
     </div>
     <div class="col-md-6 offset-md-3">
       <button class="btn btn-primary btn-lg btn-block" @click="formValidate">确认提交</button>
+    </div>
+    <!-- SuccessModal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">修改成功!</div>
+        </div>
+      </div>
+    </div>
+    <!-- FailModal -->
+    <div
+      class="modal fade"
+      id="failModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="failModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="failModalLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">服务似乎暂时不可用呢！</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -215,22 +256,22 @@ export default {
       if (res.ret === 0) {
         var that = this;
         this.$ajax
-          .post("/api/user/register", {
+          .post("/api/user/change-info", {
+            name: that.name,
             mobilephone: that.mobilephone,
-            password: that.password,
+            student_number: that.studentNumber,
+            qqnumber: that.qqNumber,
             ticket: res.ticket,
             randstr: res.randstr
           })
           .then(res => {
             if (res.data.ret === 0) {
-              $("#successModal").modal("show");
-              setTimeout(function() {
-                $("#successModal").modal("hide");
-                that.$router.push({
-                  name: "login",
-                  query: { redirect: "/user/info" }
+              var that = this;
+              $("#successModal")
+                .modal("show")
+                .on("hidden.bs.modal", function() {
+                  that.$router.go(0);
                 });
-              }, 3000);
               return;
             } else if (res.data.ret === 11) {
               $("#mobilephone").popover("enable");
@@ -242,6 +283,7 @@ export default {
               window.scrollTo({ top: position, behavior: "smooth" });
               return;
             }
+            console.log(res);
             $("#failModal").modal("show");
           })
           // eslint-disable-next-line
@@ -254,15 +296,18 @@ export default {
   mounted() {
     this.disablePopover();
     this.guide = this.$route.query.guide;
-    setTimeout(function() {
-      $(".guide").fadeTo(5000, 0);
-    }, 1000);
+    if (this.guide) {
+      setTimeout(function() {
+        $(".guide").fadeTo(5000, 0);
+      }, 1000);
+    }
     this.$ajax.get("/api/user/info").then(res => {
       if (res.data.ret === 0) {
         this.name = res.data.data.name || "";
         this.mobilephone = res.data.data.mobilephone || "";
-        this.studentNumber = res.data.data.studentNumber || "";
-        this.qqNumber = res.data.data.qqNumber || "";
+        this.studentNumber = res.data.data.student_number || "";
+        this.qqNumber = res.data.data.qqnumber || "";
+        $(".fa.fa-spinner.fa-pulse").css("display", "none");
       }
     });
   }

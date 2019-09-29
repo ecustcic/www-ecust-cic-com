@@ -368,7 +368,9 @@ body,
   /* .dropdown:hover + .dropdown-menu {
     display: block;
   } */
-  .dropdown > #navbarDropdown {
+  .dropdown > .dropdown-toggle {
+    outline: none;
+    border: none;
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
