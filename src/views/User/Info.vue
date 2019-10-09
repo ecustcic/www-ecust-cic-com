@@ -234,7 +234,7 @@ export default {
       );
     },
     checkAll: function() {
-      var targets = [];
+      var targets = ["name", "mobilephone", "studentNumber", "qqNumber"];
       for (var index in targets) {
         this.check(targets[index]);
       }
@@ -298,7 +298,9 @@ export default {
     this.guide = this.$route.query.guide;
     if (this.guide) {
       setTimeout(function() {
-        $(".guide").fadeTo(5000, 0);
+        $(".guide").fadeOut(5000, function() {
+          $(".guide").slideUp(500);
+        });
       }, 1000);
     }
     this.$ajax.get("/api/user/info").then(res => {

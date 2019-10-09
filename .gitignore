@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+/public/live2d/model/*
+!.gitkeep
 
 # local env files
 .env.local

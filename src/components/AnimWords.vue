@@ -18,7 +18,7 @@
 <style scoped>
 .text-wrapper {
   padding: 0 1rem;
-  max-width: 50rem;
+  /* max-width: 50rem; */
   width: 100%;
   text-align: center;
 }

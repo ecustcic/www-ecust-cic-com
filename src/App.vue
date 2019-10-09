@@ -6,7 +6,7 @@
     >
       <div class="container">
         <a class="navbar-brand" href="/">
-          <img src="./assets/logo-cic.svg" alt height="35" />
+          <img src="./assets/logo-cic.png" alt height="35" />
           <!-- <img src="./assets/logo-cn.png" alt class="logo-scroll" height="35" /> -->
           <!-- <img src="./assets/logo-cic.png" alt class="logo-trans" height="35" /> -->
         </a>
@@ -65,6 +65,11 @@
                 <i class="fa fa-wrench fa-fw" aria-hidden="true"></i>
                 其他
               </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-other">
+                <a class="dropdown-item" href="/others/sign">
+                  <i class="fa fa-calendar-check-o fa-fw mr-2"></i>签到
+                </a>
+              </div>
             </li>
             <li class="nav-item" id="nav-about">
               <router-link class="nav-link" to="/about">
@@ -89,19 +94,19 @@
                   >{{ name }}</a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/user/password">
-                      <i class="fa fa-info-circle fa-fw"></i>&nbsp;修改密码
+                      <i class="fa fa-key fa-fw mr-2"></i>修改密码
                     </a>
                     <a class="dropdown-item" href="/user/info">
-                      <i class="fa fa-info-circle fa-fw"></i>&nbsp;个人信息
+                      <i class="fa fa-info-circle fa-fw mr-2"></i>个人信息
                     </a>
                     <template v-if="admin">
                       <a class="dropdown-item" href="/admin" target="_blank">
-                        <i class="fa fa-gear fa-fw"></i>&nbsp;后台管理
+                        <i class="fa fa-gear fa-fw mr-2"></i>后台管理
                       </a>
                     </template>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" @click="logout" href="javascript:void(0);">
-                      <i class="fa fa-user-times fa-fw" aria-hidden="true"></i>&nbsp;退出登录
+                      <i class="fa fa-sign-out fa-fw mr-2" aria-hidden="true"></i>退出登录
                     </a>
                   </div>
                 </li>
@@ -109,7 +114,7 @@
               <template v-else>
                 <li class="nav-item">
                   <router-link class="user-link" to="/user/login">
-                    <i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>登录
+                    <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>登录
                   </router-link>
                 </li>
                 <li class="nav-item">
@@ -244,6 +249,12 @@ body,
 .navbar-light.navbar .navbar-nav .nav-link.active {
   color: #1ecfca;
   border-top-color: #1ecfca;
+}
+
+.navbar .navbar-nav .dropdown-menu {
+  min-width: 0;
+  text-align: center;
+  font-size: .8rem;
 }
 
 /* .navbar .navbar-nav .user-link {
@@ -403,6 +414,7 @@ export default {
     logout: function() {
       this.$cookies.remove("ECUST-CIC");
       this.$store.commit("logout");
+      this.$router.go(0);
     }
   },
   computed: {

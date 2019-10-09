@@ -12,7 +12,8 @@ import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
 // jquery
-import 'jquery'
+import jQuery from 'jquery'
+window.$ = jQuery
 
 // bootstrap
 import 'popper.js'
@@ -70,6 +71,42 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 )
+
+// Global Values
+import globals from "@/Global.vue"
+Vue.prototype.globals = globals
+
+// Components
+Vue.component('remote-script', {
+  render: function (createElement) {
+      var self = this;
+      return createElement('script', {
+          attrs: {
+              type: 'text/javascript',
+              src: this.src
+          },
+          on: {
+              load: function (event) {
+                  self.$emit('load', event);
+              },
+              error: function (event) {
+                  self.$emit('error', event);
+              },
+              readystatechange: function (event) {
+                  if (this.readyState == 'complete') {
+                      self.$emit('load', event);
+                  }
+              }
+          }
+      });
+  },
+  props: {
+      src: {
+          type: String,
+          required: true
+      }
+  }
+});
 
 // devtools
 Vue.config.devtools = process.env.NODE_ENV === 'development'

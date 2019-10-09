@@ -1,6 +1,13 @@
 <template>
   <div class="container px-5 pt-3 pb-5" id="register">
-    <!-- <h1 class="mb-5">Register</h1> -->
+    <div class="alert alert-dismissible fade show loading" role="alert">
+      <strong>
+        <i class="fa fa-spinner fa-pulse"></i>&nbsp;Loading...
+      </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <AnimWords text="Register" :animation="false" />
     <div class="row mb-3">
       <label
@@ -88,7 +95,7 @@
       >输入不一致</div>
     </div>
     <div class="col-md-6 offset-md-3">
-      <button class="btn btn-primary btn-lg btn-block" @click="formValidate">注册</button>
+      <button class="btn btn-primary btn-lg btn-block" @click="formValidate(cbfn)">注册</button>
     </div>
     <!-- RegisterModal -->
     <div
@@ -109,7 +116,12 @@
           </div>
           <div class="modal-body">验证邮件已经发送到你的邮箱，请前往邮箱确认...</div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">未收到邮件？</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              @click="formValidate(resendVerifyEmail)"
+            >未收到邮件？</button>
           </div>
         </div>
       </div>
@@ -159,9 +171,21 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 #register {
   background: #dedede;
+}
+.loading {
+  position: absolute;
+  right: 0.25rem;
+  top: 80px;
+  z-index: 9999;
+  max-width: 400px;
+  padding: 1rem 2rem;
+  opacity: 0;
+  color: inherit;
+  background-color: #fff;
+  box-shadow: 0px 0px 45px rgba(118, 147, 172, 0.35);
 }
 </style>
 
@@ -199,14 +223,14 @@ export default {
         this.check(targets[index]);
       }
     },
-    formValidate: function() {
+    formValidate: function(func) {
       this.checkAll();
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
           var captcha = new TencentCaptcha(
             this.globals.TencentAPPID,
-            this.cbfn
+            func
           );
           captcha.show();
         }
@@ -253,6 +277,35 @@ export default {
           // eslint-disable-next-line
           .catch(error => {
             $("#failModal").modal("show");
+          });
+      }
+    },
+    resendVerifyEmail: function(res) {
+      $(".loading").slideDown(500).css("opacity", "1");
+      if (res.ret === 0) {
+        var that = this;
+        this.$ajax
+          .post("/api/user/resend-verify-email", {
+            username: that.username,
+            password: that.password,
+            ticket: res.ticket,
+            randstr: res.randstr
+          })
+          .then(res => {
+            $(".loading").css("opacity", "0").slideUp(500);
+            if (res.data.ret === 0) {
+              $("#successModal").modal("show");
+              return;
+            }
+            console.log(res);
+            $("#failModal").modal("show");
+          })
+          // eslint-disable-next-line
+          .catch(error => {
+            console.log(error);
+            $(".loading").css("opacity", "0").slideUp(500);
+            $("#failModal").modal("show");
+            return;
           });
       }
     },

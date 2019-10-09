@@ -1,5 +1,13 @@
 <template>
   <div class="container px-5 pt-3 pb-5" id="login">
+    <div class="alert alert-dismissible fade show loading" role="alert">
+      <strong>
+        <i class="fa fa-spinner fa-pulse"></i>&nbsp;Loading...
+      </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <AnimWords text="Login" :animation="false" />
     <div class="row mb-3">
       <label
@@ -92,6 +100,7 @@
             <button
               type="button"
               class="btn btn-primary"
+              data-dismiss="modal"
               @click="formValidate(resendVerifyEmail)"
             >未收到邮件？</button>
           </div>
@@ -149,6 +158,18 @@
 <style scoped>
 #login {
   background: #dedede;
+}
+.loading {
+  position: absolute;
+  right: 0.25rem;
+  top: 80px;
+  z-index: 9999;
+  max-width: 400px;
+  padding: 1rem 2rem;
+  opacity: 0;
+  color: inherit;
+  background-color: #fff;
+  box-shadow: 0px 0px 45px rgba(118, 147, 172, 0.35);
 }
 </style>
 
@@ -224,7 +245,8 @@ export default {
               if (redirect === "/user/login") {
                 redirect = "/";
               }
-              setTimeout(that.$router.push({ path: redirect }), 100);
+              that.$router.push({ path: redirect })
+              return;
             } else if (res.data.ret === 10) {
               $("#username").popover("enable");
               $("#username").popover("show");
@@ -259,7 +281,7 @@ export default {
       }
     },
     resendVerifyEmail: function(res) {
-      $("#activeModal").modal("hide");
+      $(".loading").slideDown(500).css("opacity", "1");
       if (res.ret === 0) {
         var that = this;
         this.$ajax
@@ -270,6 +292,7 @@ export default {
             randstr: res.randstr
           })
           .then(res => {
+            $(".loading").css("opacity", "0").slideUp(500);
             if (res.data.ret === 0) {
               $("#successModal").modal("show");
               return;
@@ -280,6 +303,7 @@ export default {
           // eslint-disable-next-line
           .catch(error => {
             console.log(error);
+            $(".loading").css("opacity", "0").slideUp(500);
             $("#failModal").modal("show");
             return;
           });
@@ -288,6 +312,7 @@ export default {
   },
   mounted() {
     this.disablePopover();
+    $(".loading").slideUp(500);
   }
 };
 </script>

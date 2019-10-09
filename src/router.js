@@ -7,12 +7,19 @@ import Home from '@/views/Home.vue'
 // 技术
 // import Tech from '@/views/Tech.vue'
 
+// 其他
+import Others from '@/views/Others/Others.vue'
+// 签到
+import Sign from '@/views/Others/Sign.vue'
+
 // 用户相关
 import User from '@/views/User/User.vue'
 // 登录
 import Login from '@/views/User/Login.vue'
 // 注册
 import Register from '@/views/User/Register.vue'
+// 修改密码
+import Password from '@/views/User/Password.vue'
 // 用户信息
 import Info from '@/views/User/Info.vue'
 
@@ -48,6 +55,23 @@ const router = new Router({
     //   },
     //   component: Tech
     // },
+    // 其他
+    {
+      path: "/others",
+      name: "others",
+      component: Others,
+      children: [
+        {
+          path: "sign",
+          name: "sign",
+          component: Sign,
+          meta: {
+            title: "签到",
+            requireAuth: true
+          }
+        }
+      ]
+    },
     // 关于
     {
       path: '/about',
@@ -82,6 +106,15 @@ const router = new Router({
           }
         },
         {
+          path: "password",
+          name: "password",
+          component: Password,
+          meta: {
+            title: '修改密码',
+            requireAuth: true
+          }
+        },
+        {
           path: "info",
           name: "info",
           component: Info,
@@ -109,11 +142,6 @@ const router = new Router({
     }
   ]
 })
-
-
-// Global Values
-import globals from "@/Global.vue"
-Vue.prototype.globals = globals
 
 // router登录控制
 router.beforeEach((to, from, next) => {

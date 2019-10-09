@@ -24,7 +24,7 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="text-center mr-auto ml-auto">
-                <img src="@/assets/logo-cn.svg" class="py-4 wow fadeIn" alt width="90%" />
+                <img src="@/assets/logo-cn.png" class="py-4 wow fadeIn" alt width="90%" />
                 <div>
                   <button
                     class="btn btn-outline-primary"
@@ -734,10 +734,10 @@ import $ from "jquery";
 import { WOW } from "wowjs";
 
 import history from "../assets/img/About/history.png";
-import tech from "../assets/img/About/tech.png";
-import service from "../assets/img/About/service.png";
-import eSports from "../assets/img/About/e-sports.png";
-import publicity from "../assets/img/About/publicity.png";
+import tech from "../assets/img/About/tech.jpg";
+import service from "../assets/img/About/service.jpg";
+import eSports from "../assets/img/About/e-sports.jpg";
+import publicity from "../assets/img/About/publicity.jpg";
 
 export default {
   name: "About",
