@@ -77,36 +77,39 @@ import globals from "@/Global.vue"
 Vue.prototype.globals = globals
 
 // Components
-Vue.component('remote-script', {
-  render: function (createElement) {
-      var self = this;
-      return createElement('script', {
-          attrs: {
-              type: 'text/javascript',
-              src: this.src
-          },
-          on: {
-              load: function (event) {
-                  self.$emit('load', event);
-              },
-              error: function (event) {
-                  self.$emit('error', event);
-              },
-              readystatechange: function (event) {
-                  if (this.readyState == 'complete') {
-                      self.$emit('load', event);
-                  }
-              }
-          }
-      });
-  },
-  props: {
-      src: {
-          type: String,
-          required: true
-      }
-  }
-});
+// VueQr
+import VueQr from 'vue-qr'
+Vue.use(VueQr)
+// Vue.component('remote-script', {
+//   render: function (createElement) {
+//       var self = this;
+//       return createElement('script', {
+//           attrs: {
+//               type: 'text/javascript',
+//               src: this.src
+//           },
+//           on: {
+//               load: function (event) {
+//                   self.$emit('load', event);
+//               },
+//               error: function (event) {
+//                   self.$emit('error', event);
+//               },
+//               readystatechange: function (event) {
+//                   if (this.readyState == 'complete') {
+//                       self.$emit('load', event);
+//                   }
+//               }
+//           }
+//       });
+//   },
+//   props: {
+//       src: {
+//           type: String,
+//           required: true
+//       }
+//   }
+// });
 
 // devtools
 Vue.config.devtools = process.env.NODE_ENV === 'development'

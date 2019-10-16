@@ -10,7 +10,8 @@ import Home from '@/views/Home.vue'
 // 其他
 import Others from '@/views/Others/Others.vue'
 // 签到
-import Sign from '@/views/Others/Sign.vue'
+import Sign from '@/views/Others/Sign/Sign.vue'
+import Scan from '@/views/Others/Sign/Scan.vue'
 
 // 用户相关
 import User from '@/views/User/User.vue'
@@ -69,6 +70,15 @@ const router = new Router({
             title: "签到",
             requireAuth: true
           }
+        },
+        {
+          path: "scan",
+          name: "scan",
+          component: Scan,
+          meta: {
+            title: "签到",
+            requireAuth: true
+          }
         }
       ]
     },
@@ -90,39 +100,39 @@ const router = new Router({
       name: "user",
       component: User,
       children: [{
-          path: "login",
-          name: "login",
-          component: Login,
-          meta: {
-            title: '登录'
-          }
-        },
-        {
-          path: "register",
-          name: "register",
-          component: Register,
-          meta: {
-            title: '注册'
-          }
-        },
-        {
-          path: "password",
-          name: "password",
-          component: Password,
-          meta: {
-            title: '修改密码',
-            requireAuth: true
-          }
-        },
-        {
-          path: "info",
-          name: "info",
-          component: Info,
-          meta: {
-            title: '个人信息',
-            requireAuth: true
-          }
+        path: "login",
+        name: "login",
+        component: Login,
+        meta: {
+          title: '登录'
         }
+      },
+      {
+        path: "register",
+        name: "register",
+        component: Register,
+        meta: {
+          title: '注册'
+        }
+      },
+      {
+        path: "password",
+        name: "password",
+        component: Password,
+        meta: {
+          title: '修改密码',
+          requireAuth: true
+        }
+      },
+      {
+        path: "info",
+        name: "info",
+        component: Info,
+        meta: {
+          title: '个人信息',
+          requireAuth: true
+        }
+      }
       ]
     },
     // test

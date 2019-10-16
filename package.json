@@ -29,12 +29,12 @@
     "bootstrap-dropdown-hover": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "live2d-vue": "^0.2.4",
     "textillate": "^0.4.1",
     "vee-validate": "^2.2.15",
     "vue-cookies": "^1.5.13",
     "vue-fullpage.js": "^0.1.4",
     "vue-particles": "^1.0.9",
+    "vue-qr": "^2.1.0",
     "vue-template-compiler": "^2.6.10",
     "wowjs": "^1.1.3"
   }
