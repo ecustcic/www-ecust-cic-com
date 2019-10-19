@@ -759,19 +759,7 @@ export default {
     };
   },
   mounted() {
-    // $(
-    //   ".navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-nav"
-    // ).addClass("navbar-text-white");
-    // $("#app").css("height", "100%");
-    // $(".view").css("height", "100%");
     $(".footer").css("display", "none");
-
-    // $("#hero").particleground({
-    //   dotColor: "rgb(188, 210, 238)",
-    //   lineColor: "rgb(188, 210, 238)"
-    //   // dotColor: "#8000ff",
-    //   // lineColor: "#8000ff"
-    // });
 
     // magnific-popup
     $(".image-popup").magnificPopup({
@@ -790,12 +778,6 @@ export default {
     }, 100);
   },
   destroyed() {
-    // $(
-    //   ".navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-nav"
-    // ).removeClass("navbar-text-white");
-    // $("#app").attr("style", "");
-    // $("#app").removeAttr("style");
-    // $(".view").css("height", "");
     $(".footer").attr("style", "");
     $(".footer").removeAttr("style");
   }

@@ -104,6 +104,46 @@
         v-show="errors.has('studentNumber')"
       >请填写正确的学号</div>
     </div>
+    <div class="row mb-3">
+      <label
+        class="form-control col-md-2 offset-md-2 mb-0"
+        onselectstart="return false;"
+        for="studentCollege"
+      >学院</label>
+      <span class="form-control col-md-1 transparent">
+        <i class="fa fa-spinner fa-pulse"></i>
+      </span>
+      <div class="col-md-4">
+        <div class="form-group">
+          <select
+            id="studentCollege"
+            name="studentCollege"
+            class="selectpicker show-tick form-control"
+            title="学院"
+            v-model="studentCollege"
+          >
+            <option>化工学院</option>
+            <option>化学与分子工程学院</option>
+            <option>生物工程学院</option>
+            <option>药学院</option>
+            <option>材料科学与工程学院</option>
+            <option>信息科学与工程学院</option>
+            <option>机械与动力工程学院</option>
+            <option>资源与环境工程学院</option>
+            <option>商学院</option>
+            <option>社会与公共管理学院</option>
+            <option>理学院</option>
+            <option>艺术设计与传媒学院</option>
+            <option>外国语学院</option>
+            <option>法学院</option>
+            <option>体育科学与工程学院</option>
+            <option>马克思主义学院</option>
+            <option>中德工学院</option>
+            <option>国际卓越工程师学院</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <div class="row mb-5">
       <label
         class="form-control col-md-2 offset-md-2 mb-0"
@@ -217,6 +257,7 @@ export default {
       name: "",
       mobilephone: "",
       studentNumber: "",
+      studentCollege: "",
       qqNumber: ""
     };
   },

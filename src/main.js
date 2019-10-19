@@ -19,6 +19,9 @@ window.$ = jQuery
 import 'popper.js'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+// bootstap-select
+import 'bootstrap-select/dist/js/bootstrap-select.min.js'
+import 'bootstrap-select/dist/css/bootstrap-select.min.css'
 // bootstrap-dropdown-hover
 import 'bootstrap-dropdown-hover/dist/jquery.bootstrap-dropdown-hover.min.js'
 

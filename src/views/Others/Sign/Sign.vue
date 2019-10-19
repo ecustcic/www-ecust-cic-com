@@ -8,25 +8,32 @@
       </div>
       <div class="hide-button">隐藏</div>
     </div>
-    <div class="container">
-      <button class="btn btn-info w-50" id="start" @click="startWebsocket">发起签到</button>
-      <div class="row">
-        <div class="col-md-4 scan-qrcode">
-          <div class="scan-qrcode-wrapper">
-            <template v-if="loading">
-              <i class="fa fa-spinner fa-pulse loading"></i>
-            </template>
-            <template v-else>
-              <vue-qr :text="scanURL" :size="200" :margin="10" :dotScale="1"></vue-qr>
-            </template>
-          </div>
-        </div>
-        <div class="col-md-8 scan-list">
-          <div class="scan-list-wrapper"></div>
+    <button class="btn btn-info w-50 mt-4" id="start" @click="startWebsocket">发起签到</button>
+    <div class="scan row">
+      <div class="col-md-4 scan-qrcode">
+        <div class="scan-qrcode-wrapper image-popup" :data-mfp-src="qrcode">
+          <template v-if="loading">
+            <i class="fa fa-spinner fa-pulse loading"></i>
+          </template>
+          <template v-else>
+            <vue-qr
+              :text="scanURL"
+              :size="qrcode_width"
+              :margin="10"
+              :dotScale="1"
+              :callback="maxmize_qrcode"
+              ref="qrcode"
+            ></vue-qr>
+            <div class="text-muted image-popup" :data-mfp-src="qrcode">点击放大</div>
+          </template>
         </div>
       </div>
+      <div class="col-md-8 scan-list">
+        <div class="scan-list-wrapper row"></div>
+      </div>
     </div>
-    <button class="btn btn-info w-50" @click="closeWebsocket">关闭</button>
+    <!-- TODO: Support Pause and Resume -->
+    <button class="btn btn-info w-50" id="end" @click="closeWebsocket">关闭</button>
   </div>
 </template>
 
@@ -34,7 +41,7 @@
 .live2d-panel {
   user-select: none;
   position: relative;
-  margin: 30px auto;
+  margin: 30px auto 0 auto;
   bottom: 0;
   width: 280px;
   height: 250px;
@@ -298,46 +305,63 @@
   }
 }
 
+.scan {
+  margin: 0;
+  padding: 10px;
+}
+
 .scan-qrcode {
-  padding: 20px;
+  padding: 0;
   display: none;
 }
 .scan-qrcode .scan-qrcode-wrapper {
-  height: 250px;
+  height: 100%;
+  width: 100%;
+  min-height: 250px;
   padding: 25px;
-  display: table-cell;
+  display: inline-block;
   vertical-align: middle;
   /* background-color: #f4a7b9; */
   border: 2px solid #000;
   border-radius: 0.25rem;
 }
 .scan-qrcode .scan-qrcode-wrapper .loading {
-  width: 200px;
   font-size: 100px;
 }
 .scan-list {
-  padding: 20px;
+  padding: 0;
   display: none;
 }
 .scan-list .scan-list-wrapper {
   height: 100%;
   min-height: 250px;
-  padding: 25px;
+  overflow-y: scroll;
+  padding: 30px;
   background-color: #ebe9e9;
   border: 2px solid #000;
   border-radius: 0.25rem;
+}
+
+#end {
+  display: none;
 }
 </style>
 
 <script>
 import $ from "jquery";
+import { Hash } from "crypto";
+import Identicon from "identicon.js";
 export default {
   name: "sign",
   data() {
     return {
+      qrcode: null,
+      qrcode_width: null,
       webSocket: null,
-      scanURL: null,
       loading: true,
+      loaded: false,
+      popup: false,
+      scanURL: null,
       scanID: null,
       qrcode_id: null,
       ping_id: null
@@ -386,7 +410,6 @@ export default {
 
         // 准备完成
         this.loading = false;
-        return;
       } else {
         var data = JSON.parse(event.data);
         this.append_child(data.name);
@@ -404,8 +427,11 @@ export default {
       }
       this.webSocket = null;
       this.loading = true;
+      this.loaded = false;
       this.scanURL = null;
       this.scanID = null;
+      this.qrcode = null;
+      this.remove_child();
       $(".live2d-panel").attr("style", "");
       $(".live2d-panel").removeAttr("style");
       $(".scan-qrcode").attr("style", "");
@@ -414,6 +440,8 @@ export default {
       $(".scan-list").removeAttr("style");
       $("#start").attr("style", "");
       $("#start").removeAttr("style");
+      $("#end").attr("style", "");
+      $("#end").removeAttr("style");
     },
     ws_ping: function() {
       this.webSocket.send("ping");
@@ -423,31 +451,96 @@ export default {
       $(".scan-qrcode").css("display", "block");
       $(".scan-list").css("display", "block");
       $(".live2d-panel")
-        .css("position", "absolute")
+        .css("position", "fixed")
         .css("bottom", "0")
-        .css("right", "0");
+        .css("right", "30px");
+      $("#end").css("display", "inline-block");
     },
     change_qrcode: function() {
       const href = window.location.origin + "/others/scan?";
       let time = Math.round(Date.now() / 1000).toString();
       this.scanURL = href + "scan_id=" + this.scanID + "&time=" + time;
     },
+    maxmize_qrcode: function(data) {
+      this.loaded = true;
+      this.qrcode = data;
+      if (this.popup) {
+        var popup = $.magnificPopup.instance;
+        popup.items[0].src = this.qrcode;
+        popup.updateItemHTML();
+      }
+    },
     append_child: function(name) {
       var scan_list = $(".scan-list-wrapper");
       var card = $("<div>");
-      card.attr("class", "card");
-      var card_body = $("<div>");
-      card_body.attr("class", "card-body");
-      var card_title = $("<h5>");
-      card_title.attr("class", "card-title");
-      card_title.html(name);
-      card_body.append(card_title);
-      card.append(card_body);
+      card.attr("class", "card col-sm-2");
+      card.attr("style", "padding: 15px; height: 150px;");
+      card.html(`
+      <img src="${this.construct_head(
+        name
+      )}" class="card-img-top" alt style="width: 50px; margin: 0 auto;">
+      <div class="card-body" style="padding: 0; margin-top: 15px;">
+        <h5 class="card-title">${name}</h5>
+      </div>
+      `);
       scan_list.append(card);
+    },
+    remove_child: function() {
+      var scan_list = $(".scan-list-wrapper");
+      scan_list.empty();
+    },
+    construct_head: function(name) {
+      let hash = Hash("md5");
+      hash.update(name);
+      let head = new Identicon(hash.digest("hex"), 50).toString();
+      return "data:image/png+xml;base64," + head;
     }
   },
   mounted() {
     $("#navbarHolder").height($(".navbar").outerHeight(true) + 60);
+
+    var that = this;
+    that.qrcode_width = $(".scan-qrcode").innerWidth() - 100;
+    $(".scan-qrcode").height(that.qrcode_width + 100);
+    $(".scan-list").height(that.qrcode_width + 100);
+
+    // 动态改变二维码大小
+    // eslint-disable-next-line
+    window.onresize = function() {
+      that.qrcode_width = $(".scan-qrcode").innerWidth() - 100;
+      $(".scan-qrcode").height(that.qrcode_width + 100);
+      $(".scan-list").height(that.qrcode_width + 100);
+    };
+
+    // TODO: Support Qrcode Size Zooming
+    // magnific-popup
+    $(".image-popup").magnificPopup({
+      type: "image",
+      mainClass: "mfp-with-zoom",
+      image: {
+        cursor: "mfp-zoom-out-cur"
+      },
+      zoom: {
+        enabled: true,
+
+        duration: 300,
+        easing: "ease-in-out",
+
+        opener: function(openerElement) {
+          return openerElement.is("img")
+            ? openerElement
+            : openerElement.find("img");
+        }
+      },
+      callbacks: {
+        open: function() {
+          that.popup = true;
+        },
+        close: function() {
+          that.popup = false;
+        }
+      }
+    });
 
     // 加载模型
     // eslint-disable-next-line
@@ -460,7 +553,6 @@ export default {
     });
 
     // 确保websocket关闭
-    var that = this;
     window.onbeforeunload = function() {
       if (that.webSocket) {
         that.closeWebsocket();

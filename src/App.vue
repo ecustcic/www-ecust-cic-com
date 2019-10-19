@@ -91,7 +91,10 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                  >{{ name }}</a>
+                  >
+                    <img :src="head" />
+                    {{ name }}
+                  </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/user/password">
                       <i class="fa fa-key fa-fw mr-2"></i>修改密码
@@ -254,7 +257,7 @@ body,
 .navbar .navbar-nav .dropdown-menu {
   min-width: 0;
   text-align: center;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 /* .navbar .navbar-nav .user-link {
@@ -376,9 +379,6 @@ body,
     color: #1ecfca;
   }
 
-  /* .dropdown:hover + .dropdown-menu {
-    display: block;
-  } */
   .dropdown > .dropdown-toggle {
     outline: none;
     border: none;
@@ -395,9 +395,12 @@ body,
 
 <script>
 import $ from "jquery";
+import Identicon from "identicon.js";
+import { Hash } from "crypto";
 export default {
   data() {
     return {
+      head: null,
       screenWidth: document.documentElement.clientWidth,
       screenHeight: document.documentElement.clientHeight
     };
@@ -435,6 +438,13 @@ export default {
     }
   },
   mounted: function() {
+    if (this.token) {
+      let hash = Hash("md5");
+      hash.update(this.name);
+      var imgData = new Identicon(hash.digest("hex"), 30).toString();
+      this.head = "data:image/png+xml;base64," + imgData;
+    }
+
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="popover"]')
       .on("shown.bs.popover", function() {
