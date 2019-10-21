@@ -210,10 +210,6 @@ body,
   color: #2c3e50;
 }
 
-#title {
-  padding: 10px;
-}
-
 .navbar .container,
 .navbar .container-fluid {
   position: relative;
