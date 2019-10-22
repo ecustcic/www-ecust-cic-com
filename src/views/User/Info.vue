@@ -140,6 +140,7 @@
             <option>马克思主义学院</option>
             <option>中德工学院</option>
             <option>国际卓越工程师学院</option>
+            <option>其他/外校</option>
           </select>
         </div>
       </div>

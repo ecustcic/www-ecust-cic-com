@@ -13,5 +13,10 @@ module.exports = {
         Popper: ['popper.js', 'default']
       })
     ]
-  }
+  },
+
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ]
 }

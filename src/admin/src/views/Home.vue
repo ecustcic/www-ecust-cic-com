@@ -31,11 +31,15 @@
                 <ul id="dashboard">
                   <li class="mm-active">
                     <span class="nav-thumbnail">01</span>
-                    <a data-scroll href="/admin/dashboard#">Default</a>
+                    <a data-scroll href="/admin/dashboard#">Top</a>
                   </li>
                   <li>
                     <span class="nav-thumbnail">02</span>
                     <a data-scroll href="/admin/dashboard#user-activity">User Activity</a>
+                  </li>
+                  <li>
+                    <span class="nav-thumbnail">03</span>
+                    <a data-scroll href="/admin/dashboard#user-info">User Info</a>
                   </li>
                   <!-- <router-link tag="li" to="/dashboard2">
                     <span class="nav-thumbnail">03</span>
@@ -75,7 +79,12 @@
         </ul>
         <ul class="nav flex-row order-lg-2 ml-auto nav-icons">
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="dropdown-notify" data-toggle="dropdown">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              id="dropdown-notify"
+              data-toggle="dropdown"
+            >
               <i class="icon-Envelope"></i>
               <span class="badge badge-primary d-block text-white">1</span>
             </a>
@@ -94,7 +103,7 @@
                 <div class="slim-scroll">
                   <ul class="list">
                     <li class="list-item align-items-center unread">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 bg-info text-white rounded-circle">
                         <i class="icon-Twitter"></i>
                       </div>
@@ -106,7 +115,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center unread">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 bg-warning text-white rounded-circle">
                         <i class="icon-Ticket"></i>
                       </div>
@@ -118,7 +127,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 bg-teal text-white rounded-circle">
                         <i class="icon-Paypal"></i>
                       </div>
@@ -130,7 +139,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 bg-danger text-white rounded-circle">
                         <i class="icon-Envelope"></i>
                       </div>
@@ -148,7 +157,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="dropdownChat" data-toggle="dropdown">
+            <a class="nav-link" href="javascript:void(0)" id="dropdownChat" data-toggle="dropdown">
               <i class="icon-Speach-Bubbles"></i>
               <span class="badge badge-success text-white anibadge d-block">9</span>
             </a>
@@ -167,7 +176,7 @@
                 <div class="slim-scroll">
                   <ul class="list chat-list">
                     <li class="list-item align-items-center chat-user user-online unread">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 rounded-circle">
                         <img src="images/avatar1.jpg" class="img-fluid" alt />
                       </div>
@@ -179,7 +188,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center chat-user">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 rounded-circle">
                         <img src="images/avatar2.jpg" class="img-fluid" alt />
                       </div>
@@ -191,7 +200,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center chat-user">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 rounded-circle">
                         <img src="images/avatar5.jpg" class="img-fluid" alt />
                       </div>
@@ -203,7 +212,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center chat-user user-dnd">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div class="list-thumb avatar avatar50 rounded-circle">
                         <img src="images/avatar4.jpg" class="img-fluid" alt />
                       </div>
@@ -215,7 +224,7 @@
                     </li>
                     <!--item-->
                     <li class="list-item align-items-center chat-user user-away">
-                      <a href="#" class="list-link"></a>
+                      <a href="javascript:void(0)" class="list-link"></a>
                       <div
                         class="list-thumb avatar avatar50 bg-primary-light text-primary rounded-circle"
                       >
@@ -235,7 +244,7 @@
             </div>
           </li>
           <li class="nav-item dropdown tools-dropdown h-lg-down">
-            <a href="#" data-toggle="dropdown" class="nav-link">
+            <a href="javascript:void(0)" data-toggle="dropdown" class="nav-link">
               <i class="icon-Filter-2"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
@@ -280,9 +289,15 @@
             </div>
           </li>
           <li class="nav-item dropdown user-dropdown align-items-center">
-            <a class="nav-link" href="#" id="dropdown-user" role="button" data-toggle="dropdown">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              id="dropdown-user"
+              role="button"
+              data-toggle="dropdown"
+            >
               <span class="user-states states-online">
-                <img src="images/avatar6.jpg" width="35" alt class="img-fluid rounded-circle" />
+                <img :src="head" alt class="img-fluid rounded-circle" />
               </span>
               <span class="ml-2 h-lg-down dropdown-toggle">{{ name }}</span>
             </a>
@@ -294,20 +309,20 @@
                 </span>
                 <span class="fs12 mb-0 text-muted">Administrator</span>
               </div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="javascript:void(0)">
                 <i class="icon-User"></i>My Profile
               </a>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="javascript:void(0)">
                 <i class="icon-Newspaper"></i> Tasks
               </a>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="javascript:void(0)">
                 <i class="icon-Speach-Bubble4"></i> Messages
                 <span
                   class="badge badge-text text-primary-active bg-primary-light ml-2"
                 >5 New</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="javascript:void(0)">
                 <i class="icon-Gear"></i> Settings
                 <span
                   class="badge badge-text text-danger-active bg-danger-light ml-2"
@@ -321,7 +336,7 @@
           </li>
           <li class="h-lg-up nav-item">
             <a
-              href="#"
+              href="javascript:void(0)"
               class="nav-link collapsed"
               data-toggle="collapse"
               data-target="#navbarToggler"
@@ -361,14 +376,26 @@
 
 <script>
 import $ from "jquery";
+import Identicon from "identicon.js";
+import { Hash } from "crypto";
 export default {
   name: "home",
+  data() {
+    return {
+      head: null
+    };
+  },
   computed: {
     name: function() {
       return this.$store.state.name;
     }
   },
   mounted() {
+    let hash = Hash("md5");
+    hash.update(this.name);
+    var imgData = new Identicon(hash.digest("hex"), 30).toString();
+    this.head = "data:image/png+xml;base64," + imgData;
+
     $("#metisMenu").metisMenu({});
     $(".slim-scroll").slimScroll({
       height: "100%",
@@ -378,7 +405,6 @@ export default {
       $("#page-aside").toggleClass("aside-folded");
       $(".sidenav-btn").toggleClass("toggler-folded");
     });
-    $('[data-spy="scroll"]').scrollspy("refresh");
   }
 };
 </script>
