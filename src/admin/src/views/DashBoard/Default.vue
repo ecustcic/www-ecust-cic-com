@@ -186,64 +186,11 @@
           <!--col-->
         </div>
         <div class="row">
-          <div class="col-12">
-            <div class="portlet-box bg-trans mb-30 border0">
-              <div class="portlet-body">
-                <div class="row align-items-center">
-                  <div class="col-lg-8">
-                    <div id="world-map-markers" style="width:100%;height: 300px"></div>
-                  </div>
-                  <div class="col-lg-4">
-                    <h5 class="font500 fs-1x b-b pb-2 mb-3 brd-primary-active">Top countries</h5>
-                    <div class="clearfix pb-2">
-                      <span class="float-right">
-                        <i class="fa fa-eye mr-2"></i> 3992
-                      </span>
-                      <span class="font500 text-muted">Usa</span>
-                    </div>
-                    <div class="progress bg-white shadow-sm mb-3" style="height: 9px">
-                      <div
-                        style="width: 75%"
-                        class="progress-bar bg-primary progress-bar-animated progress-bar-striped"
-                      ></div>
-                    </div>
-                    <div class="clearfix pb-2">
-                      <span class="float-right">
-                        <i class="fa fa-eye mr-2"></i> 2394
-                      </span>
-                      <span class="font500 text-muted">Australia</span>
-                    </div>
-                    <div class="progress bg-white shadow-sm mb-3" style="height: 9px">
-                      <div
-                        style="width: 60%"
-                        class="progress-bar bg-danger progress-bar-animated progress-bar-striped"
-                      ></div>
-                    </div>
-                    <div class="clearfix pb-2">
-                      <span class="float-right">
-                        <i class="fa fa-eye mr-2"></i> 3943
-                      </span>
-                      <span class="font500 text-muted">Israel</span>
-                    </div>
-                    <div class="progress bg-white shadow-sm" style="height: 9px">
-                      <div
-                        style="width: 35%"
-                        class="progress-bar bg-success progress-bar-animated progress-bar-striped"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
           <div class="col-lg-6">
             <div class="portlet-box portlet-fullHeight border0 shadow-sm mb-30">
               <div class="portlet-header flex-row flex d-flex align-items-center b-b">
                 <div class="flex d-flex flex-column">
-                  <h3>Recent Customers</h3>
+                  <h3>Recent Logged In User</h3>
                 </div>
                 <div class="portlet-tools">
                   <ul class="nav">
@@ -443,6 +390,58 @@
           </div>
           <!--col-->
         </div>
+        <!-- <div class="row">
+          <div class="col-12">
+            <div class="portlet-box bg-trans mb-30 border0">
+              <div class="portlet-body">
+                <div class="row align-items-center">
+                  <div class="col-lg-8">
+                    <div id="world-map-markers" style="width:100%;height: 300px"></div>
+                  </div>
+                  <div class="col-lg-4">
+                    <h5 class="font500 fs-1x b-b pb-2 mb-3 brd-primary-active">Top countries</h5>
+                    <div class="clearfix pb-2">
+                      <span class="float-right">
+                        <i class="fa fa-eye mr-2"></i> 3992
+                      </span>
+                      <span class="font500 text-muted">Usa</span>
+                    </div>
+                    <div class="progress bg-white shadow-sm mb-3" style="height: 9px">
+                      <div
+                        style="width: 75%"
+                        class="progress-bar bg-primary progress-bar-animated progress-bar-striped"
+                      ></div>
+                    </div>
+                    <div class="clearfix pb-2">
+                      <span class="float-right">
+                        <i class="fa fa-eye mr-2"></i> 2394
+                      </span>
+                      <span class="font500 text-muted">Australia</span>
+                    </div>
+                    <div class="progress bg-white shadow-sm mb-3" style="height: 9px">
+                      <div
+                        style="width: 60%"
+                        class="progress-bar bg-danger progress-bar-animated progress-bar-striped"
+                      ></div>
+                    </div>
+                    <div class="clearfix pb-2">
+                      <span class="float-right">
+                        <i class="fa fa-eye mr-2"></i> 3943
+                      </span>
+                      <span class="font500 text-muted">Israel</span>
+                    </div>
+                    <div class="progress bg-white shadow-sm" style="height: 9px">
+                      <div
+                        style="width: 35%"
+                        class="progress-bar bg-success progress-bar-animated progress-bar-striped"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
       </div>
     </div>
     <footer class="content-footer bg-light b-t">
@@ -492,11 +491,6 @@ export default {
   },
   data() {
     return {
-      // initOptions: {
-      //   legend: {
-      //     type: "scroll"
-      //   }
-      // },
       userActivityData: [5, 20, 12, 26, 36, 10, 15],
       userRegisterData: [1, 2, 5, 8, 10, 4, 3],
       userInfoData: [
@@ -519,7 +513,8 @@ export default {
         { value: 1, name: "中德工学院" },
         { value: 1, name: "国际卓越工程师学院" },
         { value: 1, name: "其他/外校" }
-      ]
+      ],
+      userInfoInterval: null
     };
   },
   computed: {
@@ -596,6 +591,30 @@ export default {
         //     "其他/外校"
         //   ]
         // },
+        color: [
+          "#5facfc",
+          "#2fa1ea",
+          "#39b3ea",
+          "#3ec5ea",
+          "#44d3eb",
+          "#4ebecd",
+          "#43cec7",
+          "#62d5b2",
+          "#5ac49f",
+          "#9cdc82",
+          "#d4ec58",
+          "#fdda43",
+          "#fab64d",
+          "#f7816c",
+          "#f66d6c",
+          "#ea668d",
+          "#d65fa8",
+          "#b55cbc",
+          "#9186e7",
+          "#747be1",
+          "#6370de",
+          "#658dd6"
+        ],
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -605,7 +624,14 @@ export default {
             name: "用户学院分布",
             type: "pie",
             radius: ["10%", "80%"],
-            data: this.userInfoData
+            data: this.userInfoData,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)"
+              }
+            }
           }
         ]
       };
@@ -643,6 +669,34 @@ export default {
       easing: "easeInOutCubic",
       offset: 25
     });
+
+    let dataIndex = -1;
+    let pie = this.$refs.userInfo;
+    let dataLen = pie.options.series[0].data.length;
+    this.userInfoInterval = setInterval(() => {
+      pie.dispatchAction({
+        type: "downplay",
+        seriesIndex: 0,
+        dataIndex
+      });
+      dataIndex = (dataIndex + 1) % dataLen;
+      pie.dispatchAction({
+        type: "highlight",
+        seriesIndex: 0,
+        dataIndex
+      });
+      // 显示 tooltip
+      pie.dispatchAction({
+        type: "showTip",
+        seriesIndex: 0,
+        dataIndex
+      });
+    }, 1000);
+  },
+  destroyed() {
+    if (this.userInfoInterval) {
+      window.clearInterval(this.userInfoInterval);
+    }
   }
 };
 </script>
