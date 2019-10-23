@@ -16,109 +16,82 @@
     </template>
 
     <AnimWords text="UserInfo" :animation="false" fontSize="3rem" />
-    <div class="row mb-3">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="name"
-      >昵称</label>
-      <span class="form-control col-md-1 transparent">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </span>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        class="form-control col-md-4"
-        placeholder="昵称"
-        @click="disablePopover"
-        @blur="check('name')"
-        v-model="name"
-        v-validate="'required|max:20'"
-      />
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('name')"
-      >昵称至多15个字符</div>
-    </div>
-    <div class="row mb-3">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="mobilephone"
-      >手机号</label>
-      <span class="form-control col-md-1 transparent">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </span>
-      <input
-        type="text"
-        id="mobilephone"
-        name="mobilephone"
-        class="form-control col-md-4"
-        placeholder="手机号"
-        @click="disablePopover"
-        @blur="check('mobilephone')"
-        v-model="mobilephone"
-        v-validate
-        pattern="^1[0-9]{10}$"
-        title="修改失败"
-        data-toggle="popover"
-        datas-placement="right"
-        data-content="该用户已存在"
-      />
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('mobilephone')"
-      >请填写正确的手机号</div>
-    </div>
-    <div class="row mb-3">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="studentNumber"
-      >学号</label>
-      <span class="form-control col-md-1 transparent">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </span>
-      <input
-        type="text"
-        id="studentNumber"
-        name="studentNumber"
-        class="form-control col-md-4"
-        placeholder="学号"
-        @click="disablePopover"
-        @blur="check('studentNumber')"
-        v-model="studentNumber"
-        v-validate
-        pattern="^1[0-9]{7}$"
-        title="修改失败"
-        data-toggle="popover"
-        datas-placement="right"
-        data-content="该学号已存在"
-      />
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('studentNumber')"
-      >请填写正确的学号</div>
-    </div>
-    <div class="row mb-3">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="studentCollege"
-      >学院</label>
-      <span class="form-control col-md-1 transparent">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </span>
+    <div class="row mb-2">
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="name">昵称</label>
+      </div>
+      <div class="col-md-1">
+        <span class="form-control transparent">
+          <i class="fa fa-spinner fa-pulse"></i>
+        </span>
+      </div>
       <div class="col-md-4">
-        <div class="form-group">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="昵称"
+          @click="disablePopover"
+          @blur="check('name')"
+          v-model="name"
+          v-validate="'required|max:20'"
+        />
+      </div>
+      <div class="col-md-3">
+        <div class="form-control alert-danger" role="alert" v-show="errors.has('name')">昵称至多15个字符</div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="studentNumber">学号</label>
+      </div>
+      <div class="col-md-1">
+        <span class="form-control transparent">
+          <i class="fa fa-spinner fa-pulse"></i>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <input
+          type="text"
+          id="studentNumber"
+          name="studentNumber"
+          class="form-control"
+          placeholder="学号"
+          @click="disablePopover"
+          @blur="check('studentNumber')"
+          v-model="studentNumber"
+          v-validate
+          pattern="^1[0-9]{7}$"
+          title="修改失败"
+          data-toggle="popover"
+          datas-placement="right"
+          data-content="该学号已存在"
+        />
+      </div>
+      <div class="col-md-3">
+        <div
+          class="form-control alert-danger"
+          role="alert"
+          v-show="errors.has('studentNumber')"
+        >请填写正确的学号</div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="studentCollege">学院</label>
+      </div>
+      <div class="col-md-1">
+        <span class="form-control transparent">
+          <i class="fa fa-spinner fa-pulse"></i>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group mb-0">
           <select
             id="studentCollege"
             name="studentCollege"
-            class="selectpicker show-tick form-control"
+            class="form-control selectpicker show-tick"
             title="学院"
             v-model="studentCollege"
           >
@@ -145,38 +118,78 @@
         </div>
       </div>
     </div>
-    <div class="row mb-5">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="qqNumber"
-      >QQ号</label>
-      <span class="form-control col-md-1 transparent">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </span>
-      <input
-        type="text"
-        id="qqNumber"
-        name="qqNumber"
-        class="form-control col-md-4"
-        placeholder="QQ号"
-        @click="disablePopover"
-        @blur="check('qqNumber')"
-        v-model="qqNumber"
-        v-validate
-        pattern="^[1-9][0-9]{4,11}$"
-      />
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('qqNumber')"
-      >请填写正确的QQ号</div>
+    <div class="row mb-2">
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="mobilephone">手机号</label>
+      </div>
+      <div class="col-md-1">
+        <span class="form-control transparent">
+          <i class="fa fa-spinner fa-pulse"></i>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <input
+          type="text"
+          id="mobilephone"
+          name="mobilephone"
+          class="form-control"
+          placeholder="手机号"
+          @click="disablePopover"
+          @blur="check('mobilephone')"
+          v-model="mobilephone"
+          v-validate
+          pattern="^1[0-9]{10}$"
+          title="修改失败"
+          data-toggle="popover"
+          datas-placement="right"
+          data-content="该用户已存在"
+        />
+      </div>
+      <div class="col-md-3">
+        <div
+          class="form-control alert-danger"
+          role="alert"
+          v-show="errors.has('mobilephone')"
+        >请填写正确的手机号</div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="qqNumber">QQ号</label>
+      </div>
+      <div class="col-md-1">
+        <span class="form-control transparent">
+          <i class="fa fa-spinner fa-pulse"></i>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <input
+          type="text"
+          id="qqNumber"
+          name="qqNumber"
+          class="form-control"
+          placeholder="QQ号"
+          @click="disablePopover"
+          @blur="check('qqNumber')"
+          v-model="qqNumber"
+          v-validate
+          pattern="^[1-9][0-9]{4,11}$"
+        />
+      </div>
+      <div class="col-md-3">
+        <div
+          class="form-control alert-danger"
+          role="alert"
+          v-show="errors.has('qqNumber')"
+        >请填写正确的QQ号</div>
+      </div>
     </div>
     <div class="col-md-6 offset-md-3">
       <button class="btn btn-primary btn-lg btn-block" @click="formValidate">确认提交</button>
     </div>
     <!-- SuccessModal -->
-    <div
+    <Modal title="Success" text="修改成功!"></Modal>
+    <!-- <div
       class="modal fade"
       id="successModal"
       tabindex="-1"
@@ -195,9 +208,10 @@
           <div class="modal-body">修改成功!</div>
         </div>
       </div>
-    </div>
+    </div>-->
     <!-- FailModal -->
-    <div
+    <Modal title="Error" text="服务似乎暂时不可用呢!"></Modal>
+    <!-- <div
       class="modal fade"
       id="failModal"
       tabindex="-1"
@@ -216,7 +230,7 @@
           <div class="modal-body">服务似乎暂时不可用呢！</div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -245,10 +259,12 @@
 
 <script>
 import $ from "jquery";
+import Modal from "@/components/Modal.vue";
 import AnimWords from "@/components/AnimWords.vue";
 export default {
   name: "info",
   components: {
+    Modal,
     AnimWords
   },
   data() {
@@ -300,8 +316,9 @@ export default {
         this.$ajax
           .post("/api/user/change-info", {
             name: that.name,
-            mobilephone: that.mobilephone,
             student_number: that.studentNumber,
+            college: that.studentCollege,
+            mobilephone: that.mobilephone,
             qqnumber: that.qqNumber,
             ticket: res.ticket,
             randstr: res.randstr
@@ -309,7 +326,7 @@ export default {
           .then(res => {
             if (res.data.ret === 0) {
               var that = this;
-              $("#successModal")
+              $("#SuccessModal")
                 .modal("show")
                 .on("hidden.bs.modal", function() {
                   that.$router.go(0);
@@ -326,17 +343,19 @@ export default {
               return;
             }
             console.log(res);
-            $("#failModal").modal("show");
+            $("#ErrorModal").modal("show");
           })
           // eslint-disable-next-line
           .catch(error => {
-            $("#failModal").modal("show");
+            $("#ErrorModal").modal("show");
           });
       }
     }
   },
   mounted() {
     this.disablePopover();
+
+    // guide
     this.guide = this.$route.query.guide;
     if (this.guide) {
       setTimeout(function() {
@@ -345,13 +364,17 @@ export default {
         });
       }, 1000);
     }
+
+    // 加载用户数据
     this.$ajax.get("/api/user/info").then(res => {
       if (res.data.ret === 0) {
         this.name = res.data.data.name || "";
-        this.mobilephone = res.data.data.mobilephone || "";
         this.studentNumber = res.data.data.student_number || "";
+        this.studentCollege = res.data.data.college || "";
+        this.mobilephone = res.data.data.mobilephone || "";
         this.qqNumber = res.data.data.qqnumber || "";
         $(".fa.fa-spinner.fa-pulse").css("display", "none");
+        $(".selectpicker").selectpicker("val", this.studentCollege);
       }
     });
   }

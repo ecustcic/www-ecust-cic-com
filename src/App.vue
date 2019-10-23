@@ -375,7 +375,7 @@ body,
     color: #1ecfca;
   }
 
-  .dropdown > .dropdown-toggle {
+  #navbarDropdown {
     outline: none;
     border: none;
     max-width: 150px;

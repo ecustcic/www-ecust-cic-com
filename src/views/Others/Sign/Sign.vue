@@ -371,8 +371,10 @@ export default {
     startWebsocket: function() {
       if ("WebSocket" in window) {
         console.log("Start Websocket...");
+        var protol =
+          process.env.NODE_ENV === "development" ? "ws://" : "wss://";
         this.webSocket = new WebSocket(
-          "ws://" + window.location.host + "/api/others/sign/websocket"
+          protol + window.location.host + "/api/others/sign/websocket"
         );
         this.webSocket.onopen = this.ws_open;
         this.webSocket.onmessage = this.ws_message;
