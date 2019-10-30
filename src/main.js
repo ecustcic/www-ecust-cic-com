@@ -83,6 +83,12 @@ Vue.prototype.globals = globals
 // VueQr
 import VueQr from 'vue-qr'
 Vue.use(VueQr)
+
+// vue-spinkit
+import 'loaders.css'
+import Spinner from 'vue-spinkit'
+Vue.component("Spinner", Spinner)
+
 // Vue.component('remote-script', {
 //   render: function (createElement) {
 //       var self = this;

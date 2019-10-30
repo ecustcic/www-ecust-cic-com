@@ -8,7 +8,7 @@
       </div>
       <div class="hide-button">隐藏</div>
     </div>
-    <button class="btn btn-info w-50 mt-4" id="start" @click="startWebsocket">发起签到</button>
+    <button class="btn btn-info w-50 mt-4" id="start" @click="startSign">发起签到</button>
     <div class="scan row">
       <div class="col-md-4 scan-qrcode">
         <div class="scan-qrcode-wrapper image-popup" :data-mfp-src="qrcode">
@@ -321,7 +321,6 @@
   padding: 25px;
   display: inline-block;
   vertical-align: middle;
-  /* background-color: #f4a7b9; */
   border: 2px solid #000;
   border-radius: 0.25rem;
 }
@@ -368,6 +367,14 @@ export default {
     };
   },
   methods: {
+    startSign: function() {
+      // eslint-disable-next-line
+      var captcha = new TencentCaptcha(
+        this.globals.TencentAPPID,
+        this.startWebsocket
+      );
+      captcha.show();
+    },
     startWebsocket: function() {
       if ("WebSocket" in window) {
         console.log("Start Websocket...");

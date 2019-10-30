@@ -1,104 +1,100 @@
 <template>
   <div class="container px-5 pt-3 pb-5" id="register">
-    <div class="alert alert-dismissible fade show loading" role="alert">
-      <strong>
-        <i class="fa fa-spinner fa-pulse"></i>&nbsp;Loading...
-      </strong>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+    <Loading />
     <AnimWords text="Register" :animation="false" />
     <div class="row mb-3">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="username"
-      >邮箱</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        class="form-control col-md-4 offset-md-1"
-        placeholder="邮箱"
-        @click="disablePopover"
-        @blur="check('username')"
-        v-model="username"
-        v-validate="'required|email'"
-        title="注册失败"
-        data-toggle="popover"
-        datas-placement="right"
-        data-content="该用户已存在"
-      />
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('username')"
-      >请填写正确的邮箱</div>
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="username">邮箱</label>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          placeholder="邮箱"
+          @click="disablePopover"
+          @blur="check('username')"
+          v-model="username"
+          v-validate="'required|email'"
+          title="注册失败"
+          data-toggle="popover"
+          datas-placement="right"
+          data-content="该用户已存在"
+        />
+      </div>
+      <div class="col-md-3">
+        <div class="form-control alert-danger" role="alert" v-show="errors.has('username')">请填写正确的邮箱</div>
+      </div>
     </div>
     <div class="row mb-3">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="password"
-      >密码</label>
-      <div class="input-group col-md-4 offset-md-1 p-0">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control"
-          placeholder="请输入密码"
-          @click="disablePopover"
-          @blur="check('password')"
-          v-model="password"
-          v-validate="'required|min:6'"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            tabindex="-1"
-            @click="showPassword"
-          >
-            <i class="fa fa-eye-slash fa-fw" id="eye"></i>
-          </button>
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="password">密码</label>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="请输入密码"
+            @click="disablePopover"
+            @blur="check('password')"
+            v-model="password"
+            v-validate="'required|min:6'"
+          />
+          <div class="input-group-append bg-white">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              tabindex="-1"
+              @click="showPassword"
+            >
+              <i class="fa fa-eye-slash fa-fw" id="eye"></i>
+            </button>
+          </div>
         </div>
       </div>
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('password')"
-      >请填写至少6位密码</div>
+      <div class="col-md-3">
+        <div
+          class="form-control alert-danger"
+          role="alert"
+          v-show="errors.has('password')"
+        >请填写至少6位密码</div>
+      </div>
     </div>
     <div class="row mb-5">
-      <label
-        class="form-control col-md-2 offset-md-2 mb-0"
-        onselectstart="return false;"
-        for="passwordAgain"
-      >确认密码</label>
-      <input
-        type="password"
-        id="passwordAgain"
-        name="passwordAgain"
-        class="form-control col-md-4 offset-md-1"
-        placeholder="请再次输入密码"
-        @click="disablePopover"
-        @blur="check('passwordAgain')"
-        v-model="passwordAgain"
-        v-validate="{'required': 'true', 'is': password}"
-      />
-      <div
-        class="form-control alert-danger col-md-3"
-        role="alert"
-        v-show="errors.has('passwordAgain')"
-      >输入不一致</div>
+      <div class="col-md-2 offset-md-2">
+        <label class="form-control" onselectstart="return false;" for="passwordAgain">确认密码</label>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <input
+          type="password"
+          id="passwordAgain"
+          name="passwordAgain"
+          class="form-control"
+          placeholder="请再次输入密码"
+          @click="disablePopover"
+          @blur="check('passwordAgain')"
+          v-model="passwordAgain"
+          v-validate="{'required': 'true', 'is': password}"
+        />
+      </div>
+      <div class="col-md-3">
+        <div
+          class="form-control alert-danger"
+          role="alert"
+          v-show="errors.has('passwordAgain')"
+        >输入不一致</div>
+      </div>
     </div>
     <div class="col-md-6 offset-md-3">
       <button class="btn btn-primary btn-lg btn-block" @click="formValidate(cbfn)">注册</button>
     </div>
     <!-- RegisterModal -->
-    <div
+    <Modal title="Register" text="验证邮件已经发送到你的邮箱，请前往邮箱确认..."></Modal>
+    <!-- <div
       class="modal fade"
       id="registerModal"
       tabindex="-1"
@@ -125,9 +121,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
     <!-- SuccessModal -->
-    <div
+    <Modal title="Success" text="浏览器将在3s后跳转登录..."></Modal>
+    <!-- <div
       class="modal fade"
       id="successModal"
       tabindex="-1"
@@ -146,9 +143,10 @@
           <div class="modal-body">浏览器将在3s后跳转登录...</div>
         </div>
       </div>
-    </div>
+    </div>-->
     <!-- FailModal -->
-    <div
+    <Modal title="Error" text="服务似乎暂时不可用呢！"></Modal>
+    <!-- <div
       class="modal fade"
       id="failModal"
       tabindex="-1"
@@ -167,7 +165,7 @@
           <div class="modal-body">服务似乎暂时不可用呢！</div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -175,26 +173,18 @@
 #register {
   background: #dedede;
 }
-.loading {
-  position: absolute;
-  right: 0.25rem;
-  top: 80px;
-  z-index: 9999;
-  max-width: 400px;
-  padding: 1rem 2rem;
-  opacity: 0;
-  color: inherit;
-  background-color: #fff;
-  box-shadow: 0px 0px 45px rgba(118, 147, 172, 0.35);
-}
 </style>
 
 <script>
 import $ from "jquery";
+import Modal from "@/components/Modal.vue";
+import Loading from "@/components/Loading.vue";
 import AnimWords from "@/components/AnimWords.vue";
 export default {
   name: "Register",
   components: {
+    Modal,
+    Loading,
     AnimWords
   },
   data() {
@@ -228,10 +218,7 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
-          var captcha = new TencentCaptcha(
-            this.globals.TencentAPPID,
-            func
-          );
+          var captcha = new TencentCaptcha(this.globals.TencentAPPID, func);
           captcha.show();
         }
       });
@@ -259,7 +246,7 @@ export default {
           })
           .then(res => {
             if (res.data.ret === 0) {
-              $("#registerModal").modal("show");
+              $("#RegisterModal").modal("show");
               return;
             } else if (res.data.ret === 11) {
               $("#username").popover("enable");
@@ -272,16 +259,15 @@ export default {
               return;
             }
             console.log(res);
-            $("#failModal").modal("show");
+            $("#ErrorModal").modal("show");
           })
           // eslint-disable-next-line
           .catch(error => {
-            $("#failModal").modal("show");
+            $("#ErrorModal").modal("show");
           });
       }
     },
     resendVerifyEmail: function(res) {
-      $(".loading").slideDown(500).css("opacity", "1");
       if (res.ret === 0) {
         var that = this;
         this.$ajax
@@ -292,19 +278,17 @@ export default {
             randstr: res.randstr
           })
           .then(res => {
-            $(".loading").css("opacity", "0").slideUp(500);
             if (res.data.ret === 0) {
-              $("#successModal").modal("show");
+              $("#SuccessModal").modal("show");
               return;
             }
             console.log(res);
-            $("#failModal").modal("show");
+            $("#ErrorModal").modal("show");
           })
           // eslint-disable-next-line
           .catch(error => {
             console.log(error);
-            $(".loading").css("opacity", "0").slideUp(500);
-            $("#failModal").modal("show");
+            $("#ErrorModal").modal("show");
             return;
           });
       }
@@ -317,9 +301,9 @@ export default {
         })
         .then(res => {
           if (res.data.ret === 0) {
-            $("#successModal").modal("show");
+            $("#SuccessModal").modal("show");
             setTimeout(function() {
-              $("#successModal").modal("hide");
+              $("#SuccessModal").modal("hide");
               that.$router.push({
                 name: "login",
                 query: { redirect: "/user/info?guide=true" }
@@ -328,11 +312,11 @@ export default {
             return;
           }
           console.log(res);
-          $("#failModal").modal("show");
+          $("#ErrorModal").modal("show");
         })
         // eslint-disable-next-line
         .catch(error => {
-          $("#failModal").modal("show");
+          $("#ErrorModal").modal("show");
         });
     }
   },

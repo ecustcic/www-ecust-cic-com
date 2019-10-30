@@ -215,13 +215,13 @@ body,
   position: relative;
 }
 
-.navbar .navbar-brand {
+/* .navbar .navbar-brand {
   margin-left: -30px;
-}
+} */
 
-.navbar .navbar-nav {
+/* .navbar .navbar-nav {
   margin-left: 135px;
-}
+} */
 
 @media (max-width: 992px) {
   .navbar .navbar-nav {
@@ -269,10 +269,10 @@ body,
     z-index: 999;
     background-color: transparent !important;
   }
-  .navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-brand > img {
+  /* .navbar.navbar-sticky.navbar-transparent-light.bg-white .navbar-brand > img {
     position: absolute;
     top: 25px;
-  }
+  } */
 
   /* logo */
   .navbar.navbar-sticky.navbar-transparent-light.bg-white
@@ -377,7 +377,6 @@ body,
 
   #navbarDropdown {
     outline: none;
-    border: none;
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;

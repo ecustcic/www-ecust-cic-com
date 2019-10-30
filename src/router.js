@@ -25,7 +25,7 @@ import Password from '@/views/User/Password.vue'
 import Info from '@/views/User/Info.vue'
 
 // test
-// import AnimWords from '@/components/AnimWords.vue'
+// import Loading from '@/views/test.vue'
 
 // 404 Not Found
 import NotFound from '@/views/NotFound.vue'
@@ -139,7 +139,7 @@ const router = new Router({
     // {
     //   path: '/test',
     //   name: 'test',
-    //   component: AnimWords
+    //   component: Loading
     // },
     // 404 not found
     {
