@@ -17,42 +17,46 @@
       </div>
       <hr />
       <div class="row">
-        <div class="media shadow-sm col-md-6 wow fadeInLeft">
-          <img src="@/assets/img/Home/tech.png" class="mr-3" alt="技术" width="100" height="100" />
-          <div class="media-body">
-            <h5 class="mt-0 font-weight-bold">技术部</h5>
-            这里有大佬有萌新，但他们都热爱计算机。
-            <br />
-            <router-link to="/tech">点击进入</router-link>
+        <div class="col-md-6 mb-3">
+          <div class="media shadow-sm wow fadeInLeft">
+            <img src="@/assets/img/Home/tech.png" class="mr-3" alt="技术" width="100" height="100" />
+            <div class="media-body">
+              <h5 class="mt-0 font-weight-bold">技术部</h5>这里有大佬有萌新，但他们都热爱计算机。
+              <br />
+              <router-link to="/tech">点击进入</router-link>
+            </div>
           </div>
         </div>
-        <div class="media shadow-sm col-md-6 wow fadeInDown">
-          <img src="@/assets/img/Home/serve.png" class="mr-3" alt="服务" width="100" height="100" />
-          <div class="media-body">
-            <h5 class="mt-0 font-weight-bold">服务部</h5>
-            这里有一群无私奉献、为他人服务的人。
-            <br />
-            <router-link to="/service">点击进入</router-link>
+        <div class="col-md-6 mb-3">
+          <div class="media shadow-sm wow fadeInDown">
+            <img src="@/assets/img/Home/serve.png" class="mr-3" alt="服务" width="100" height="100" />
+            <div class="media-body">
+              <h5 class="mt-0 font-weight-bold">服务部</h5>这里有一群无私奉献、为他人服务的人。
+              <br />
+              <router-link to="/service">点击进入</router-link>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="media shadow-sm col-md-6 wow fadeInUp">
-          <img src="@/assets/img/Home/media.png" class="mr-3" alt="组宣" width="100" height="100" />
-          <div class="media-body">
-            <h5 class="mt-0 font-weight-bold">组宣部</h5>
-            这里是社团运营以及宣传的大脑。
-            <br />
-            <a href="javascript:void;">点击进入</a>
+        <div class="col-md-6 mb-3">
+          <div class="media shadow-sm wow fadeInUp">
+            <img src="@/assets/img/Home/media.png" class="mr-3" alt="组宣" width="100" height="100" />
+            <div class="media-body">
+              <h5 class="mt-0 font-weight-bold">组宣部</h5>这里是社团运营以及宣传的大脑。
+              <br />
+              <router-link to="/publicity">点击进入</router-link>
+            </div>
           </div>
         </div>
-        <div class="media shadow-sm col-md-6 wow fadeInRight">
-          <img src="@/assets/img/Home/game.png" class="mr-3" alt="电竞" width="100" height="100" />
-          <div class="media-body">
-            <h5 class="mt-0 font-weight-bold">电竞部</h5>
-            这里是游戏爱好者的圣地。
-            <br />
-            <router-link to="/e-sports">点击进入</router-link>
+        <div class="col-md-6 mb-3">
+          <div class="media shadow-sm wow fadeInRight">
+            <img src="@/assets/img/Home/game.png" class="mr-3" alt="电竞" width="100" height="100" />
+            <div class="media-body">
+              <h5 class="mt-0 font-weight-bold">电竞部</h5>这里是游戏爱好者的圣地。
+              <br />
+              <router-link to="/e-sports">点击进入</router-link>
+            </div>
           </div>
         </div>
       </div>

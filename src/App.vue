@@ -409,6 +409,14 @@ export default {
         21;
       $(".view").css("min-height", height + "px");
     },
+    showHead: function() {
+      if (this.token) {
+        let hash = Hash("md5");
+        hash.update(this.name);
+        var imgData = new Identicon(hash.digest("hex"), 30).toString();
+        this.head = "data:image/png+xml;base64," + imgData;
+      }
+    },
     logout: function() {
       this.$cookies.remove("ECUST-CIC");
       this.$store.commit("logout");
@@ -433,13 +441,6 @@ export default {
     }
   },
   mounted: function() {
-    if (this.token) {
-      let hash = Hash("md5");
-      hash.update(this.name);
-      var imgData = new Identicon(hash.digest("hex"), 30).toString();
-      this.head = "data:image/png+xml;base64," + imgData;
-    }
-
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="popover"]')
       .on("shown.bs.popover", function() {
@@ -484,6 +485,12 @@ export default {
     // eslint-disable-next-line
     screenHeight: function(val) {
       this.windowsResize();
+    },
+    token: function() {
+      this.showHead();
+      this.$nextTick(function() {
+        $('[data-toggle="dropdown"]').bootstrapDropdownHover();
+      });
     }
   }
 };
