@@ -33,6 +33,8 @@
       </div>
     </div>
     <!-- TODO: Support Pause and Resume -->
+    <button class="btn btn-info w-50" id="pause" @click="pauseSign">暂停</button>
+    <button class="btn btn-info w-50" id="export" @click="exportExcel">导出excel</button>
     <button class="btn btn-info w-50" id="end" @click="closeWebsocket">关闭</button>
   </div>
 </template>
@@ -341,6 +343,8 @@
   border-radius: 0.25rem;
 }
 
+#pause,
+#export,
 #end {
   display: none;
 }
@@ -348,6 +352,7 @@
 
 <script>
 import $ from "jquery";
+import XLSX from "xlsx";
 import { Hash } from "crypto";
 import Identicon from "identicon.js";
 export default {
@@ -359,9 +364,11 @@ export default {
       webSocket: null,
       loading: true,
       loaded: false,
+      paused: false,
       popup: false,
       scanURL: null,
       scanID: null,
+      scanedUsers: [],
       qrcode_id: null,
       ping_id: null
     };
@@ -402,6 +409,7 @@ export default {
         window.clearInterval(this.ping_id);
       }
       this.ping_id = setInterval(this.ws_ping, 30000);
+      this.scanedUsers = [];
     },
     ws_message: function(event) {
       if (event.data === "pong") return;
@@ -415,7 +423,7 @@ export default {
           window.clearInterval(this.qrcode_id);
         }
         this.change_qrcode();
-        this.qrcode_id = setInterval(this.change_qrcode, 10000);
+        this.qrcode_id = setInterval(this.change_qrcode, 5000);
 
         // 准备完成
         this.loading = false;
@@ -464,6 +472,18 @@ export default {
         .css("bottom", "0")
         .css("right", "30px");
       $("#end").css("display", "inline-block");
+      $("#pause").css("display", "inline-block");
+      $("#export").css("display", "inline-block");
+    },
+    pauseSign: function() {
+      this.paused = !this.paused;
+      if (this.paused) {
+        this.loading = true;
+        $("#pause").html("继续");
+      } else {
+        this.loading = false;
+        $("#pause").html("暂停");
+      }
     },
     change_qrcode: function() {
       const href = window.location.origin + "/others/scan?";
@@ -480,6 +500,7 @@ export default {
       }
     },
     append_child: function(name) {
+      this.scanedUsers.push(name);
       var scan_list = $(".scan-list-wrapper");
       var card = $("<div>");
       card.attr("class", "card col-sm-2");
@@ -503,6 +524,16 @@ export default {
       hash.update(name);
       let head = new Identicon(hash.digest("hex"), 50).toString();
       return "data:image/png+xml;base64," + head;
+    },
+    exportExcel: function() {
+      var data = [["姓名"]];
+      for (let index in this.scanedUsers) {
+        data.push([this.scanedUsers[index]]);
+      }
+      var worksheet = XLSX.utils.aoa_to_sheet(data);
+      var workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "签到列表");
+      XLSX.writeFile(workbook, "签到列表");
     }
   },
   mounted() {

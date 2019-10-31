@@ -8815,9 +8815,6 @@ export default {
       const token = this.$cookies.get("ECUST-CIC");
       this.$store.commit("login", token);
     }
-  },
-  mounted() {
-    this.$router.push("/dashboard");
   }
 };
 </script>

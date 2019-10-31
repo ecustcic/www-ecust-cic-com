@@ -64,7 +64,7 @@
         >请填写至少6位密码</div>
       </div>
     </div>
-    <div class="row mb-5">
+    <div class="row mb-3">
       <div class="col-md-2 offset-md-2">
         <label class="form-control" onselectstart="return false;" for="passwordAgain">确认密码</label>
       </div>
@@ -87,6 +87,18 @@
           role="alert"
           v-show="errors.has('passwordAgain')"
         >输入不一致</div>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-3 offset-md-2 text-left">
+        其他登录方式：
+        <button class="btn btn-link p-0" style="vertical-align: inherit;" @click="qqLogin">
+          <!-- <i class="fa fa-qq"></i> -->
+          <img src="../../assets/img/User/qq_login.png" alt />
+        </button>
+      </div>
+      <div class="col-md-4 text-right">
+        <button class="btn btn-link p-0" @click="formValidate(resendVerifyEmail)">未收到激活邮件?</button>
       </div>
     </div>
     <div class="col-md-6 offset-md-3">
@@ -166,6 +178,8 @@
         </div>
       </div>
     </div>-->
+    <!-- FeatureModal -->
+    <Modal title="Feature" text="敬请期待！"></Modal>
   </div>
 </template>
 
@@ -318,6 +332,9 @@ export default {
         .catch(error => {
           $("#ErrorModal").modal("show");
         });
+    },
+    qqLogin: function() {
+      $("#FeatureModal").modal("show");
     }
   },
   mounted() {

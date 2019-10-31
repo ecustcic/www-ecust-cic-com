@@ -12,47 +12,44 @@ Vue.use(Router)
 
 const routes = []
 
-const guestRoutes = [{
-  path: '*',
-  name: 'forbidden',
-  component: Forbidden,
-  meta: {
-    title: "Permission Denied"
-  }
-}]
-
-const adminRoutes = [{
-  path: '/',
-  name: 'home',
-  component: Home,
-  children: [
-    {
-      path: 'dashboard',
-      name: 'dashboard',
-      component: DefaultDash,
-      meta: {
-        title: 'DashBoard'
-      }
+const guestRoutes = [
+  {
+    path: '*',
+    name: 'forbidden',
+    component: Forbidden,
+    meta: {
+      title: "Permission Denied"
     }
-  ]
-},
-{
-  path: '/about',
-  name: 'about',
-  // route level code-splitting
-  // this generates a separate chunk (about.[hash].js) for this route
-  // which is lazy-loaded when the route is visited.
-  component: () =>
-    import( /* webpackChunkName: "about" */ './views/About.vue')
-},
-{
-  path: '*',
-  name: 'forbidden',
-  component: Forbidden,
-  meta: {
-    title: "Permission Denied"
-  }
-}]
+  }]
+
+const adminRoutes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home,
+    children: [
+      {
+        path: '',
+        redirect: '/dashboard'
+      },
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: DefaultDash,
+        meta: {
+          title: 'DashBoard'
+        }
+      }
+    ]
+  },
+  {
+    path: '*',
+    name: 'forbidden',
+    component: Forbidden,
+    meta: {
+      title: "Permission Denied"
+    }
+  }]
 
 const router = new Router({
   mode: 'history',
@@ -77,18 +74,25 @@ router.beforeEach((to, from, next) => {
           if (res.data.ret === 0) {
             router.addRoutes(adminRoutes);
             store.state.addRoutes = true;
-            next();
+          } else {
+            router.addRoutes(guestRoutes);
+            store.state.addRoutes = true;
+            next("/");
           }
-          console.log(res.data)
         })
         .catch(error => {
           console.log(error)
+          router.addRoutes(guestRoutes);
+          store.state.addRoutes = true;
+          next("/")
         });
+    } else {
+      router.addRoutes(guestRoutes);
+      store.state.addRoutes = true;
+      next("/");
     }
-    router.addRoutes(guestRoutes);
-    store.state.addRoutes = true;
   }
-  next()
+  next();
 })
 
 window.router = router
