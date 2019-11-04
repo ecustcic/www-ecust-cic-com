@@ -63,15 +63,9 @@
       <template v-for="(item, index) in this.news">
         <div :key="index">
           <div class="row">
-            <div class="col-md-8">
-              {{item.title}}
-            </div>
-            <div class="col-md-2">
-              {{item.date}}
-            </div>
-            <div class="col-md-2">
-              {{item.author}}
-            </div>
+            <div class="col-md-8">{{item.title}}</div>
+            <div class="col-md-2">{{item.date}}</div>
+            <div class="col-md-2">{{item.author}}</div>
           </div>
         </div>
       </template>

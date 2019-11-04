@@ -41,6 +41,14 @@
                     <span class="nav-thumbnail">03</span>
                     <a data-scroll href="/admin/dashboard#user-info">User Info</a>
                   </li>
+                  <li>
+                    <span class="nav-thumbnail">04</span>
+                    <a data-scroll href="/admin/dashboard#user-today">User Today</a>
+                  </li>
+                  <li>
+                    <span class="nav-thumbnail">05</span>
+                    <a data-scroll href="/admin/dashboard#official-activities">Official Activities</a>
+                  </li>
                   <!-- <router-link tag="li" to="/dashboard2">
                     <span class="nav-thumbnail">03</span>
                     <a>Dashboard 2</a>

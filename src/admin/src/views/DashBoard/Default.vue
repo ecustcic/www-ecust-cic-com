@@ -186,16 +186,16 @@
           <!--col-->
         </div>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-6" id="user-today">
             <div class="portlet-box portlet-fullHeight border0 shadow-sm mb-30">
               <div class="portlet-header flex-row flex d-flex align-items-center b-b">
                 <div class="flex d-flex flex-column">
-                  <h3>Recent Logged In User</h3>
+                  <h3>Today Active User</h3>
                 </div>
                 <div class="portlet-tools">
                   <ul class="nav">
                     <li class="nav-item">
-                      <a href="javascript:void(0)" class="nav-link">
+                      <a href="javascript:void(0)" @click="userAccessLoad" class="nav-link">
                         <i class="fa fa-sync"></i>
                       </a>
                     </li>
@@ -204,113 +204,35 @@
               </div>
               <div class="portlet-body no-padding">
                 <div class="list">
-                  <div class="list-item b-b bg-light">
-                    <div
-                      class="list-thumb shadow-sm avatar40 bg-primary text-primary-light rounded-circle"
-                    >JA</div>
-                    <div class="list-body">
-                      <span class="float-right fs12 text-muted">
-                        <i class="fa fa-clock mr-2"></i>Just Now
-                      </span>
-                      <span class="list-title">John Adams</span>
-                      <span class="list-content pt-1">
-                        <i class="fa text-muted fa-map-marker mr-1 fs10"></i>
-                        Sau Polo, 302012, Argentina
-                      </span>
+                  <template v-for="(item, index) in this.userAccessData">
+                    <div class="list-item b-b" :class="{'bg-light': index % 2 == 0}" :key="index">
+                      <img :src="item.head" class="list-thumb shadow-sm avatar40 rounded-circle" />
+                      <div class="list-body">
+                        <!-- <span class="float-right fs12 text-muted">
+                          <i class="fa fa-clock mr-2"></i>Just Now
+                        </span>-->
+                        <span class="list-title">{{ item.name }}</span>
+                        <span class="list-content pt-1">
+                          <span class="text-muted mr-1 fs12">
+                            <i class="fas fa-envelope"></i>
+                          </span>
+                          {{ item.email }}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <!--list item-->
-                  <div class="list-item b-b">
-                    <div class="list-thumb shadow-sm avatar40 rounded-circle">
-                      <img src="images/avatar1.jpg" alt class="img-fluid" />
-                    </div>
-                    <div class="list-body">
-                      <span class="float-right fs12 text-muted">
-                        <i class="fa fa-clock mr-2"></i>Just Now
-                      </span>
-                      <span class="list-title">Amily Howkins</span>
-                      <span class="list-content pt-1">
-                        <i class="fa text-muted fa-map-marker mr-1 fs10"></i>
-                        Sau Polo, 302012, Argentina
-                      </span>
-                    </div>
-                  </div>
-                  <!--list item-->
-                  <div class="list-item b-b bg-light">
-                    <div class="list-thumb shadow-sm avatar40 rounded-circle">
-                      <img src="images/avatar4.jpg" alt class="img-fluid" />
-                    </div>
-                    <div class="list-body">
-                      <span class="float-right fs12 text-muted">
-                        <i class="fa fa-clock mr-2"></i>Just Now
-                      </span>
-                      <span class="list-title">John Sinha</span>
-                      <span class="list-content pt-1">
-                        <i class="fa text-muted fa-map-marker mr-1 fs10"></i>
-                        Sau Polo, 302012, Argentina
-                      </span>
-                    </div>
-                  </div>
-                  <!--list item-->
-                  <div class="list-item b-b">
-                    <div class="list-thumb shadow-sm avatar40 rounded-circle">
-                      <img src="images/avatar5.jpg" alt class="img-fluid" />
-                    </div>
-                    <div class="list-body">
-                      <span class="float-right fs12 text-muted">
-                        <i class="fa fa-clock mr-2"></i>Just Now
-                      </span>
-                      <span class="list-title">Luiciya Wangdu</span>
-                      <span class="list-content pt-1">
-                        <i class="fa text-muted fa-map-marker mr-1 fs10"></i>
-                        Sau Polo, 302012, Argentina
-                      </span>
-                    </div>
-                  </div>
-                  <!--list item-->
-                  <div class="list-item b-b bg-light">
-                    <div
-                      class="list-thumb shadow-sm avatar40 bg-teal text-teal-light rounded-circle"
-                    >AB</div>
-                    <div class="list-body">
-                      <span class="float-right fs12 text-muted">
-                        <i class="fa fa-clock mr-2"></i>Just Now
-                      </span>
-                      <span class="list-title">Abraham Banjara</span>
-                      <span class="list-content pt-1">
-                        <i class="fa text-muted fa-map-marker mr-1 fs10"></i>
-                        Sau Polo, 302012, Argentina
-                      </span>
-                    </div>
-                  </div>
-                  <!--list item-->
-                  <div class="list-item">
-                    <div class="list-thumb shadow-sm avatar40 rounded-circle">
-                      <img src="images/avatar6.jpg" alt class="img-fluid" />
-                    </div>
-                    <div class="list-body">
-                      <span class="float-right fs12 text-muted">
-                        <i class="fa fa-clock mr-2"></i>Just Now
-                      </span>
-                      <span class="list-title">Juliat Thomas</span>
-                      <span class="list-content pt-1">
-                        <i class="fa text-muted fa-map-marker mr-1 fs10"></i>
-                        Francisco, 344564, USA
-                      </span>
-                    </div>
-                  </div>
-                  <!--list item-->
+                  </template>
                 </div>
               </div>
             </div>
             <!--portlet-->
           </div>
           <!--col-->
-          <div class="col-lg-6">
+          <!-- TODO: Display Official Activities Here -->
+          <div class="col-lg-6" id="official-activities">
             <div class="portlet-box portlet-fullHeight border0 shadow-sm mb-30">
               <div class="portlet-header flex-row flex d-flex align-items-center b-b">
                 <div class="flex d-flex flex-column">
-                  <h3>Todo</h3>
+                  <h3>Official Activities</h3>
                 </div>
                 <div class="portlet-tools">
                   <ul class="nav">
@@ -444,6 +366,7 @@
         </div>-->
       </div>
     </div>
+    <!-- content end-->
     <footer class="content-footer bg-light b-t">
       <div class="d-flex flex align-items-center pl-15 pr-15">
         <div class="d-flex flex p-3 ml-auto">
@@ -470,11 +393,13 @@
 </style>
 
 <script>
+import { Hash } from "crypto";
+import Identicon from "identicon.js";
 import SmoothScroll from "smooth-scroll";
 
 // echarts
 import Echarts from "vue-echarts";
-// import 'echarts'
+// import 'echarts' // 全部引入
 import "echarts/lib/chart/bar"; // 柱状图
 import "echarts/lib/chart/pie"; // 饼图
 import "echarts/lib/chart/line"; // 折线图
@@ -512,7 +437,34 @@ export default {
         { value: 1, name: "马克思主义学院" },
         { value: 1, name: "中德工学院" },
         { value: 1, name: "国际卓越工程师学院" },
-        { value: 1, name: "其他/外校" }
+        { value: 1, name: "其他/外校" },
+        { value: 1, name: "未知" }
+      ],
+      userAccessData: [
+        {
+          id: "8e6aba6f-9e77-44a0-bd81-c7c281fac72d",
+          email: "admin@ecust-cic.com",
+          admin: true,
+          active: true,
+          register_time: "2019-10-23T12:49:20.606",
+          name: "admin",
+          student_number: null,
+          college: "信息科学与工程学院",
+          mobilephone: null,
+          qqnumber: null
+        },
+        {
+          id: "8e6aba6f-9e77-44a0-bd81-c7c281fac72d",
+          email: "yanyongyu@ecust-cic.com",
+          admin: true,
+          active: true,
+          register_time: "2019-10-23T12:49:20.606",
+          name: "yanyongyu",
+          student_number: 10182461,
+          college: "信息科学与工程学院",
+          mobilephone: 15214301298,
+          qqnumber: 3323077879
+        }
       ],
       userInfoInterval: null
     };
@@ -651,7 +603,19 @@ export default {
         color: "#4ea397",
         maskColor: "rgba(255, 255, 255, 0.4)"
       });
-      setTimeout(userActivity.hideLoading, 3000);
+      this.$ajax
+        .get("/api/admin/user-activity")
+        .then(res => {
+          if (res.data.ret === 0) {
+            this.userActivityData = res.data.data.access_times;
+            this.userRegisterData = res.data.data.register_num;
+          }
+          userActivity.hideLoading();
+        })
+        .catch(error => {
+          console.log(error);
+          userActivity.hideLoading();
+        });
     },
     userInfoLoad: function() {
       let userInfo = this.$refs.userInfo;
@@ -660,7 +624,125 @@ export default {
         color: "#4ea397",
         maskColor: "rgba(255, 255, 255, 0.4)"
       });
-      setTimeout(userInfo.hideLoading, 3000);
+      this.$ajax
+        .get("/api/admin/user-info")
+        .then(res => {
+          if (res.data.ret === 0) {
+            this.userInfoData = res.data.data.college_count;
+            let dataIndex = -1;
+            let pie = this.$refs.userInfo;
+            let dataLen = this.userInfoData.length;
+            if (this.userInfoInterval) {
+              window.clearInterval(this.userInfoInterval);
+            }
+            this.userInfoInterval = setInterval(() => {
+              pie.dispatchAction({
+                type: "downplay",
+                seriesIndex: 0,
+                dataIndex
+              });
+              dataIndex = (dataIndex + 1) % dataLen;
+              pie.dispatchAction({
+                type: "highlight",
+                seriesIndex: 0,
+                dataIndex
+              });
+              // 显示 tooltip
+              pie.dispatchAction({
+                type: "showTip",
+                seriesIndex: 0,
+                dataIndex
+              });
+            }, 1500);
+          }
+          userInfo.hideLoading();
+        })
+        .catch(error => {
+          console.log(error);
+          userInfo.hideLoading();
+        });
+    },
+    userAccessLoad: function() {
+      this.$ajax
+        .get("/api/admin/user-all")
+        .then(res => {
+          if (res.data.ret === 0) {
+            this.userInfoData = res.data.data.college_count;
+            for (let value of this.userAccessData) {
+              value.head = this.constructHead(value.name);
+            }
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    UserAllLoad: function() {
+      let userActivity = this.$refs.userActivity;
+      userActivity.showLoading({
+        text: "Loading...",
+        color: "#4ea397",
+        maskColor: "rgba(255, 255, 255, 0.4)"
+      });
+      let userInfo = this.$refs.userInfo;
+      userInfo.showLoading({
+        text: "Loading...",
+        color: "#4ea397",
+        maskColor: "rgba(255, 255, 255, 0.4)"
+      });
+
+      this.$ajax
+        .get("/api/admin/user-all")
+        .then(res => {
+          if (res.data.ret === 0) {
+            this.userActivityData = res.data.data.access_times;
+            this.userRegisterData = res.data.data.register_num;
+            this.userAccessData = res.data.data.access_users;
+            this.userInfoData = res.data.data.college_count;
+            for (let value of this.userAccessData) {
+              value.head = this.constructHead(value.name);
+            }
+            let dataIndex = -1;
+            let pie = this.$refs.userInfo;
+            let dataLen = this.userInfoData.length;
+            if (this.userInfoInterval) {
+              window.clearInterval(this.userInfoInterval);
+            }
+            this.userInfoInterval = setInterval(() => {
+              pie.dispatchAction({
+                type: "downplay",
+                seriesIndex: 0,
+                dataIndex
+              });
+              dataIndex = (dataIndex + 1) % dataLen;
+              pie.dispatchAction({
+                type: "highlight",
+                seriesIndex: 0,
+                dataIndex
+              });
+              // 显示 tooltip
+              pie.dispatchAction({
+                type: "showTip",
+                seriesIndex: 0,
+                dataIndex
+              });
+            }, 1500);
+          }
+
+          userActivity.hideLoading();
+          userInfo.hideLoading();
+        })
+        .catch(error => {
+          console.log(error);
+          userActivity.hideLoading();
+          userInfo.hideLoading();
+        });
+    },
+    constructHead: function(name) {
+      let hash = Hash("md5");
+      hash.update(name);
+      var imgData = new Identicon(hash.digest("hex"), 40).toString();
+      return "data:image/png+xml;base64," + imgData;
     }
   },
   mounted() {
@@ -670,28 +752,7 @@ export default {
       offset: 25
     });
 
-    let dataIndex = -1;
-    let pie = this.$refs.userInfo;
-    let dataLen = pie.options.series[0].data.length;
-    this.userInfoInterval = setInterval(() => {
-      pie.dispatchAction({
-        type: "downplay",
-        seriesIndex: 0,
-        dataIndex
-      });
-      dataIndex = (dataIndex + 1) % dataLen;
-      pie.dispatchAction({
-        type: "highlight",
-        seriesIndex: 0,
-        dataIndex
-      });
-      // 显示 tooltip
-      pie.dispatchAction({
-        type: "showTip",
-        seriesIndex: 0,
-        dataIndex
-      });
-    }, 1000);
+    this.UserAllLoad();
   },
   destroyed() {
     if (this.userInfoInterval) {
