@@ -32,7 +32,6 @@
         <div class="scan-list-wrapper row"></div>
       </div>
     </div>
-    <!-- TODO: Support Pause and Resume -->
     <button class="btn btn-info w-50" id="pause" @click="pauseSign">暂停</button>
     <button class="btn btn-info w-50" id="export" @click="exportExcel">导出excel</button>
     <button class="btn btn-info w-50" id="end" @click="closeWebsocket">关闭</button>
@@ -457,6 +456,8 @@ export default {
       $(".scan-list").removeAttr("style");
       $("#start").attr("style", "");
       $("#start").removeAttr("style");
+      $("#pause").attr("style", "");
+      $("#pause").removeAttr("style");
       $("#end").attr("style", "");
       $("#end").removeAttr("style");
     },
@@ -513,7 +514,7 @@ export default {
         <h5 class="card-title">${name}</h5>
       </div>
       `);
-      scan_list.append(card);
+      scan_list.prepend(card);
     },
     remove_child: function() {
       var scan_list = $(".scan-list-wrapper");
@@ -533,7 +534,7 @@ export default {
       var worksheet = XLSX.utils.aoa_to_sheet(data);
       var workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "签到列表");
-      XLSX.writeFile(workbook, "签到列表");
+      XLSX.writeFile(workbook, "签到列表.xlsx");
     }
   },
   mounted() {

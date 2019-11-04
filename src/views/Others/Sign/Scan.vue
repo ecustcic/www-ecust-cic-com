@@ -1,6 +1,7 @@
 <template>
   <div id="scan">
     <Modal :title="title" :text="text"></Modal>
+    <!-- <Modal title="Error" :text="text"></Modal> -->
   </div>
 </template>
 
@@ -34,12 +35,17 @@ export default {
           this.title = "Error";
           this.text = res.data.msg;
         }
-        $(`#${this.title}Modal`).modal("show");
+        this.$nextTick(() => {
+          $(`#${this.title}Modal`).modal("show");
+        });
       })
       // eslint-disable-next-line
       .catch(error => {
         this.title = "Error";
         this.text = "服务似乎暂时不可用呢！";
+        this.$nextTick(() => {
+          $(`#${this.title}Modal`).modal("show");
+        });
       });
   }
 };
