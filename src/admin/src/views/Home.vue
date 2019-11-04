@@ -26,7 +26,6 @@
                 </div>
                 <a class="has-arrow" href="javascript:void(0)" aria-expanded="true">
                   <span class="nav-text">Dashboard&nbsp;</span>
-                  <span class="badge text-danger-light badge-danger ml-1 badge-text anibadge">Hot</span>
                 </a>
                 <ul id="dashboard">
                   <li class="mm-active">
@@ -49,10 +48,21 @@
                     <span class="nav-thumbnail">05</span>
                     <a data-scroll href="/admin/dashboard#official-activities">Official Activities</a>
                   </li>
-                  <!-- <router-link tag="li" to="/dashboard2">
-                    <span class="nav-thumbnail">03</span>
-                    <a>Dashboard 2</a>
-                  </router-link>-->
+                </ul>
+              </li>
+              <li>
+                <div class="nav-thumbnail">
+                  <i class="fa fa-tachometer-alt"></i>
+                </div>
+                <a class="has-arrow" href="javascript:void(0)" aria-expanded="true">
+                  <span class="nav-text">Activity&nbsp;</span>
+                  <span class="badge text-danger-light badge-danger ml-1 badge-text anibadge">Hot</span>
+                </a>
+                <ul id="activity">
+                  <li>
+                    <span class="nav-thumbnail">01</span>
+                    <a data-scroll href="/admin/activity/release">Release</a>
+                  </li>
                 </ul>
               </li>
             </ul>

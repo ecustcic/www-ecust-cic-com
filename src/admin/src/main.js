@@ -33,6 +33,11 @@ import './assets/fontawesome/js/all.min.js'
 // line-icons
 import './assets/css/line-icons.css'
 
+// mavon-editor
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+Vue.use(mavonEditor)
+
 // axios
 import qs from 'qs'
 import axios from 'axios'

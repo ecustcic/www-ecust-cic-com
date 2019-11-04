@@ -6,6 +6,9 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import DefaultDash from './views/DashBoard/Default.vue'
 
+import Activity from './views/Activity/Activity.vue'
+import Release from './views/Activity/Release.vue'
+
 import Forbidden from './views/Forbidden.vue'
 
 Vue.use(Router)
@@ -39,6 +42,21 @@ const adminRoutes = [
         meta: {
           title: 'DashBoard'
         }
+      },
+      {
+        path: 'activity',
+        name: 'activity',
+        component: Activity,
+        children: [
+          {
+            path: 'release',
+            name: 'release',
+            component: Release,
+            meta: {
+              title: 'Activity Release'
+            }
+          }
+        ]
       }
     ]
   },
