@@ -60,6 +60,13 @@
           </router-link>
         </div>
       </div>
+      <hr />
+      <div class="tlt h3">
+        <ul class="texts">
+          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">活动更新</li>
+          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">更新于2019年11月4日</li>
+        </ul>
+      </div>
       <template v-for="(item, index) in this.news">
         <div :key="index">
           <div class="row">
