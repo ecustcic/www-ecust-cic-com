@@ -4,6 +4,9 @@ import Router from 'vue-router'
 // 主页
 import Home from '@/views/Home.vue'
 
+// 活动
+import Activity from '@/views/Activity.vue'
+
 // 技术
 // import Tech from '@/views/Tech.vue'
 
@@ -42,10 +45,15 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
+      component: Home,
       meta: {
         title: '华理计算机信息交流协会'
-      },
-      component: Home
+      }
+    },
+    {
+      path: '/activity/:id',
+      name: 'activity',
+      component: Activity
     },
     // 技术
     // {

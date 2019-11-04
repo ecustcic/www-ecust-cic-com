@@ -73,7 +73,7 @@
       </div>
       <div class="text-muted lead">更新时间：2019年11月4日</div>
       <div class="text-muted">
-        <router-link to="/#">查看更多>></router-link>
+        <a href="#">查看更多>></a>
       </div>
 
       <hr />
@@ -82,16 +82,15 @@
           <div :key="index">
             <div class="col-md-4 mb-3">
               <div class="newsItem">
-                <router-link class="tdn" :to="item.link">
-                <img class="newsImg" :src="item.img">
-                </router-link>
+                <a class="tdn" :href="`/activity/${item.id}`">
+                  <img class="newsImg" :src="item.img" />
+                </a>
                 <div class="newsText">
-                  <router-link class="tdn" :to="item.link">
-                  {{item.title}}</router-link>
+                  <a class="tdn" :href="`/activity/${item.id}`">{{item.title}}</a>
                   <br />
                 </div>
-                <div class="left">{{item.date}}</div> 
-                <div class="right">{{item.author}}</div> 
+                <div class="left">{{item.date}}</div>
+                <div class="right">{{item.author}}</div>
               </div>
             </div>
           </div>
@@ -141,7 +140,6 @@
 .newsText {
   font-size: 1em;
   padding: 0.3rem 0.7rem 0.3rem;
-    
 }
 .left {
   left: 0.5rem;
@@ -155,7 +153,6 @@
   position: absolute;
   color: #6c757d;
 }
-
 </style>
 
 <script>
@@ -190,32 +187,32 @@ export default {
       ],
       news: [
         {
-          img: require("@/assets/img/News/1.jpg"),
+          img: require("@/assets/img/Activity/1.jpg"),
           title: "本学期第一次义诊顺利举行！",
           date: "2019/10/31",
           author: "服务部",
-          link: "/#"
+          id: "1"
         },
         {
-          img: require("@/assets/img/News/2.jpg"),
+          img: require("@/assets/img/Activity/2.jpg"),
           title: "害，没头发了呀",
           date: "2019/10/31",
           author: "严永煜",
-          link: "/#"
+          id: "2"
         },
         {
-          img: require("@/assets/img/News/3.jpg"),
+          img: require("@/assets/img/Activity/3.jpg"),
           title: "我想谈恋爱",
           date: "2019/11/11",
           author: "程序员",
-          link: "/#"
+          id: "3"
         },
         {
-          img: require("@/assets/img/News/4.jpg"),
+          img: require("@/assets/img/Activity/4.jpg"),
           title: "女生节牛逼！",
           date: "2019/10/31",
           author: "CIC全员",
-          link: "/#"
+          id: "4"
         }
       ]
     };
