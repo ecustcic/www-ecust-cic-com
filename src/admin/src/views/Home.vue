@@ -20,15 +20,13 @@
                 Main
                 <span class="nav-thumbnail">MAIN</span>
               </li>
-              <li class="mm-active">
-                <div class="nav-thumbnail">
-                  <i class="fa fa-tachometer-alt"></i>
-                </div>
+              <li id="dashboard">
+                <i class="nav-thumbnail fa fa-tachometer"></i>
                 <a class="has-arrow" href="javascript:void(0)" aria-expanded="true">
                   <span class="nav-text">Dashboard&nbsp;</span>
                 </a>
-                <ul id="dashboard">
-                  <li class="mm-active">
+                <ul>
+                  <li>
                     <span class="nav-thumbnail">01</span>
                     <a data-scroll href="/admin/dashboard#">Top</a>
                   </li>
@@ -50,15 +48,15 @@
                   </li>
                 </ul>
               </li>
-              <li>
+              <li id="activity">
                 <div class="nav-thumbnail">
-                  <i class="fa fa-tachometer-alt"></i>
+                  <i class="fa fa-image"></i>
                 </div>
-                <a class="has-arrow" href="javascript:void(0)" aria-expanded="true">
+                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
                   <span class="nav-text">Activity&nbsp;</span>
                   <span class="badge text-danger-light badge-danger ml-1 badge-text anibadge">Hot</span>
                 </a>
-                <ul id="activity">
+                <ul>
                   <li>
                     <span class="nav-thumbnail">01</span>
                     <a data-scroll href="/admin/activity/release">Release</a>

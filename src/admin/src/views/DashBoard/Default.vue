@@ -7,7 +7,7 @@
             <div class="list">
               <div class="list-item pl-0">
                 <div class="list-thumb ml-0 mr-3 pr-3 b-r text-muted">
-                  <i class="fas fa-home"></i>
+                  <i class="fa fa-home"></i>
                 </div>
                 <div class="list-body">
                   <div class="list-title fs-2x">
@@ -25,7 +25,7 @@
               <ol class="breadcrumb no-padding bg-trans mb-0">
                 <li class="breadcrumb-item">
                   <a href="/">
-                    <i class="fas fa-home mr-2 fs14"></i>
+                    <i class="fa fa-home mr-2 fs14"></i>
                   </a>
                 </li>
                 <li class="breadcrumb-item">Admin</li>
@@ -44,7 +44,7 @@
             <div class="list bg-white shadow-sm rounded mb-30">
               <a href="//weibo.com/u/2130417982" class="list-item" target="_blank">
                 <div class="list-thumb avatar si-colored-facebook text-white rounded avatar40">
-                  <i class="fab fa-weibo"></i>
+                  <i class="fa fa-weibo"></i>
                 </div>
                 <div class="list-body text-right">
                   <span class="list-title fs-1x">521</span>
@@ -58,7 +58,7 @@
             <div class="list bg-white shadow-sm rounded mb-30">
               <a href="//mp.weixin.qq.com/" class="list-item" target="_blank">
                 <div class="list-thumb avatar si-colored-twitter text-white rounded avatar40">
-                  <i class="fab fa-weixin"></i>
+                  <i class="fa fa-weixin"></i>
                 </div>
                 <div class="list-body text-right">
                   <span class="list-title fs-1x">1822</span>
@@ -72,7 +72,7 @@
             <div class="list bg-white shadow-sm rounded">
               <a href="//connect.qq.com" class="list-item" target="_blank">
                 <div class="list-thumb avatar bg-danger text-white rounded avatar40">
-                  <i class="fab fa-qq"></i>
+                  <i class="fa fa-qq"></i>
                 </div>
                 <div class="list-body text-right">
                   <span class="list-title fs-1x">100+</span>
@@ -86,7 +86,7 @@
             <div class="list bg-white shadow-sm rounded mb-30">
               <a href="//github.com/ecustcic" class="list-item" target="_blank">
                 <div class="list-thumb avatar bg-success text-white rounded avatar40">
-                  <i class="fab fa-github"></i>
+                  <i class="fa fa-github"></i>
                 </div>
                 <div class="list-body text-right">
                   <span class="list-title fs-1x">10</span>
@@ -109,7 +109,7 @@
                   <ul class="nav">
                     <li class="nav-item">
                       <a href="javascript:void(0)" @click="userActivityLoad" class="nav-link">
-                        <i class="fa fa-sync"></i>
+                        <i class="fa fa-refresh"></i>
                       </a>
                     </li>
                   </ul>
@@ -167,7 +167,7 @@
                   <ul class="nav">
                     <li class="nav-item">
                       <a href="javascript:void(0)" @click="userInfoLoad" class="nav-link">
-                        <i class="fa fa-sync"></i>
+                        <i class="fa fa-refresh"></i>
                       </a>
                     </li>
                   </ul>
@@ -196,7 +196,7 @@
                   <ul class="nav">
                     <li class="nav-item">
                       <a href="javascript:void(0)" @click="userAccessLoad" class="nav-link">
-                        <i class="fa fa-sync"></i>
+                        <i class="fa fa-refresh"></i>
                       </a>
                     </li>
                   </ul>
@@ -213,9 +213,7 @@
                         </span>-->
                         <span class="list-title">{{ item.name }}</span>
                         <span class="list-content pt-1">
-                          <span class="text-muted mr-1 fs12">
-                            <i class="fas fa-envelope"></i>
-                          </span>
+                          <i class="text-muted mr-1 fs12 fa fa-envelope"></i>
                           {{ item.email }}
                         </span>
                       </div>
@@ -238,7 +236,7 @@
                   <ul class="nav">
                     <li class="nav-item">
                       <a href="javascript:void(0)" class="nav-link">
-                        <i class="fa fa-sync"></i>
+                        <i class="fa fa-refresh"></i>
                       </a>
                     </li>
                   </ul>
@@ -393,6 +391,7 @@
 </style>
 
 <script>
+import $ from "jquery";
 import { Hash } from "crypto";
 import Identicon from "identicon.js";
 import SmoothScroll from "smooth-scroll";
@@ -746,6 +745,7 @@ export default {
     }
   },
   mounted() {
+    $("#dashboard").addClass("mm-active");
     new SmoothScroll("[data-scroll]", {
       speed: 2000,
       easing: "easeInOutCubic",
@@ -755,6 +755,7 @@ export default {
     this.UserAllLoad();
   },
   destroyed() {
+    $("#dashboard").removeClass("mm-active");
     if (this.userInfoInterval) {
       window.clearInterval(this.userInfoInterval);
     }

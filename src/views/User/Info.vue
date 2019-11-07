@@ -87,35 +87,33 @@
         </span>
       </div>
       <div class="col-md-4">
-        <div class="form-group mb-0">
-          <select
-            id="studentCollege"
-            name="studentCollege"
-            class="form-control selectpicker show-tick"
-            title="学院"
-            v-model="studentCollege"
-          >
-            <option>化工学院</option>
-            <option>化学与分子工程学院</option>
-            <option>生物工程学院</option>
-            <option>药学院</option>
-            <option>材料科学与工程学院</option>
-            <option>信息科学与工程学院</option>
-            <option>机械与动力工程学院</option>
-            <option>资源与环境工程学院</option>
-            <option>商学院</option>
-            <option>社会与公共管理学院</option>
-            <option>理学院</option>
-            <option>艺术设计与传媒学院</option>
-            <option>外国语学院</option>
-            <option>法学院</option>
-            <option>体育科学与工程学院</option>
-            <option>马克思主义学院</option>
-            <option>中德工学院</option>
-            <option>国际卓越工程师学院</option>
-            <option>其他/外校</option>
-          </select>
-        </div>
+        <select
+          id="studentCollege"
+          name="studentCollege"
+          class="form-control selectpicker show-tick"
+          title="学院"
+          v-model="studentCollege"
+        >
+          <option>化工学院</option>
+          <option>化学与分子工程学院</option>
+          <option>生物工程学院</option>
+          <option>药学院</option>
+          <option>材料科学与工程学院</option>
+          <option>信息科学与工程学院</option>
+          <option>机械与动力工程学院</option>
+          <option>资源与环境工程学院</option>
+          <option>商学院</option>
+          <option>社会与公共管理学院</option>
+          <option>理学院</option>
+          <option>艺术设计与传媒学院</option>
+          <option>外国语学院</option>
+          <option>法学院</option>
+          <option>体育科学与工程学院</option>
+          <option>马克思主义学院</option>
+          <option>中德工学院</option>
+          <option>国际卓越工程师学院</option>
+          <option>其他/外校</option>
+        </select>
       </div>
     </div>
     <div class="row mb-2">

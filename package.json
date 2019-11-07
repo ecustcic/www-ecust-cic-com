@@ -18,6 +18,7 @@
     "identicon.js": "^2.3.3",
     "jquery": "^3.4.1",
     "loaders.css": "^0.1.2",
+    "password-validator": "^5.0.2",
     "popper.js": "^1.15.0",
     "qs": "^6.9.0",
     "textillate": "^0.4.1",

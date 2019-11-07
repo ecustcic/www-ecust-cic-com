@@ -132,10 +132,8 @@
       </div>
     </nav>
 
-    <div class="view">
-      <!-- router页面 -->
-      <router-view />
-    </div>
+    <!-- router页面 -->
+    <router-view />
 
     <!-- 页尾 -->
     <footer class="footer bg-light">
@@ -208,6 +206,10 @@ body,
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
+}
+.footer {
+  width: 100%;
 }
 
 .navbar .container,
@@ -395,20 +397,10 @@ import { Hash } from "crypto";
 export default {
   data() {
     return {
-      head: null,
-      screenWidth: document.documentElement.clientWidth,
-      screenHeight: document.documentElement.clientHeight
+      head: null
     };
   },
   methods: {
-    windowsResize: function() {
-      const height =
-        $(window).innerHeight() -
-        // $(".navbar").outerHeight(true) -
-        $(".footer").outerHeight(true) -
-        21;
-      $(".view").css("min-height", height + "px");
-    },
     showHead: function() {
       if (this.token) {
         let hash = Hash("md5");
@@ -464,28 +456,15 @@ export default {
 
     // navbar
     $(document).on("scroll", function() {
-      if ($(document).scrollTop() > 150) {
+      if ($(document).scrollTop() > 120) {
         $(".navbar-sticky").addClass("fixed-top");
       } else {
         $(".navbar-sticky").removeClass("fixed-top");
       }
     });
     $('[data-toggle="dropdown"]').bootstrapDropdownHover();
-
-    // resize
-    this.windowsResize();
-    var that = this;
-    window.onresize = function() {
-      // 定义窗口大小变更通知事件
-      that.screenWidth = document.documentElement.clientWidth; //窗口宽度
-      that.screenHeight = document.documentElement.clientHeight; //窗口高度
-    };
   },
   watch: {
-    // eslint-disable-next-line
-    screenHeight: function(val) {
-      this.windowsResize();
-    },
     token: function() {
       this.showHead();
       this.$nextTick(function() {

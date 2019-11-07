@@ -5875,9 +5875,9 @@ Metis menu
 }
 
 .metisMenu > li a.has-arrow:after {
-  font-family: "Font Awesome 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
-  content: "\f054";
+  content: "\f105";
   position: absolute;
   right: 10px;
   top: 50%;
@@ -5887,7 +5887,7 @@ Metis menu
   height: 10px;
   border: none;
   line-height: 10px;
-  font-size: 10px;
+  font-size: 14px;
   text-align: center;
   transform: none !important;
   transform-origin: center !important;
@@ -5902,7 +5902,7 @@ Metis menu
   z-index: 2;
   right: 14px;
   top: 0px;
-  font-size: 15px;
+  font-size: 17px;
   text-align: center;
 }
 
@@ -6411,6 +6411,10 @@ Template dropdown styles
   line-height: 16px;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  background-color: aqua;
+}
+
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:focus {
   background-color: #f3f8fa;
@@ -6513,8 +6517,8 @@ Template dropdown styles
   height: 10px;
   top: 3px;
   border: 0px;
-  content: "\f0d7";
-  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+  font-family: "FontAwesome";
   font-weight: 900;
   text-align: center;
 }

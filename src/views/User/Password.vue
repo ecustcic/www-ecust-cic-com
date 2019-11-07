@@ -27,7 +27,7 @@
         v-show="errors.has('oldPassword')"
       >请输入正确的密码</div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-1">
       <label
         class="form-control col-md-2 offset-md-2 mb-0"
         onselectstart="return false;"
@@ -40,9 +40,8 @@
           name="newPassword"
           class="form-control"
           placeholder="请输入新密码"
-          @blur="check('newPassword')"
+          @input="checkPassword()"
           v-model="newPassword"
-          v-validate="'required|min:6'"
         />
         <div class="input-group-append">
           <button
@@ -55,11 +54,25 @@
           </button>
         </div>
       </div>
-      <div
+      <!-- <div
         class="form-control alert-danger col-md-3"
         role="alert"
         v-show="errors.has('newPassword')"
-      >请填写至少6位密码</div>
+      >请填写至少6位密码</div>-->
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-1 offset-md-5">
+        <span class="badge anibadge" id="lowercase">Lowwer</span>
+      </div>
+      <div class="col-md-1">
+        <span class="badge anibadge" id="uppercase">Upper</span>
+      </div>
+      <div class="col-md-1">
+        <span class="badge anibadge" id="digits">Digit</span>
+      </div>
+      <div class="col-md-1">
+        <span class="badge anibadge" id="min">&ge;8Letters</span>
+      </div>
     </div>
     <div class="row mb-5">
       <label
@@ -135,10 +148,105 @@
 #password {
   background: #dedede;
 }
+
+.badge {
+  width: 100%;
+  height: auto;
+  line-height: 1.5;
+  padding: 0.25rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  position: relative;
+}
+.badge.anibadge:before,
+.badge.anibadge:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+.badge.anibadge:after {
+  z-index: 10;
+  background-color: 5px solid rgba(242, 246, 248, 0.4);
+  animation: not-blink 2s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  -webkit-animation: not-blink 2s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+    infinite;
+}
+.badge.anibadge.badge-danger:after {
+  background-color: rgba(250, 98, 94, 0.75);
+}
+.badge.anibadge.badge-success:after {
+  background-color: rgba(148, 223, 74, 0.75);
+}
+.badge.anibadge.badge-warning:after {
+  background-color: rgba(243, 215, 104, 0.75);
+}
+.badge.anibadge.badge-info:after {
+  background-color: rgba(134, 212, 245, 0.75);
+}
+.badge.anibadge.badge-teal:after {
+  background-color: rgba(44, 221, 190, 0.75);
+}
+.badge.anibadge.badge-purple:after {
+  background-color: rgba(169, 94, 199, 0.75);
+}
+.badge.anibadge.badge-primary:after {
+  background-color: rgba(0, 132, 255, 0.75);
+}
+.badge.anibadge.badge-dark:after {
+  background-color: rgba(44, 45, 58, 0.75);
+}
+.badge.anibadge.badge-pink:after {
+  background-color: rgba(247, 125, 194, 0.75);
+}
+.badge.anibadge.badge-light:after {
+  background-color: #f3f8fa;
+}
+@keyframes not-blink {
+  0% {
+    transform: scale(1);
+    -wekbit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.25);
+    -wekbit-transform: scale(1.25);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.5);
+    -wekbit-transform: scale(1.5);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes not-blink {
+  0% {
+    transform: scale(1);
+    -wekbit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.25);
+    -wekbit-transform: scale(1.25);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.5);
+    -wekbit-transform: scale(1.5);
+    opacity: 0;
+  }
+}
 </style>
 
 <script>
 import $ from "jquery";
+import passwordValidator from "password-validator";
 import AnimWords from "@/components/AnimWords.vue";
 export default {
   name: "password",
@@ -149,31 +257,54 @@ export default {
     return {
       oldPassword: "",
       newPassword: "",
-      newPasswordAgain: ""
+      newPasswordAgain: "",
+      schema: null
     };
   },
   methods: {
+    disablePopover: function() {
+      $('[data-toggle="popover"]').popover("hide");
+      $('[data-toggle="popover"]').popover("disable");
+    },
     logout: function() {
       this.$cookies.remove("ECUST-CIC");
       this.$store.commit("logout");
       this.$router.go(0);
     },
     check: function(name) {
-      var target = document.getElementsByName(name)[0];
-      target.classList.remove("is-valid");
-      target.classList.remove("is-invalid");
-      target.classList.add(
+      $(`[name='${name}']`).removeClass("is-valid");
+      $(`[name='${name}']`).removeClass("is-invalid");
+      $(`[name='${name}']`).addClass(
         !this[name] | this.errors.has(name) ? "is-invalid" : "is-valid"
       );
     },
+    checkPassword: function() {
+      $(".badge").removeClass("badge-danger");
+      $(".badge").addClass("badge-success");
+      $("[name='newPassword']").removeClass("is-valid");
+      $("[name='newPassword']").removeClass("is-invalid");
+      if (!this.schema.validate(this.newPassword)) {
+        $("[name='newPassword']").addClass("is-invalid");
+        let errors = this.schema.validate(this.newPassword, { list: true });
+        for (let item of errors) {
+          $(`#${item}`).removeClass("badge-success");
+          $(`#${item}`).addClass("badge-danger");
+        }
+        return false;
+      } else {
+        $("[name='newPassword']").addClass("is-valid");
+        return true;
+      }
+    },
     checkAll: function() {
-      var targets = ["oldPassword", "newPassword", "newPasswordAgain"];
+      var targets = ["oldPassword", "newPasswordAgain"];
       for (var index in targets) {
         this.check(targets[index]);
       }
     },
     formValidate: function(func) {
       this.checkAll();
+      if (!this.checkPassword()) return;
       this.$validator.validateAll().then(result => {
         if (result) {
           // eslint-disable-next-line
@@ -230,6 +361,24 @@ export default {
           });
       }
     }
+  },
+  mounted() {
+    this.disablePopover();
+    this.schema = new passwordValidator();
+    this.schema
+      .is()
+      .min(8) // Minimum length 8
+      .is()
+      .max(20) // Maximum length 20
+      .has()
+      .uppercase() // Must have uppercase letters
+      .has()
+      .lowercase() // Must have lowercase letters
+      .has()
+      .digits() // Must have digits
+      .has()
+      .not()
+      .spaces();
   }
 };
 </script>

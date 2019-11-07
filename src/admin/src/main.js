@@ -18,6 +18,9 @@ window.$ = jQuery
 import 'popper.js'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+// bootstrap-select
+import 'bootstrap-select/dist/js/bootstrap-select.min.js'
+import 'bootstrap-select/dist/css/bootstrap-select.min.css'
 // metismenu
 import 'metismenu/dist/metisMenu.min.css'
 import 'metismenu/dist/metisMenu.min.js'
@@ -27,8 +30,9 @@ import 'jquery-slimscroll/jquery.slimscroll.min.js'
 import 'smooth-scroll/dist/smooth-scroll.polyfills.min.js'
 
 // font-awesome
-import './assets/fontawesome/css/all.min.css'
-import './assets/fontawesome/js/all.min.js'
+import 'font-awesome/css/font-awesome.min.css'
+// import './assets/fontawesome/css/all.min.css'
+// import './assets/fontawesome/js/all.min.js'
 
 // line-icons
 import './assets/css/line-icons.css'
