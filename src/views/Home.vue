@@ -68,7 +68,7 @@
       <div class="tlt h3">
         <ul class="texts">
           <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">活动更新</li>
-          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">NEWS</li>
+          <li data-in-effect="fadeInLeft" data-out-effect="fadeOut">ACTIVITIES</li>
         </ul>
       </div>
       <div class="text-muted lead">更新时间：2019年11月4日</div>
@@ -103,7 +103,7 @@
 <style scoped>
 .media {
   padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 125);
+  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
 .tdn {
