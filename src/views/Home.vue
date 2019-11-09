@@ -77,21 +77,19 @@
       </div>
 
       <hr />
-      <div class="row newsContain">
-        <template v-for="(item, index) in this.news">
-          <div :key="index">
-            <div class="col-md-4 mb-3">
-              <div class="newsItem">
-                <a class="tdn" :href="`/activity/${item.id}`">
-                  <img class="newsImg" :src="item.img" />
-                </a>
-                <div class="newsText">
-                  <a class="tdn" :href="`/activity/${item.id}`">{{item.title}}</a>
-                  <br />
-                </div>
-                <div class="left">{{item.date}}</div>
-                <div class="right">{{item.author}}</div>
+      <div class="row">
+        <template v-for="(item, index) in this.activities">
+          <div class="col-md-4 mb-3" :key="index">
+            <div class="newsItem hover">
+              <a class="tdn" :href="`/activity/${item.id}`">
+                <img class="newsImg" :src="item.img" />
+              </a>
+              <div class="newsText">
+                <a class="tdn" :href="`/activity/${item.id}`">{{item.title}}</a>
+                <br />
               </div>
+              <div class="left">{{item.date}}</div>
+              <div class="right">{{item.author}}</div>
             </div>
           </div>
         </template>
@@ -118,12 +116,6 @@
   box-shadow: 0 0 6px #999;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
-}
-.newsContain {
-  margin-left: 0%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 .newsItem {
   width: 300px;
@@ -185,7 +177,7 @@ export default {
           subTitle: "ECUST E-Sports, Go Beyond the Game"
         }
       ],
-      news: [
+      activities: [
         {
           img: require("@/assets/img/Activity/1.jpg"),
           title: "本学期第一次义诊顺利举行！",

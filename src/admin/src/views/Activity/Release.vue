@@ -39,9 +39,9 @@
     </div>
     <div class="page-content d-flex flex">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row mb-30">
           <div class="col-lg-12">
-            <div class="portlet-box border0 shadow-sm mb-30">
+            <div class="portlet-box border0 shadow-sm">
               <div class="portlet-header flex-row flex d-flex align-items-center b-b">
                 <div class="flex d-flex flex-column">
                   <h3>Upload Cover</h3>
@@ -62,7 +62,7 @@
                   id="upload"
                   ref="cover"
                   style="display:none"
-                  accept="image/jpeg, image/png"
+                  accept="image/jpeg, image/png, image/gif"
                   @change="processUpload"
                 />
                 <template v-if="cover">
@@ -192,7 +192,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row mb-30">
           <div class="col-lg-12">
             <div class="portlet-box border0 shadow-sm">
               <div class="portlet-header flex-row flex d-flex align-items-center b-b">
@@ -202,7 +202,7 @@
                 <div class="portlet-tools">
                   <ul class="nav">
                     <li class="nav-item">
-                      <a href="javascript:void(0)" class="nav-link">
+                      <a href="javascript:void(0)" class="nav-link" @click="clearContent">
                         <i class="fa fa-trash-o mr-1"></i>Clear
                       </a>
                     </li>
@@ -218,7 +218,6 @@
                       </div>
                       <flat-pickr
                         v-model="date"
-                        :config="config"
                         class="form-control"
                         placeholder="Select date"
                         name="date"
@@ -231,7 +230,7 @@
                         <span class="input-group-text">Author</span>
                       </div>
                       <select class="form-control selectpicker" v-model="author">
-                        <option :value="name">{{ name }}</option>
+                        <option value disabled>Selet An Author</option>
                         <option value="技术部">技术部</option>
                         <option value="服务部">服务部</option>
                         <option value="组宣部">组宣部</option>
@@ -241,11 +240,28 @@
                     </div>
                   </div>
                 </div>
-                <mavon-editor v-model="value"></mavon-editor>
+                <mavon-editor
+                  v-model="value"
+                  :imageFilter="imgFilter"
+                  @imgAdd="addImg"
+                  @imgDel="delImg"
+                  ref="md"
+                ></mavon-editor>
               </div>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="btn-toolbar justify-content-center">
+              <button
+                class="btn btn-gradient btn-gradient-primary btn-lg w-50"
+                @click="checkRelease(releaseActivity)"
+              >Release</button>
+            </div>
+          </div>
+        </div>
+        <Modal title="Error" :text="errorText"></Modal>
       </div>
     </div>
     <footer class="content-footer bg-light b-t">
@@ -301,14 +317,18 @@
 
 <script>
 import $ from "jquery";
+import Modal from "@/components/Modal.vue";
+// vue-cropper
 import { VueCropper } from "vue-cropper";
-import flatPickr from "vue-flatpickr-component";
+// flatpickr
+import FlatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/dark.css";
 export default {
   name: "release",
   components: {
-    flatPickr,
+    Modal,
+    FlatPickr,
     VueCropper
   },
   data() {
@@ -316,10 +336,12 @@ export default {
       // activity data
       author: "",
       date: null,
-      value: "",
+      value: "*[^_^]: 标题start\n# 这里是标题\n*[^_^]: 标题end",
+      imgs: {},
 
       // cover data
       cover: "",
+      errorText: "",
       uploaded: false,
       preview: {},
       previewStyle: {},
@@ -356,7 +378,25 @@ export default {
       };
       this.preview = data;
     },
+    imgFilter: function(file) {
+      let allowType = ".png|.gif|.jpg|.jpeg";
+      let fileType = file.name
+        .substring(file.name.lastIndexOf("."))
+        .toLowerCase();
+      if (allowType.indexOf(fileType + "|") == "-1") {
+        this.errorText = "请上传jpg、png、gif格式图片！";
+        $("#ErrorModal").modal("show");
+        return false;
+      } else if (file.size > 2 * 1024 * 1024) {
+        this.errorText = "图片过大。请上传2M以内图片！";
+        $("#ErrorModal").modal("show");
+        return false;
+      }
+      return true;
+    },
     processUpload: function() {
+      let file = this.$refs.cover.files[0];
+      if (!this.imgFilter(file)) return;
       this.cover = "";
       this.uploaded = true;
       var that = this;
@@ -364,7 +404,7 @@ export default {
       reader.onload = function(e) {
         that.cropper.cover = e.target.result;
       };
-      reader.readAsDataURL(this.$refs.cover.files[0]);
+      reader.readAsDataURL(file);
     },
     scaleCover: function(num) {
       num = num || 1;
@@ -419,6 +459,100 @@ export default {
       this.cover = "";
       this.uploaded = false;
       this.cropper.cover = "";
+    },
+
+    // mavonEditor
+    addImg: function(pos, $file) {
+      this.imgs[pos] = $file;
+    },
+    delImg: function(pos) {
+      delete this.imgs[pos];
+    },
+    clearContent: function() {
+      this.date = "";
+      this.author = "";
+      $(".selectpicker").selectpicker("val", "");
+      this.value = "*[^_^]: 标题start\n# 这里是标题\n*[^_^]: 标题end";
+      for (let img in this.imgs) {
+        this.$refs.md.$refs.toolbar_left.$imgDelByFilename(this.imgs[img].name);
+      }
+      this.imgs = {};
+    },
+
+    dataURLToFile: function(dataurl, filename) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      console.log(mime);
+      return new File([u8arr], filename, { type: mime });
+    },
+    checkRelease: function(callback) {
+      // if (!this.cover || !this.date || !this.author || !this.value) {
+      //   this.errorText = "请完整填写信息！";
+      //   $("#ErrorModal").modal("show");
+      //   return;
+      // }
+      // eslint-disable-next-line
+      var captcha = new TencentCaptcha(this.globals.TencentAPPID, callback);
+      captcha.show();
+    },
+    releaseActivity: function(res) {
+      if (res.ret === 0) {
+        // upload images
+        if (!$.isEmptyObject(this.imgs)) {
+          var form = new FormData();
+          form.append("ticket", res.ticket);
+          form.append("randstr", res.randstr);
+          for (var _img in this.imgs) {
+            form.append(_img, this.imgs[_img]);
+          }
+          this.$ajax({
+            url: "/api/admin/upload-images",
+            method: "post",
+            data: form,
+            headers: { "Content-Type": "multipart/form-data" }
+          })
+            .then(res => {
+              if (res.data.ret === 0) {
+                for (var img in res.data.data) {
+                  this.$refs.md.$img2Url(img, res.data.data[img]);
+                }
+              } else {
+                this.errorText = res.data.msg;
+                $("#ErrorModal").modal("show");
+              }
+            })
+            .catch(error => {
+              console.log(error);
+              this.errorText = "服务暂时不可用呢，请稍后再试。。。";
+              $("#ErrorModal").modal("show");
+            });
+        }
+
+        // upload activity content
+        var form2 = new FormData();
+        form2.append("cover", this.dataURLToFile(this.cover, "cover"));
+        form2.append("date", this.date);
+        form2.append("author", this.author);
+        form2.append("content", this.value);
+        form2.append("ticket", res.ticket);
+        form2.append("randstr", res.randstr);
+        this.$ajax({
+          url: "/api/admin/upload-activity",
+          method: "post",
+          data: form2,
+          headers: { "Content-Type": "multipart/form-data" }
+        }).then(res => {
+          if (res.data.ret === 0) {
+            console.log(res);
+          }
+        });
+      }
     }
   },
   mounted() {

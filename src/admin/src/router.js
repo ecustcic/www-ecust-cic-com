@@ -3,13 +3,14 @@ import store from './store'
 import axios from 'axios'
 import Router from 'vue-router'
 
-import Home from './views/Home.vue'
-import DefaultDash from './views/DashBoard/Default.vue'
+import Home from '@/views/Home.vue'
+import DefaultDash from '@/views/DashBoard/Default.vue'
 
-import Activity from './views/Activity/Activity.vue'
-import Release from './views/Activity/Release.vue'
+import Activity from '@/views/Activity/Activity.vue'
+import Release from '@/views/Activity/Release.vue'
+import Overview from '@/views/Activity/Overview.vue'
 
-import Forbidden from './views/Forbidden.vue'
+import Forbidden from '@/views/Forbidden.vue'
 
 Vue.use(Router)
 
@@ -54,6 +55,14 @@ const adminRoutes = [
             component: Release,
             meta: {
               title: 'Activity Release'
+            }
+          },
+          {
+            path: 'overview',
+            name: 'overview',
+            component: Overview,
+            meta: {
+              title: 'Activity OverView'
             }
           }
         ]

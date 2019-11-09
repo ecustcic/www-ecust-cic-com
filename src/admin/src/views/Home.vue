@@ -61,6 +61,10 @@
                     <span class="nav-thumbnail">01</span>
                     <a data-scroll href="/admin/activity/release">Release</a>
                   </li>
+                  <li>
+                    <span class="nav-thumbnail">02</span>
+                    <a data-scroll href="/admin/activity/overview">Overview</a>
+                  </li>
                 </ul>
               </li>
             </ul>

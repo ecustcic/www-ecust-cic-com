@@ -6559,7 +6559,7 @@ li.show .dropdown-toggle:after {
 
 @media (min-width: 992px) {
   .dropdown-menu {
-    display: block;
+    /* display: block; */
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease-in-out;

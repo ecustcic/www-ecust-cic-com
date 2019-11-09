@@ -35,7 +35,7 @@ import 'font-awesome/css/font-awesome.min.css'
 // import './assets/fontawesome/js/all.min.js'
 
 // line-icons
-import './assets/css/line-icons.css'
+import '@/assets/css/line-icons.css'
 
 // mavon-editor
 import mavonEditor from 'mavon-editor'
@@ -43,7 +43,7 @@ import 'mavon-editor/dist/css/index.css'
 Vue.use(mavonEditor)
 
 // axios
-import qs from 'qs'
+// import qs from 'qs'
 import axios from 'axios'
 Vue.prototype.$ajax = axios;
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
@@ -53,9 +53,9 @@ axios.interceptors.request.use(
         if (token) {
             config.headers.common['Authorization'] = token;
         }
-        config.data = qs.stringify(config.data, {
-            indices: false
-        });
+        // config.data = qs.stringify(config.data, {
+        //     indices: false
+        // });
         return config;
     },
     error => {
@@ -63,6 +63,9 @@ axios.interceptors.request.use(
     }
 )
 
+// Global Values
+import globals from "@/Global.vue"
+Vue.prototype.globals = globals
 
 // devtools
 Vue.config.devtools = process.env.NODE_ENV === 'development'
