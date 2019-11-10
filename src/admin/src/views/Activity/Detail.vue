@@ -1,5 +1,5 @@
 <template>
-  <div class="release">
+  <div class="detail">
     <div class="page-subheader mb-30">
       <div class="container-fluid">
         <div class="row align-items-center">
@@ -229,7 +229,7 @@
                   <div class="col-lg-6">
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text">Date</span>
+                        <span class="input-group-text">Select A Date</span>
                       </div>
                       <flat-pickr
                         v-model="date"
@@ -267,13 +267,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12">
-            <div class="btn-toolbar justify-content-center">
-              <button
-                class="btn btn-gradient btn-gradient-primary btn-lg w-50"
-                @click="checkRelease(releaseActivity)"
-              >Release</button>
-            </div>
+          <div class="col-md-6">
+            <button
+              class="btn btn-block btn-gradient btn-gradient-primary"
+              @click="checkRelease(commitActivity)"
+            >Commit</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-block btn-gradient btn-gradient-danger">Delete</button>
           </div>
         </div>
         <Modal title="Error" :text="errorText"></Modal>
@@ -340,7 +341,7 @@ import FlatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/dark.css";
 export default {
-  name: "release",
+  name: "detail",
   components: {
     Modal,
     FlatPickr,
@@ -359,6 +360,7 @@ export default {
       cover: "",
       errorText: "",
       uploaded: false,
+      submitted: false,
       preview: {},
       previewStyle: {},
       downloadImg: "",
@@ -469,6 +471,7 @@ export default {
       this.$refs.cropper.getCropData(data => {
         // do something
         this.cover = data;
+        this.submitted = true;
       });
     },
     clearCover: function() {
@@ -488,7 +491,7 @@ export default {
       this.date = "";
       this.author = "";
       $(".selectpicker").selectpicker("val", "");
-      this.value = "";
+      this.value = "*[^_^]: 标题start\n# 这里是标题\n*[^_^]: 标题end";
       for (let img in this.imgs) {
         this.$refs.md.$refs.toolbar_left.$imgDelByFilename(this.imgs[img].name);
       }
@@ -516,7 +519,7 @@ export default {
       var captcha = new TencentCaptcha(this.globals.TencentAPPID, callback);
       captcha.show();
     },
-    releaseActivity: function(res) {
+    commitActivity: function(res) {
       if (res.ret === 0) {
         // upload images
         if (!$.isEmptyObject(this.imgs)) {
@@ -551,7 +554,10 @@ export default {
 
         // upload activity content
         var form2 = new FormData();
-        form2.append("cover", this.dataURLToFile(this.cover, "cover"));
+        form2.append("id", this.$route.params.id);
+        if (this.uploaded && this.submitted) {
+          form2.append("cover", this.dataURLToFile(this.cover, "cover"));
+        }
         form2.append("date", this.date);
         form2.append("title", this.title);
         form2.append("author", this.author);
@@ -559,7 +565,7 @@ export default {
         form2.append("ticket", res.ticket);
         form2.append("randstr", res.randstr);
         this.$ajax({
-          url: "/api/admin/upload-activity",
+          url: "/api/admin/change-activity",
           method: "post",
           data: form2,
           headers: { "Content-Type": "multipart/form-data" }
@@ -569,14 +575,30 @@ export default {
           }
         });
       }
+    },
+
+    restoreActivity: function(id) {
+      this.$ajax
+        .get("/api/activity/detail", { params: { id: id } })
+        .then(res => {
+          if (res.data.ret === 0) {
+            this.date = res.data.data.date;
+            this.title = res.data.data.title;
+            this.cover = res.data.data.cover;
+            this.value = res.data.data.content;
+            this.author = res.data.data.author;
+            $(".selectpicker").selectpicker("val", this.author);
+          }
+        });
     }
   },
   mounted() {
-    $("#activity > ul > li:nth-child(1)").addClass("mm-active");
+    $("#activity > ul > li:nth-child(2)").addClass("mm-active");
     $(".selectpicker").selectpicker({ sanitize: false });
+    this.restoreActivity(this.$route.params.id);
   },
   destroyed() {
-    $("#activity > ul > li:nth-child(1)").removeClass("mm-active");
+    $("#activity > ul > li:nth-child(2)").removeClass("mm-active");
   }
 };
 </script>

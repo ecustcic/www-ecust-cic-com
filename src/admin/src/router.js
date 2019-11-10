@@ -9,6 +9,7 @@ import DefaultDash from '@/views/DashBoard/Default.vue'
 import Activity from '@/views/Activity/Activity.vue'
 import Release from '@/views/Activity/Release.vue'
 import Overview from '@/views/Activity/Overview.vue'
+import Detail from '@/views/Activity/Detail.vue'
 
 import Forbidden from '@/views/Forbidden.vue'
 
@@ -63,6 +64,14 @@ const adminRoutes = [
             component: Overview,
             meta: {
               title: 'Activity OverView'
+            }
+          },
+          {
+            path: ":id",
+            name: 'detail',
+            component: Detail,
+            meta: {
+              title: 'Activity Detail'
             }
           }
         ]

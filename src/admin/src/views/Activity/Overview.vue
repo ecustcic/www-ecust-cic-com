@@ -161,10 +161,11 @@ export default {
   },
   methods: {
     getActivities: function() {
-      this.$ajax.get("/api/activity/get-activity", { limit: 9 }).then(res => {
-        console.log(res);
-        this.activities = res.data.data.activities;
-      });
+      this.$ajax
+        .get("/api/activity/all", { params: { page: 1, limit: 9 } })
+        .then(res => {
+          this.activities = res.data.data.activities;
+        });
     }
   },
   mounted() {
