@@ -25,11 +25,6 @@
 </template>
 
 <style scoped>
-#user {
-  width: 100%;
-  padding: 1rem;
-  margin: 0 0 0 0;
-}
 .particles-wrapper {
   position: relative;
   -ms-flex-align: center;
@@ -49,6 +44,11 @@
   height: 100%;
   margin: 0;
   padding: 0;
+}
+#user {
+  width: 100%;
+  padding: 1rem;
+  margin: 0 0 0 0;
 }
 </style>
 

@@ -61,16 +61,16 @@
       >请填写至少6位密码</div>-->
     </div>
     <div class="row mb-3">
-      <div class="col-md-1 offset-md-5">
+      <div class="col-sm-1 offset-md-5">
         <span class="badge anibadge" id="lowercase">Lowwer</span>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <span class="badge anibadge" id="uppercase">Upper</span>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <span class="badge anibadge" id="digits">Digit</span>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <span class="badge anibadge" id="min">&ge;8Letters</span>
       </div>
     </div>

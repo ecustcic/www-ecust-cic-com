@@ -82,7 +82,7 @@
           <div class="col-md-4 mb-3" :key="index">
             <div class="newsItem hover">
               <a class="tdn" :href="`/activity/${item.id}`">
-                <img class="newsImg" :src="item.img" />
+                <img class="newsImg" :src="item.cover" />
               </a>
               <div class="newsText">
                 <a class="tdn" :href="`/activity/${item.id}`">{{item.title}}</a>
@@ -177,37 +177,20 @@ export default {
           subTitle: "ECUST E-Sports, Go Beyond the Game"
         }
       ],
-      activities: [
-        {
-          img: require("@/assets/img/Activity/1.jpg"),
-          title: "本学期第一次义诊顺利举行！",
-          date: "2019/10/31",
-          author: "服务部",
-          id: "1"
-        },
-        {
-          img: require("@/assets/img/Activity/2.jpg"),
-          title: "害，没头发了呀",
-          date: "2019/10/31",
-          author: "严永煜",
-          id: "2"
-        },
-        {
-          img: require("@/assets/img/Activity/3.jpg"),
-          title: "我想谈恋爱",
-          date: "2019/11/11",
-          author: "程序员",
-          id: "3"
-        },
-        {
-          img: require("@/assets/img/Activity/4.jpg"),
-          title: "女生节牛逼！",
-          date: "2019/10/31",
-          author: "CIC全员",
-          id: "4"
-        }
-      ]
+      activities: []
     };
+  },
+  methods: {
+    getActivities: function() {
+      this.$ajax
+        .get("/api/activity/all", { params: { page: 1, limit: 9 } })
+        .then(res => {
+          this.activities = res.data.data.activities;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   },
   mounted() {
     // 循环文字特效
@@ -226,6 +209,7 @@ export default {
     setTimeout(function() {
       $(".wow").css("opacity", "1");
     }, 100);
+    this.getActivities();
   }
 };
 </script>

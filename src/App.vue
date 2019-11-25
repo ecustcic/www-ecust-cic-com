@@ -61,15 +61,107 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                data-dropdown-hover
               >
                 <i class="fa fa-wrench fa-fw" aria-hidden="true"></i>
                 其他
               </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-other">
-                <a class="dropdown-item" href="/others/sign">
-                  <i class="fa fa-calendar-check-o fa-fw mr-2"></i>签到
-                </a>
-              </div>
+              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-other">
+                <li>
+                  <a class="dropdown-item" href="/others/sign">
+                    <i class="fa fa-calendar-check-o fa-fw mr-2"></i>签到
+                  </a>
+                </li>
+                <li data-stop-propagation>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <a
+                      class="dropdown-item"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      data-submenu
+                    >
+                      <i class="fa fa-circle-o fa-fw mr-2"></i>OCR
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-ocr">
+                      <li>
+                        <a class="dropdown-item" href="/others/ocr?tab=general">
+                          <i class="fa fa-dot-circle-o fa-fw"></i>
+                          通用文字识别
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/others/ocr?tab=idcard">
+                          <i class="fa fa-dot-circle-o fa-fw"></i>
+                          身份证识别
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <!-- <li data-stop-propagation>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <a
+                      class="dropdown-item"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-labelledby="dropdown-face"
+                      data-submenu
+                    >
+                      <i class="fa fa-meh-o fa-fw mr-2"></i>人脸识别
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-face">
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-circle-o fa-fw mr-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li data-stop-propagation>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <a
+                      class="dropdown-item"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-labelledby="dropdown-face"
+                      data-submenu
+                    >
+                      <i class="fa fa-image fa-fw mr-2"></i>图片特效
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-face">
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-circle-o fa-fw mr-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li data-stop-propagation>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <a
+                      class="dropdown-item"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-labelledby="dropdown-face"
+                      data-submenu
+                    >
+                      <i class="fa fa-camera-retro fa-fw mr-2"></i>图片识别
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-face">
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-circle-o fa-fw mr-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>-->
+              </ul>
             </li>
             <li class="nav-item" id="nav-about">
               <router-link class="nav-link" to="/about">
@@ -91,6 +183,7 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
+                    data-dropdown-hover
                   >
                     <img :src="head" />
                     {{ name }}
@@ -187,6 +280,11 @@
         </div>
       </div>
     </footer>
+    <back-to-top bottom="100px" right="50px">
+      <button type="button" class="btn btn-light">
+        <i class="fa fa-chevron-up"></i>
+      </button>
+    </back-to-top>
   </div>
 </template>
 
@@ -385,6 +483,142 @@ body,
   }
 }
 
+/**mulit level dropdown**/
+.dropdown-submenu {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+  margin-left: -1px;
+  border-radius: 0px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu > a:after {
+  display: block;
+  float: right;
+  font-family: "FontAwesome";
+  content: "\f0da";
+  /* margin-top: 4px; */
+  margin-right: -8px;
+}
+
+.dropdown-submenu:hover > a:after {
+  border-left-color: #ccc;
+}
+
+.dropdown-submenu.pull-left {
+  float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.mega-title {
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.mega-inner-nav li {
+  vertical-align: middle;
+}
+.mega-inner-nav li a {
+  display: block;
+}
+.mega-inner-nav li a:hover {
+  color: #4782d3;
+  background-color: transparent;
+}
+.mega-inner-nav li a i {
+  margin-right: 6px;
+  position: relative;
+  top: 1px;
+  font-size: 13px;
+  width: 16px;
+  display: inline-block;
+}
+
+.dropdown .dropdown-menu .dropdown-item,
+.mega-inner-nav > li > a {
+  padding: 4px 20px;
+}
+.dropdown .dropdown-menu .dropdown-item:hover,
+.mega-inner-nav > li > a:hover {
+  background-color: transparent;
+  color: #4782d3;
+}
+.dropdown .dropdown-menu .dropdown-item:focus,
+.mega-inner-nav > li > a:focus {
+  background-color: transparent;
+  color: #4782d3;
+}
+
+@media (min-width: 992px) {
+  .dropdown-menu.dropdown-mega-fw {
+    position: absolute;
+    width: 100%;
+    padding: 0px 20px;
+    padding-bottom: 0px;
+  }
+  .mega-menu-content {
+    padding: 30px 0;
+    padding-bottom: 20px;
+  }
+  .dropdown-menu,
+  .dropdown-submenu .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    -moz-transform: translateY(8px);
+    -o-transform: translateY(8px);
+    -ms-transform: translateY(8px);
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .show > .dropdown-menu,
+  .dropdown-submenu:hover > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1000;
+    -moz-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    -webkit-transform: none;
+    transform: none;
+  }
+  .mega-menu-content .row .col-lg-3:first-child {
+    border-left: 0;
+  }
+  .mega-menu-content .row .col-lg-3 {
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+    padding: 0px 30px;
+  }
+  .mega-menu-content .mega-title {
+    color: #fff;
+  }
+}
+
 .wow {
   opacity: 0;
 }
@@ -462,7 +696,10 @@ export default {
         $(".navbar-sticky").removeClass("fixed-top");
       }
     });
-    $('[data-toggle="dropdown"]').bootstrapDropdownHover();
+    $("[data-dropdown-hover]").bootstrapDropdownHover();
+    $("[data-stop-propagation]").on("click", function(e) {
+      e.stopPropagation();
+    });
   },
   watch: {
     token: function() {
