@@ -85,8 +85,8 @@ const router = new Router({
           name: "repair",
           component: Repair,
           meta: {
-            title: "CIC-维修",
-            requireAuth: true
+            title: "CIC-维修"
+            // requireAuth: true
           }
         },
         {
