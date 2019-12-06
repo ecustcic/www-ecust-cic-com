@@ -67,6 +67,21 @@
                   </li>
                 </ul>
               </li>
+              <li id="service">
+                <div class="nav-thumbnail">
+                  <i class="fa fa-group"></i>
+                </div>
+                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+                  <span class="nav-text">Service&nbsp;</span>
+                  <span class="badge text-danger-light badge-danger ml-1 badge-text anibadge">Hot</span>
+                </a>
+                <ul>
+                  <li>
+                    <span class="nav-thumbnail">01</span>
+                    <a data-scroll href="/admin/service/repair">Repair</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
           <!-- aside content end-->

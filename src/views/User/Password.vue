@@ -272,9 +272,10 @@ export default {
       this.$router.go(0);
     },
     check: function(name) {
-      $(`[name='${name}']`).removeClass("is-valid");
-      $(`[name='${name}']`).removeClass("is-invalid");
-      $(`[name='${name}']`).addClass(
+      var target = $(`[name="${name}"]`);
+      target.removeClass("is-valid");
+      target.removeClass("is-invalid");
+      target.addClass(
         !this[name] | this.errors.has(name) ? "is-invalid" : "is-valid"
       );
     },

@@ -324,9 +324,10 @@ export default {
       $('[data-toggle="popover"]').popover("disable");
     },
     check: function(name) {
-      $(`[name='${name}']`).removeClass("is-valid");
-      $(`[name='${name}']`).removeClass("is-invalid");
-      $(`[name='${name}']`).addClass(
+      var target = $(`[name="${name}"]`);
+      target.removeClass("is-valid");
+      target.removeClass("is-invalid");
+      target.addClass(
         !this[name] | this.errors.has(name) ? "is-invalid" : "is-valid"
       );
     },

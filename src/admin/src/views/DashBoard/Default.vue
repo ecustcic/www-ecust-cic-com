@@ -495,6 +495,12 @@ export default {
             type: "value"
           }
         ],
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "cross"
+          }
+        },
         series: [
           {
             name: "新增用户量",

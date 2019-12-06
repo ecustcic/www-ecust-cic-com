@@ -46,7 +46,7 @@
   bottom: 0;
   width: 280px;
   height: 250px;
-  z-index: 10000;
+  z-index: 200;
   font-size: 0;
   transition: all 0.3s ease-in-out;
 }
