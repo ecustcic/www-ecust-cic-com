@@ -3,6 +3,10 @@ node_modules
 /dist
 /public/live2d/model/*
 !.gitkeep
+*.doc
+*.docx
+*.pdf
+*.pptx
 
 # local env files
 .env.local

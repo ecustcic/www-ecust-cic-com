@@ -1,6 +1,5 @@
 <template>
   <div id="sign">
-    <div id="navbarHolder"></div>
     <div class="live2d-panel">
       <div class="message" style="opacity:0"></div>
       <div class="live2d">
@@ -42,7 +41,7 @@
 .live2d-panel {
   user-select: none;
   position: relative;
-  margin: 30px auto 0 auto;
+  margin: 60px auto 0 auto;
   bottom: 0;
   width: 280px;
   height: 250px;
@@ -373,6 +372,21 @@ export default {
     };
   },
   methods: {
+    windowResize: function() {
+      this.$nextTick(function() {
+        $(".footer").attr("style", "");
+        $(".footer").removeAttr("style");
+        if (
+          $("#sign").outerHeight() +
+            $(".navbar").outerHeight() +
+            $(".footer").outerHeight() <
+          $(window).innerHeight()
+        ) {
+          $(".footer").css("position", "fixed");
+          $(".footer").css("bottom", "0");
+        }
+      });
+    },
     startSign: function() {
       // eslint-disable-next-line
       var captcha = new TencentCaptcha(
@@ -538,7 +552,8 @@ export default {
     }
   },
   mounted() {
-    $("#navbarHolder").height($(".navbar").outerHeight(true) + 60);
+    $(".navbar").css("position", "relative");
+    this.windowResize();
 
     var that = this;
     that.qrcode_width = $(".scan-qrcode").innerWidth() - 100;
@@ -546,11 +561,11 @@ export default {
     $(".scan-list").height(that.qrcode_width + 100);
 
     // 动态改变二维码大小
-    // eslint-disable-next-line
     window.onresize = function() {
       that.qrcode_width = $(".scan-qrcode").innerWidth() - 100;
       $(".scan-qrcode").height(that.qrcode_width + 100);
       $(".scan-list").height(that.qrcode_width + 100);
+      this.windowResize();
     };
 
     // TODO: Support Qrcode Size Zooming
@@ -599,6 +614,12 @@ export default {
         that.closeWebsocket();
       }
     };
+  },
+  destroyed: function() {
+    $(".navbar").attr("style", "");
+    $(".navbar").removeAttr("style");
+    $(".footer").attr("style", "");
+    $(".footer").removeAttr("style");
   }
 };
 </script>

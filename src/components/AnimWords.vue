@@ -278,7 +278,7 @@
   }
 }
 .text .letter:nth-child(4) .character {
-  color: #cee007;
+  color: #66ccff;
   -webkit-animation: wave 1.2s linear infinite;
   animation: wave 1.2s linear infinite;
   -webkit-animation-delay: 1.33333s;
