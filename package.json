@@ -16,7 +16,7 @@
     "core-js": "^2.6.5",
     "font-awesome": "^4.7.0",
     "identicon.js": "^2.3.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "loaders.css": "^0.1.2",
     "mavon-editor": "^2.7.7",
     "password-validator": "^5.0.2",
